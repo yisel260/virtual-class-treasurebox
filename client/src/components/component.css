@@ -1,0 +1,26 @@
+.header {
+    background-color : #288eb6;
+    text-align: center;
+    padding: 2px;
+    margin-bottom:20px;
+    font-size:45px;
+    overflow: auto;
+
+
+
+}
+.navbar{
+    color:white;
+    width:100%;
+    overflow: auto;
+}
+.nav-link{
+    background-color: #66acc7;
+    text-align: center; 
+    padding:10px;
+    margin:10px;
+    text-decoration:none;
+    color:black;
+    font-size: 30px;
+
+}
