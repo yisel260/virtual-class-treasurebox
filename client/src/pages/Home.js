@@ -3,6 +3,7 @@ import NavBar from '../components/NavBar';
 import Header from '../components/Header';
 import SignUpForm from '../components/SignUpForm';
 import "./pages.css"
+import LogInForm from '../components/LogInForm';
 
 function Home (){
   return (
@@ -14,10 +15,16 @@ function Home (){
       <main>
         <h1>Welcome to Treasure Box! </h1>
         <div class="parent-section">
+        <div class="section">
+          <div id = "teachers-section" />
+             <h2>I am a teacher:</h2> 
+            <LogInForm/>
+            
           <div class="section">
-            <h2>I am a teacher:</h2>
             <SignUpForm/>
           </div>
+          </div>
+      
           <div class="section">
             <h2>I am a student:</h2>
             <form>
