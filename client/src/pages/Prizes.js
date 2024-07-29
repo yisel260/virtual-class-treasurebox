@@ -6,20 +6,16 @@ import "./pages.css";
 import LogInForm from '../components/LogInForm';
 
 
-function Classes (){
-    return (
-      <>
-        <header>
+function Prizes(){
+    return(
+        <>
+          <header>
           <Header/>
           <NavBar />
         </header>
-        <main>
-        <h1>This is where class stuff will go</h1>
-  
-        </main>
-      </>
-    );
-  };
-  
-  export default Classes;
-  
+        <h1>Here is where prize funtions will go</h1>
+        </>
+    )
+}
+
+export default Prizes;

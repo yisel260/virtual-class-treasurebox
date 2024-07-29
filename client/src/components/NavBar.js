@@ -12,13 +12,13 @@ function NavBar() {
         Home
       </NavLink>
       <NavLink
-        to="/manageclasses"
+        to="/classes"
         className="nav-link"
       >
         Manage Classes 
       </NavLink>
       <NavLink
-        to="/manage prizes"
+        to="/prizes"
         className="nav-link"
       >
         Manage Prizes 
