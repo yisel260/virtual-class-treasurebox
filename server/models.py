@@ -25,7 +25,7 @@ class Teacher(db.Model, SerializerMixin):
         else: 
             raise ValueError("name must be a nonempty string")
     
-    @validates('fname')
+    @validates('lname')
     def validate_email(self, key, lname):
         if lname:
             return lname
