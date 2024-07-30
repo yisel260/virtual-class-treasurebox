@@ -14,21 +14,21 @@ function Home (){
       </header>
       <main>
         <h1>Welcome to Treasure Box! </h1>
-        <div class="parent-section">
-        <div class="section">
+        <div className="parent-section">
+        <div className="section">
           <div id = "teachers-section" />
              <h2>I am a teacher:</h2> 
             <LogInForm/>
-          <div class="section">
+          <div className="section">
             <SignUpForm/>
           </div>
           </div>
       
-          <div class="section">
+          <div className="section">
             <h2>I am a student:</h2>
             <form>
               <label>Class code:</label>
-              <input type="text" class="form-control" placeholder=""></input>
+              <input type="text" className="form-control" placeholder=""></input>
               <input type="submit" value = "Go!"/>
             </form>
           </div>

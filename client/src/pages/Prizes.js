@@ -11,13 +11,13 @@ function Prizes(){
           <NavBar />
         </header>
         <form id="addPrizeForm">
-            <label for = "prize-name">Prize </label>
+            <label htmlFor = "prize-name">Prize </label>
             <input type="text"></input>
-            <label for ="description">Description</label>
+            <label htmlFor ="description">Description</label>
             <input type="text"></input>
-            <label for = "points">Point value</label>
+            <label htmlFor = "points">Point value</label>
             <input type="text"></input>
-            <label for="inventory">Number Available</label>
+            <label htmlFor="inventory">Number Available</label>
             <input type="text"></input>
             <input type="submit" value = "Add Prize"/>
             </form>

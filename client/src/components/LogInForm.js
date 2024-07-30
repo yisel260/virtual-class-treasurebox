@@ -5,11 +5,11 @@ function LogInForm(){
    return( <>
     <div id="Log-in">
       <form>
-        <label for="username" planceholder= "teacher@adress.com">User name: </label>
+        <label htmlFor="username" planceholder= "teacher@adress.com">User name: </label>
         <input type="text" ></input><br/><br/>
-        <label for="pasword">Password: </label>
+        <label htmlFor="pasword">Password: </label>
         <input type="text" ></input><br/><br/>
-        <input class= "action-button" type = "submit" value="Log in"/>
+        <input className= "action-button" type = "submit" value="Log in"/>
       </form>
     </div>
     </>

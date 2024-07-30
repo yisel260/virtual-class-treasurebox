@@ -16,8 +16,8 @@ function HomeLoggedIn (){
         </header>
         <main>
             <div id="class-button-div">
-            <button class= "class-button">Class 1</button>
-            <button class= "class-button">Class 2</button>
+            <button className= "class-button">Class 1</button>
+            <button className= "class-button">Class 2</button>
             </div>
             <StudentCard/>
 
