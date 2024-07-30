@@ -14,8 +14,23 @@ function Classes (){
           <NavBar />
         </header>
         <main>
-        <h1>This is where class stuff will go</h1>
-  
+        <div>
+        <label for="cars">Choose a class:</label>
+        <select name="classesdrpdwn" id="classdrpdwn">
+            <option value="">Class 1 </option>
+            <option value="">Class 2 </option>
+        </select> 
+        </div>
+        <div>
+            <button type="button"> Add a new class </button>
+        </div>
+        <table>
+            <tr>
+                <th>Student Name</th>
+                <th>password</th>
+            </tr>
+        </table>
+        <button>Add student</button>
         </main>
       </>
     );

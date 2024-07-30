@@ -1,10 +1,7 @@
 import React from 'react';
 import NavBar from '../components/NavBar';
 import Header from '../components/Header';
-import SignUpForm from '../components/SignUpForm';
 import "./pages.css";
-import LogInForm from '../components/LogInForm';
-
 
 function Prizes(){
     return(
@@ -13,7 +10,29 @@ function Prizes(){
           <Header/>
           <NavBar />
         </header>
-        <h1>Here is where prize funtions will go</h1>
+        <form id="addPrizeForm">
+            <label for = "prize-name">Prize </label>
+            <input type="text"></input>
+            <label for ="description">Description</label>
+            <input type="text"></input>
+            <label for = "points">Point value</label>
+            <input type="text"></input>
+            <label for="inventory">Number Available</label>
+            <input type="text"></input>
+            <input type="submit" value = "Add Prize"/>
+            </form>
+        <div>
+            <table >
+                <tr>
+                    <th>Prize</th>
+                    <th>Description</th>
+                    <th>Available </th>
+                    <th>Requested</th>
+                    <th>Net Total</th>  
+                </tr>
+            </table>
+            
+        </div>
         </>
     )
 }

@@ -8,6 +8,7 @@ function LogInForm(){
         <label for="username" planceholder= "teacher@adress.com">User name: </label>
         <input type="text" ></input><br/><br/>
         <label for="pasword">Password: </label>
+        <input type="text" ></input><br/><br/>
         <input class= "action-button" type = "submit" value="Log in"/>
       </form>
     </div>

@@ -19,7 +19,6 @@ function Home (){
           <div id = "teachers-section" />
              <h2>I am a teacher:</h2> 
             <LogInForm/>
-
           <div class="section">
             <SignUpForm/>
           </div>
