@@ -10,23 +10,22 @@ from faker import Faker
 from app import app
 from models import db, Teacher 
 
-fake =Faker()
-with app.app_context():
-    
-  Teacher.query.delete()
-
-  teachers=[]
-  for n in range (5):
-     teacher = Teacher(
-        fname=fake.firts_name(), 
-        lname=fake.last_name(), 
-        school=fake.company(), 
-        emal=fake.email())
-     teachers.append(teacher)
-  db.session.add(teachers)
-
-  if __name__ == '__main__':
+if __name__ == '__main__':
     fake = Faker()
     with app.app_context():
         print("Starting seed...")
-        # Seed code goes here!
+        Teacher.query.delete()
+
+        teachers = []
+        for n in range(5):
+            teacher = Teacher(
+                fname=fake.first_name(),
+                lname=fake.last_name(),
+                school=fake.company(),
+                email=fake.email()
+            )
+            teachers.append(teacher)
+            db.session.add(teacher)
+
+        db.session.commit()
+        print("Seed completed successfully!")

@@ -1,8 +1,8 @@
-"""Adds Teacher Model
+"""adds teacher model
 
-Revision ID: 4b5b86dc1bad
+Revision ID: 28a9283cb85d
 Revises: 36b93b391948
-Create Date: 2024-07-29 19:42:38.671305
+Create Date: 2024-07-30 18:08:51.124634
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '4b5b86dc1bad'
+revision = '28a9283cb85d'
 down_revision = '36b93b391948'
 branch_labels = None
 depends_on = None

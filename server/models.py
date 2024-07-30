@@ -11,8 +11,8 @@ class Teacher(db.Model, SerializerMixin):
     lname=db.Column(db.String)
     email=db.Column(db.String)
     school=db.Column(db.String)
-    sections=db.relationship('Section', back_populates="teacher", cascade='all, delete-orphan')
-    prizes=db.relationship('Prize', back_populates="teacher", cascade='all, delete-orphan')
+   # sections=db.relationship('Section', back_populates="teacher", cascade='all, delete-orphan')
+    #prizes=db.relationship('Prize', back_populates="teacher", cascade='all, delete-orphan')
     serialize_rules = ('-prizes.teacher','-sections.teacher',)
 
     def __repr__(self):
