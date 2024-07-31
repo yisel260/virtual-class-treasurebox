@@ -11,7 +11,7 @@ class Teacher(db.Model, SerializerMixin):
     lname=db.Column(db.String)
     email=db.Column(db.String)
     school=db.Column(db.String)
-   # sections=db.relationship('Section', back_populates="teacher", cascade='all, delete-orphan')
+    sections=db.relationship('Section', back_populates="teacher", cascade='all, delete-orphan')
     #prizes=db.relationship('Prize', back_populates="teacher", cascade='all, delete-orphan')
     serialize_rules = ('-prizes.teacher','-sections.teacher',)
 
@@ -19,14 +19,14 @@ class Teacher(db.Model, SerializerMixin):
         return f"{self.fname}{self.lname} from {self.school}"
     
     @validates('fname')
-    def validate_email(self, key, fname):
+    def validate_fnamel(self, key, fname):
         if fname:
             return fname
         else: 
             raise ValueError("name must be a nonempty string")
     
     @validates('lname')
-    def validate_email(self, key, lname):
+    def validate_lname(self, key, lname):
         if lname:
             return lname
         else: 
@@ -41,3 +41,19 @@ class Teacher(db.Model, SerializerMixin):
             elif'@' not in email:
                 raise ValueError("Failed simple email validation")
         return email
+    
+
+class Section(db.Model, SerializerMixin):
+    __tablename__ ="sections"
+
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String)
+    section_code = db.Column(db.String, nullable=False, unique=True)
+    teacher_id= db.Column(db.Integer, db.ForeignKey("teachers.id"))
+    teacher = db.relationship("Teacher",back_populates ="sections")
+
+    def __repr__(self):
+        return f"{self.name} class code: {self.section_code}"
+    
+    
+    # students = db.relationship('Student', on_delete=,secondary=)f

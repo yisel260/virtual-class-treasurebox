@@ -8,13 +8,14 @@ from faker import Faker
 
 # Local imports
 from app import app
-from models import db, Teacher 
+from models import db, Teacher , Section
 
 if __name__ == '__main__':
     fake = Faker()
     with app.app_context():
         print("Starting seed...")
         Teacher.query.delete()
+        Section.query.delete()
 
         teachers = []
         for n in range(5):
@@ -28,4 +29,15 @@ if __name__ == '__main__':
             db.session.add(teacher)
 
         db.session.commit()
+
+        for n in range(10):
+            section = Section(
+                name=fake.word(),
+                section_code=fake.word(),
+                teacher_id=randint(1,10)
+            )
+            db.session.add(section)
+
+        db.session.commit()
+
         print("Seed completed successfully!")
