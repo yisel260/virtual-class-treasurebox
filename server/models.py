@@ -12,7 +12,7 @@ class Teacher(db.Model, SerializerMixin):
     email=db.Column(db.String)
     school=db.Column(db.String)
     sections=db.relationship('Section', back_populates="teacher", cascade='all, delete-orphan')
-    #prizes=db.relationship('Prize', back_populates="teacher", cascade='all, delete-orphan')
+    prizes=db.relationship('Prize', back_populates="teacher", cascade='all, delete-orphan')
     serialize_rules = ('-prizes.teacher','-sections.teacher',)
 
     def __repr__(self):
@@ -70,4 +70,29 @@ class Student(db.Model, SerializerMixin):
 
     def __repr__(self):
         return f"student:{self.name} password:{self.points} "
-    
+
+class Prize(db.Model):
+    __tablename__ ="prizes"
+
+    id = db.Column(db.Integer, primary_key=True)
+    foto = db.Column(db.String)
+    description=db.Column(db.String)
+    point_value=db.Column(db.Integer)
+    inventory=db.Column(db.Integer)
+    number_requested=db.Column(db.Integer, nullable=True)
+    teacher_id=db.Column(db.Integer, db.ForeignKey("teachers.id"))
+    teacher=db.relationship("Teacher", back_populates="prizes")
+    serialize_rules = ('-prizes.teacher')
+
+
+# student_prizes = db.Table(
+#     'students_prizes',
+#     metadata,
+#     db.Column('employee_id', db.Integer, db.ForeignKey(
+#         'employees.id'), primary_key=True),
+#     db.Column('meeting_id', db.Integer, db.ForeignKey(
+#         'meetings.id'), primary_key=True)
+# )
+
+
+ 
