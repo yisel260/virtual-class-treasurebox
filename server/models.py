@@ -65,13 +65,13 @@ class Student(db.Model, SerializerMixin):
     points = db.Column(db.Integer)
     section_id= db.Column(db.Integer, db.ForeignKey("sections.id"))
     section = db.relationship("Section",back_populates ="students")
-    serialize_rules = ('-prizes.student','-section.student','-teacher.student')
-
+    serialize_rules = ('-section.students',)
+    
 
     def __repr__(self):
         return f"student:{self.name} password:{self.points} "
 
-class Prize(db.Model):
+class Prize(db.Model,SerializerMixin):
     __tablename__ ="prizes"
 
     id = db.Column(db.Integer, primary_key=True)
@@ -82,7 +82,7 @@ class Prize(db.Model):
     number_requested=db.Column(db.Integer, nullable=True)
     teacher_id=db.Column(db.Integer, db.ForeignKey("teachers.id"))
     teacher=db.relationship("Teacher", back_populates="prizes")
-    serialize_rules = ('-prizes.teacher')
+    serialize_rules = ('-teacher.prizes',)
 
 
 # student_prizes = db.Table(

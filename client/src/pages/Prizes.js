@@ -1,9 +1,25 @@
-import React from 'react';
+import React, { useEffect, useState } from "react";
 import NavBar from '../components/NavBar';
 import Header from '../components/Header';
 import "./pages.css";
 
 function Prizes(){
+
+    const [prizes, setPrizes] = useState([{}]);
+    const [refreshPage, setRefreshPage] = useState(false);
+  // Pass the useFormik() hook initial form values and a submit function that will
+  // be called when the form is submitted
+
+  useEffect(() => {
+    console.log("FETCH! ");
+    fetch("/prizes")
+      .then((res) => res.json())
+      .then((data) => {
+        setPrizes(data);
+        console.log(data);
+      });
+
+  }, [refreshPage]);
     return(
         <>
           <header>
@@ -30,6 +46,23 @@ function Prizes(){
                     <th>Requested</th>
                     <th>Net Total</th>  
                 </tr>
+                {prizes === "undefined" ? (
+            <p>Loading</p>
+          ) : (
+            prizes.map((prize, i) => (
+              <>
+                <tr key={i}>
+                  <td>{prize.name}</td>
+                  <td>{prize.description}</td>
+                  <td>{prize.available}</td>
+                  <td>{prize.requested}</td>
+                  <td>{prize.available - prize.requested}</td>
+
+
+                </tr>
+              </>
+            ))
+          )}
             </table>
             
         </div>

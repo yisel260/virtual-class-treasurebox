@@ -4,7 +4,19 @@ import { useFormik } from "formik";
 import * as yup from "yup";
 
 function SignUpForm(){
-
+  const [teachers, setTeachers] = useState([{}]);
+  const [refreshPage, setRefreshPage] = useState(false);
+  
+  
+  useEffect(() => {
+    console.log("FETCH! ");
+    fetch("/teachers")
+      .then((res) => res.json())
+      .then((data) => {
+        setTeachers(data);
+        console.log(data);
+      });
+  }, [refreshPage]);
 
   const formSchema= yup.object().shape(
     {
@@ -22,15 +34,17 @@ function SignUpForm(){
         school: "",
       },
       validationSchema: formSchema,
-      onSubmit: (values) => {
-        fetch("teachers", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(values, null, 2),
-        });
-      },
+      onSubmit: (values) => console.log(values)
+      
+
+    //     fetch("teachers", {
+    //       method: "POST",
+    //       headers: {
+    //         "Content-Type": "application/json",
+    //       },
+    //       body: JSON.stringify(values, null, 2),
+    //     });
+    //   },
     });
 
    return( <>

@@ -20,7 +20,7 @@ function Home (){
              <h2>I am a teacher:</h2> 
             <LogInForm/>
           <div className="section">
-            <SignUpForm/>
+             <SignUpForm/>
           </div>
           </div>
       
