@@ -3,8 +3,9 @@
 # Standard library imports
 
 # Remote library imports
-from flask import Flask,request, make_response
+from flask import Flask,request, make_response, session
 from flask_restful import Resource
+from flask import jsonify
 
 # Local imports
 from config import app, db, api
@@ -13,11 +14,6 @@ from models import Teacher
 
 
 # Views go here!
-
-@app.route('/')
-def index():
-    return '<h1>Project Server</h1>'
-
 class Teachers(Resource):
 
     def get(self):
@@ -28,24 +24,27 @@ class Teachers(Resource):
             response_dict_list,
             200,
         )
-
         return response
     
     def post(self):
+        data = request.get_json()
+
         new_teacher = Teacher(
-            fname=request.form['fname'],
-            lname=request.form['lname'],
-            email=request.form['email'],
-            school=request.form['school'],
+            fname=data.get('fname'),
+            lname=data.get('lname'),
+            email=data.get('email'),
+            school=data.get('school'),
         )
+
+        print(new_teacher)
 
         db.session.add(new_teacher)
         db.session.commit()
 
-        response_dict = new_teacher.to_dict()
+        response_dict = jsonify(new_teacher.to_dict())
 
         response = make_response(
-            response_dict,
+             response_dict,
             201,
         )
 
@@ -64,9 +63,37 @@ class TeacherByID(Resource):
 
         return response
 
+
+class Login(Resource):
+
+    def post(self):
+        user = Teacher.query.filter(
+            Teacher.email == request.get_json()['email']
+        ).first()
+
+        session['user_id'] = user.id
+        return user.to_dict()
+    
+class Logout(Resource):
+    def delete(self): # just add this line!
+        session['user_id'] = None
+        return {'message': '204: No Content'}, 204
+    
+class CheckSession(Resource):
+    def get(self):
+        user = Teacher.query.filter(Teacher.id == session.get('user_id')).first()
+        if user:
+            return user.to_dict()
+        else:
+            return {}, 401
+
+
+
 api.add_resource(TeacherByID, '/teachers/<int:id>')
 api.add_resource(Teachers, '/teachers')
-
+api.add_resource(Login,'/login')
+api.add_resource(Logout,'/logout')
+api.add_resource(CheckSession, '/check_session')
 
 
 if __name__ == '__main__':

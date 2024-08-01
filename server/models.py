@@ -1,3 +1,4 @@
+from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy_serializer import SerializerMixin
 from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.orm import validates
@@ -5,6 +6,9 @@ from config import db
 
 class Teacher(db.Model, SerializerMixin): 
     __tablename__ = "teachers"
+
+    serialize_rules = ('-prizes.teacher','-sections.teacher',)
+
 
     id =db.Column(db.Integer, primary_key=True)
     fname=db.Column(db.String)
@@ -45,6 +49,8 @@ class Teacher(db.Model, SerializerMixin):
 
 class Section(db.Model, SerializerMixin):
     __tablename__ ="sections"
+
+    serialize_rules = ("-students.section",)
 
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String)

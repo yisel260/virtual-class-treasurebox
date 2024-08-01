@@ -34,17 +34,21 @@ function SignUpForm(){
         school: "",
       },
       validationSchema: formSchema,
-      onSubmit: (values) => console.log(values)
-      
-
-    //     fetch("teachers", {
-    //       method: "POST",
-    //       headers: {
-    //         "Content-Type": "application/json",
-    //       },
-    //       body: JSON.stringify(values, null, 2),
-    //     });
-    //   },
+      onSubmit: (values) => {
+        fetch("/teachers", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(values, null, 2),
+        }).then(
+          (res) => {
+          if (res.status === 200) {
+              console.log(res)         
+             }
+            }
+          )
+        },
     });
 
    return( <>
