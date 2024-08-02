@@ -3,6 +3,25 @@ import { BrowserRouter, Route } from "react-router-dom";
 import Home from "../pages/Home";
 
 function  App() {
+  
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    fetch("/check_session").then((response) => {
+      if (response.ok) {
+        response.json().then((user) => setUser(user));
+      }
+    });
+  }, []);
+
+  function handleLogin(user) {
+    setUser(user);
+  }
+
+  function handleLogout() {
+    setUser(null);
+  }
+
   return (
     <>
     <BrowserRouter>

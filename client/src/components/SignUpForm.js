@@ -53,6 +53,7 @@ function SignUpForm(){
 
    return( <>
     <div id="sign-up">
+    <h3>Sign up</h3>
         <form onSubmit={formik.handleSubmit}>
           <label htmlFor="fname">First Name: </label>
           <input

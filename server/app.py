@@ -68,8 +68,10 @@ class Login(Resource):
 
     def post(self):
         user = Teacher.query.filter(
-            Teacher.email == request.get_json()['email']
+            Teacher.email == request.get_json()['username']
         ).first()
+
+        print(user)
 
         session['user_id'] = user.id
         return user.to_dict()
