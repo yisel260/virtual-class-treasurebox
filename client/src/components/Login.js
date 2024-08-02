@@ -5,20 +5,7 @@ import * as yup from "yup";
 function Login({onLogin}) {
   const [username, setUsername] = useState("");
 
-  // function handleSubmit(e) {
-  //   e.preventDefault();
-  //   fetch("/login", {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify({ username }),
-  //   }).then((r) => {
-  //     if (r.ok) {
-  //       r.json().then((user) => onLogin(user));
-  //     }
-  //   });
-  // }
+
   const formSchema= yup.object().shape(
     {
       email: yup.string().email("Invalid email").required("Must enter email")
@@ -28,26 +15,29 @@ function Login({onLogin}) {
     initialValues: {
       username: "",
     },
-    validationSchema: formSchema,
-    onSubmit: (values) => {
-      console.log(values)
+      validationSchema: formSchema,
+      onSubmit: (values) => {
+        console.log(values)
     //   fetch("/login", {
     //   method: "POST",
     //   headers: {
     //     "Content-Type": "application/json",
     //   },
-    //   body: JSON.stringify(values.username ),
+    //   body: JSON.stringify(values.username),
     // }).then((r) => {
     //   if (r.ok) {
+    //     console.log("Response status:", r.status);
     //     r.json().then((user) => onLogin(user));
     //   }
+    //   else console.log("response not ok")
     // });
   },
   });
 
   return (
+    <>
+    <h3>Login With Email</h3>
     <form onSubmit={formik.handleSubmit}>
-      <h3>Login With Email</h3>
       <label htmlFor="username">Username: </label>
       <input
             type="text"
@@ -58,6 +48,7 @@ function Login({onLogin}) {
           /><br/><br/>
       <button type="submit">Login</button>
     </form>
+    </>
   );
 }
 

@@ -87,7 +87,7 @@ function SignUpForm(){
             value={formik.values.email}
             
           /><br/><br/>
-          <button type="submit">Submit</button>
+          <button  type="submit">Submit</button>
 
         
       </form>

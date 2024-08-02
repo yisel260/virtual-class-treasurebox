@@ -9,7 +9,7 @@ import Login from'../components/Login';
 function Home (){
 
   const [user, setUser] = useState(null);
-
+  
   useEffect(() => {
     fetch("/check_session").then((response) => {
       if (response.ok) {
@@ -31,7 +31,7 @@ function Home (){
       <>
         <header>
           <Header/>
-          <NavBar />
+          <NavBar  />
         </header>
         <main>
             <div id="class-button-div">
@@ -46,7 +46,7 @@ function Home (){
   } else{ return (
     <>
         <header>
-          <Header/>
+          <Header onLogout={handleLogout}/>
         </header>
         <main>
           <h1>Welcome to Treasure Box! </h1>

@@ -68,10 +68,8 @@ class Login(Resource):
 
     def post(self):
         user = Teacher.query.filter(
-            Teacher.email == request.get_json()['username']
+            Teacher.email == request.get_json("username")
         ).first()
-
-        print(user)
 
         session['user_id'] = user.id
         return user.to_dict()
@@ -83,7 +81,7 @@ class Logout(Resource):
     
 class CheckSession(Resource):
     def get(self):
-        user = Teacher.query.filter(Teacher.id == session.get('user_id')).first()
+        user = Teacher.query.filter(Teacher.id == session.get('username')).first()
         if user:
             return user.to_dict()
         else:
