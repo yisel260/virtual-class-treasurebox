@@ -50,15 +50,20 @@ function Home (){
         <main>
           <h1>Welcome to Treasure Box! </h1>
          {/* <div className="parent-section"> */}
+         <div>
+            <h2 className='section-banner'>I am a student:</h2> 
+            </div>
            <div id="student-section">
-              <h2>I am a student:</h2>
               <form>
                 <label>Class code:</label>
                 <input type="text" className="form-control" placeholder=""></input>
                 <input className="action-button" type="submit" value = "Go!"/>
               </form>
             </div>
-            <h2>I am a teacher:</h2> 
+            <div>
+            <h2 className='section-banner'>I am a teacher:</h2> 
+            </div>
+           
            <div id="teacher-section">
               <div id="log-in-form" className="section">
                   <Login onLogin={handleLogin}/>

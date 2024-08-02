@@ -9,6 +9,14 @@
     vertical-align: middle;
     width: 50%;
   } */
+
+.section-banner{
+    border-radius:12px;
+    background-color:salmon;
+    width:75%;
+    text-align: center;
+    margin:auto;
+}
 #student-section{
     text-align: center;
 }
@@ -16,6 +24,7 @@
 #teacher-section {
     text-align: center;
     display: flex;
+    margin:auto;
 
 }
 
@@ -23,6 +32,7 @@
     display: inline-block;
     padding:10px;
     width:45%;
+    margin:auto;
 
 }
 
