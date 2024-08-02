@@ -8,7 +8,7 @@ function Login({onLogin}) {
 
   const formSchema= yup.object().shape(
     {
-      email: yup.string().email("Invalid email").required("Must enter email")
+      username: yup.string().email("Invalid email").required("Must enter email")
     })
 
   const formik = useFormik({
@@ -18,19 +18,19 @@ function Login({onLogin}) {
       validationSchema: formSchema,
       onSubmit: (values) => {
         console.log(values)
-    //   fetch("/login", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify(values.username),
-    // }).then((r) => {
-    //   if (r.ok) {
-    //     console.log("Response status:", r.status);
-    //     r.json().then((user) => onLogin(user));
-    //   }
-    //   else console.log("response not ok")
-    // });
+      fetch("/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(values.username),
+    }).then((r) => {
+      if (r.ok) {
+        console.log("Response status:", r.status);
+        r.json().then((user) => onLogin(user));
+      }
+      else console.log("response not ok")
+    });
   },
   });
 
