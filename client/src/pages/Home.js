@@ -30,7 +30,7 @@ function Home (){
     return (
       <>
         <header>
-          <Header/>
+          <Header onLogout={handleLogout}/>
           <NavBar  />
         </header>
         <main>
