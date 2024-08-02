@@ -10,67 +10,51 @@ from flask import jsonify
 # Local imports
 from config import app, db, api
 # Add your model imports
-from models import Teacher
+from models import Teacher, Section, Student, Prize
 
 
 # Views go here!
 class Teachers(Resource):
 
     def get(self):
-
         response_dict_list = [n.to_dict() for n in Teacher.query.all()]
-
         response = make_response(
             response_dict_list,
-            200,
-        )
+            200, )
         return response
     
     def post(self):
         data = request.get_json()
-
         new_teacher = Teacher(
             fname=data.get('fname'),
             lname=data.get('lname'),
             email=data.get('email'),
             school=data.get('school'),
         )
-
-        print(new_teacher)
-
         db.session.add(new_teacher)
         db.session.commit()
-
         response_dict = jsonify(new_teacher.to_dict())
-
         response = make_response(
              response_dict,
             201,
         )
-
         return response
     
 class TeacherByID(Resource):
 
     def get(self, id):
-
         response_dict = Teacher.query.filter_by(id=id).first().to_dict()
-
         response = make_response(
             response_dict,
             200,
         )
-
         return response
 
 
 class Login(Resource):
 
     def post(self):
-        user = Teacher.query.filter(
-            Teacher.email == request.get_json("username")
-        ).first()
-
+        user = Teacher.query.filter(Teacher.email == request.get_json("username")).first()
         session['user_id'] = user.id
         return user.to_dict()
     
@@ -88,12 +72,46 @@ class CheckSession(Resource):
             return {}, 401
 
 
+class Sections(Resource):
+    def get(self):
+        response_dict_list = [n.to_dict() for n in Section.query.all()]
+        response = make_response(
+            response_dict_list,
+            200, )
+        return response
+    
+    def post(self):
+        data = request.get_json()
+        new_section = Section(
+            name=data.get('fname'),
+            section_code=data.get('lname'),
+            teacher_id=data.get('teacher_id'),
+        )
+        db.session.add(new_section)
+        db.session.commit()
+        response_dict = jsonify(new_section.to_dict())
+        response = make_response(
+             response_dict,
+            201,
+        )
+        return response
+    
+class SectionBySectionCode(Resource):
+    def get(self, section_code):
+        response_dict = Section.query.filter_by(section_code=section_code).first().to_dict()
+        response = make_response(
+            response_dict,
+            200,
+        )
+        return response
 
 api.add_resource(TeacherByID, '/teachers/<int:id>')
 api.add_resource(Teachers, '/teachers')
 api.add_resource(Login,'/login')
 api.add_resource(Logout,'/logout')
 api.add_resource(CheckSession, '/check_session')
+api.add_resource(Sections,'/sections')
+api.add_resource(SectionBySectionCode, '/sections/<string:section_code>')
 
 
 if __name__ == '__main__':
