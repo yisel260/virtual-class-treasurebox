@@ -3,8 +3,58 @@
     padding: 2rem 2rem;
     text-align: center;
 }
-.section {
+/* .section {
     display: inline-block;
     padding: 1rem 1rem;
     vertical-align: middle;
-  }
+    width: 50%;
+  } */
+#student-section{
+    text-align: center;
+}
+
+#teacher-section {
+    text-align: center;
+    display: flex;
+
+}
+
+#log-in-form{
+    display: inline-block;
+    padding:10px;
+    width:45%;
+
+}
+
+#or{
+    display: inline-block;
+    padding:10px;
+
+   
+}
+#sign-up-form{
+    display: inline-block;
+    padding:10px;
+    width:45%
+
+
+}
+.action-button {
+    background-color: #96df8c; 
+    border: none;
+    color: #111010;
+    padding: 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius:12px;
+   
+}
+
+h1 {
+    text-align: center;}
+h2 {
+     text-align: center;}

@@ -3,7 +3,6 @@ import NavBar from '../components/NavBar';
 import Header from '../components/Header';
 import SignUpForm from '../components/SignUpForm';
 import "./pages.css";
-import LogInForm from '../components/LogInForm';
 
 
 function Classes (){

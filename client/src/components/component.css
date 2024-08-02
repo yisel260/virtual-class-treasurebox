@@ -1,13 +1,38 @@
 .header {
-    background-color : #288eb6;
+    background-color : #6ec0e0;
     text-align: center;
-    padding: 2px;
-    margin-bottom:20px;
+    padding: 0px;
+    margin-bottom:5px;
+    margin-top: 5px;
     font-size:45px;
     overflow: auto;
-    font-family:Brush Script MT, Brush Script Std, cursive	;
-
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    position:relative;
+    color:aliceblue
 }
+
+.action-button {
+    background-color: #96df8c; /* Green */
+    border: none;
+    color: #111010;
+    padding: 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius:12px;
+   
+}
+
+#logout{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+
 .navbar{
     color:white;
     width:100%;

@@ -3,13 +3,12 @@ import NavBar from '../components/NavBar';
 import Header from '../components/Header';
 import SignUpForm from '../components/SignUpForm';
 import "./pages.css"
-import LogInForm from '../components/LogInForm';
 import Login from'../components/Login';
 
 function Home (){
 
   const [user, setUser] = useState(null);
-  
+  //Etrech Goal: Stay logged after login
   // useEffect(() => {
   //   fetch("/check_session").then((response) => {
   //     if (response.ok) {
@@ -50,25 +49,30 @@ function Home (){
         </header>
         <main>
           <h1>Welcome to Treasure Box! </h1>
-          <div className="parent-section">
-          <div className="section">
-            <div id = "teachers-section" />
-              <h2>I am a teacher:</h2> 
-              <Login onLogin={handleLogin}/>
-            <div className="section">
-               <h3>Or</h3>
-              <SignUpForm/>
-            </div>
-            </div>
-        
-            <div className="section">
+         {/* <div className="parent-section"> */}
+           <div id="student-section">
               <h2>I am a student:</h2>
               <form>
                 <label>Class code:</label>
                 <input type="text" className="form-control" placeholder=""></input>
-                <input type="submit" value = "Go!"/>
+                <input className="action-button" type="submit" value = "Go!"/>
               </form>
             </div>
+            <h2>I am a teacher:</h2> 
+           <div id="teacher-section">
+              <div id="log-in-form" className="section">
+                  <Login onLogin={handleLogin}/>
+              </div>
+              <div id= "or">
+              <h3>Or</h3>
+              </div>
+              <div id="sign-up-form"className="section">
+                  
+                  <SignUpForm/>
+              </div>
+            {/* </div> */}
+
+      
           </div>
 
         </main>

@@ -46,7 +46,7 @@ function Login({onLogin}) {
             onChange={formik.handleChange}
             value={formik.values.username}
           /><br/><br/>
-      <button type="submit">Login</button>
+      <button type="submit" className="action-button">Login</button>
     </form>
     </>
   );

@@ -15,8 +15,8 @@ function Header({onLogout}){
 
    return( <>
     <div className="header">
-        <h1 className="header-title">Treasure Box! </h1>
-        <button onClick={handleLogout}>Logout</button>
+        <h1 id="header-title">Treasure Box! </h1>
+        <button id ="logout" className="action-button" onClick={handleLogout}>Logout</button>
     </div>
     </>
 )}
