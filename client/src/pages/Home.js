@@ -24,7 +24,6 @@ function Home (){
 
   function handleLogin(user) {
     setUser(user);
-    navigate("/classes")
   }
 
   function handleLogout() {
@@ -37,7 +36,6 @@ const formik = useFormik(
       sectionCode:"",
     },
     onSubmit: (values)=>{
-      console.log("handleSectionMatch called");
       console.log(values.sectionCode);
       fetch(`/sections/${values.sectionCode}`)
       .then((res) => res.json())
@@ -103,8 +101,7 @@ const formik = useFormik(
               <h3>Or</h3>
               </div>
               <div id="sign-up-form"className="section">
-                  
-                  <SignUpForm/>
+                  <SignUpForm onLogin={handleLogin}/>
               </div>
             {/* </div> */}
 

@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import * as yup from "yup";
 
-function SignUpForm(){
+function SignUpForm({onLogin}){
   const [teachers, setTeachers] = useState([{}]);
   const [refreshPage, setRefreshPage] = useState(false);
   
@@ -43,8 +43,22 @@ function SignUpForm(){
           body: JSON.stringify(values, null, 2),
         }).then(
           (res) => {
-          if (res.status === 200) {
-              console.log(res)         
+            console.log(res)
+          if (res.status === 201) {
+            fetch("/login", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(values.email),
+            }).then((r) => {
+              if (r.ok) {
+                console.log("Response status:", r.status);
+                r.json().then((user) => onLogin(user));
+              }
+              else console.log("response not ok")
+            });
+                      
              }
             }
           )
