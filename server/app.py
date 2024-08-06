@@ -138,7 +138,27 @@ class StudentsBySection(Resource):
             200,
         )
         return response
+    
+class StudentLogIn(Resource):
 
+    def post(self):
+        student = request.get_json()
+        studentUserName = student.get('studentUserName')
+        print(type(studentUserName))
+
+        studentUser = Student.query.filter(Student.name == studentUserName).first()
+
+        password = student.get('password')
+        if password == studentUser.password:
+            #  session['user_id'] = studentUser.id
+            response = make_response(studentUser.to_dict(), 200)
+            return response 
+    
+# class Logout(Resource):
+#     def delete(self): # just add this line!
+#         session['user_id'] = None
+#         return {'message': '204: No Content'}, 204
+    
 api.add_resource(TeacherByID, '/teachers/<int:id>')
 api.add_resource(Teachers, '/teachers')
 api.add_resource(Login,'/login')
@@ -148,7 +168,7 @@ api.add_resource(Sections,'/sections')
 api.add_resource(SectionBySectionCode, '/sections/<string:section_code>')
 api.add_resource(Students, '/students')
 api.add_resource(StudentsBySection,"/studentsbysection/<int:section_id>")
-
+api.add_resource(StudentLogIn, '/studentlogin')
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)

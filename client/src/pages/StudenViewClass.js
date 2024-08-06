@@ -1,10 +1,11 @@
 import React, {useEffect,useState} from "react" 
 import LoginStudentCard from "../components/LoginStudentCard"
-
-
-function StudentViewClass({section}){
+import StudentShopping from "./StudentShopping"
+function StudentViewClass({onStudentLogIn,section}){
 
     const [students,setStudents] = useState([])
+    const [studentUser, setStudentUser] = useState(null)
+
     useEffect(() => {
         console.log("FETCH! ");
         fetch(`/studentsbysection/${section}`)
@@ -15,17 +16,27 @@ function StudentViewClass({section}){
           });
       }, []);
 
+function onStudentLogIn(studentUser){
+    setStudentUser(studentUser)
+    console.log(studentUser);
+}
 
+if (studentUser){
+    return (
+        <StudentShopping studentUser={studentUser}/>
+    )
+}
+else{
     return(
         <>
         <p>You have made it to the page where the students log in</p>
         <p>{section}</p>
         {students.map(student=>{
             return(
-             <LoginStudentCard student={student} key={student.id}/>)}
+             <LoginStudentCard onStudentLogIn={onStudentLogIn} student={student} key={student.id}/>)}
         )}
         </>
-    )
+    )}
 }
 
 export default StudentViewClass

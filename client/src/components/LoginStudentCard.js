@@ -3,22 +3,37 @@ import { useFormik } from "formik";
 import * as yup from "yup";
 
 
-function LoginStudentCard({student}){
+function LoginStudentCard({onStudentLogIn, student}){
     //find way to set class id 
     //fetch students 
     //map over students creating a new card per student 
     const formik = useFormik({
         initialValues: {
           password: "",
+          studentUserName:`${student.name}`,
         },
           onSubmit:(values)=>{
-            console.log(values.password)
+            console.log(values)
+            fetch("/studentlogin", {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify(values),
+              }).then((r) => {
+                if (r.ok) {
+                  console.log("Response status:", r.status);
+                  r.json().then((studentUser) => onStudentLogIn(studentUser));
+                }
+                else console.log("response not ok")
+              }); 
           }});
 return(
         <>
                 <div>
                     <p>{student.name}</p> 
                     <form onSubmit={formik.handleSubmit}>
+                    <input type='hidden' id="name" name="name" value={formik.studentUserName}></input>
                     <label>password:</label>
                     <input type="text" 
                     id="password"
