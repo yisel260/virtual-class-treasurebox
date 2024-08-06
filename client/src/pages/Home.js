@@ -7,6 +7,7 @@ import Login from'../components/Login';
 import { useNavigate } from 'react-router-dom';
 import { useFormik, validateYupSchema } from 'formik';
 import * as yup from "yup";
+import StudentViewClass from './StudenViewClass';
 
 
 
@@ -46,7 +47,9 @@ const formik = useFormik(
           .then((data) => {
             setSection(data);
             console.log(data);
-            navigate("/studentViewClass")
+            setSection(data.id)
+            console.log(section);
+            //navigate("/studentViewClass")
         })
         }
         else {
@@ -75,7 +78,17 @@ const formik = useFormik(
         </main>
       </>
     );
-  } else{ return (
+  } 
+  else if(section) {
+    return(
+      <>
+      < StudentViewClass section={section}/>
+      </>
+    )
+
+  }
+  
+  else{ return (
     <>
         <header>
           <Header onLogout={handleLogout}/>

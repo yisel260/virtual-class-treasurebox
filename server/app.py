@@ -63,13 +63,13 @@ class Logout(Resource):
         session['user_id'] = None
         return {'message': '204: No Content'}, 204
     
-class CheckSession(Resource):
-    def get(self):
-        user = Teacher.query.filter(Teacher.id == session.get('username')).first()
-        if user:
-            return user.to_dict()
-        else:
-            return {}, 401
+# class CheckSession(Resource):
+#     def get(self):
+#         user = Teacher.query.filter(Teacher.id == session.get('username')).first()
+#         if user:
+#             return user.to_dict()
+#         else:
+#             return {}, 401
 
 
 class Sections(Resource):
@@ -104,14 +104,50 @@ class SectionBySectionCode(Resource):
             200,
         )
         return response
+    
+class Students(Resource):
+    def get(self):
+        response_dict_list = [n.to_dict() for n in Student.query.all()]
+        response = make_response(
+            response_dict_list,
+            200, )
+        return response
+    
+    def post(self):
+        data = request.get_json()
+        new_section = Student(
+            name=data.get('name'),
+            password=data.get('password'),
+            section_id=data.get('section_id'),
+        )
+        db.session.add(new_section)
+        db.session.commit()
+        response_dict = jsonify(new_section.to_dict())
+        response = make_response(
+             response_dict,
+            201,
+        )
+        return response
+    
+class StudentsBySection(Resource):
+    def get(self, section_id):
+        studentsInSection = Student.query.filter(Student.section_id == section_id).all()
+        response_dict = [n.to_dict() for n in studentsInSection]
+        response = make_response(
+            response_dict,
+            200,
+        )
+        return response
 
 api.add_resource(TeacherByID, '/teachers/<int:id>')
 api.add_resource(Teachers, '/teachers')
 api.add_resource(Login,'/login')
 api.add_resource(Logout,'/logout')
-api.add_resource(CheckSession, '/check_session')
+# api.add_resource(CheckSession, '/check_session')
 api.add_resource(Sections,'/sections')
 api.add_resource(SectionBySectionCode, '/sections/<string:section_code>')
+api.add_resource(Students, '/students')
+api.add_resource(StudentsBySection,"/studentsbysection/<int:section_id>")
 
 
 if __name__ == '__main__':
