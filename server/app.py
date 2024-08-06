@@ -158,6 +158,33 @@ class StudentLogIn(Resource):
 #     def delete(self): # just add this line!
 #         session['user_id'] = None
 #         return {'message': '204: No Content'}, 204
+
+class Prizes(Resource):
+
+    def get(self):
+        response_dict_list = [n.to_dict() for n in Prize.query.all()]
+        response = make_response(
+            response_dict_list,
+            200, )
+        return response
+    
+    # def post(self):
+    #     data = request.get_json()
+    #     new_teacher = Prize(
+    #         fname=data.get('fname'),
+    #         lname=data.get('lname'),
+    #         email=data.get('email'),
+    #         school=data.get('school'),
+    #     )
+    #     db.session.add(new_teacher)
+    #     db.session.commit()
+    #     response_dict = jsonify(new_teacher.to_dict())
+    #     response = make_response(
+    #          response_dict,
+    #         201,
+    #     )
+        return response
+    
     
 api.add_resource(TeacherByID, '/teachers/<int:id>')
 api.add_resource(Teachers, '/teachers')
@@ -169,6 +196,7 @@ api.add_resource(SectionBySectionCode, '/sections/<string:section_code>')
 api.add_resource(Students, '/students')
 api.add_resource(StudentsBySection,"/studentsbysection/<int:section_id>")
 api.add_resource(StudentLogIn, '/studentlogin')
+api.add_resource(Prizes, '/prizes')
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)

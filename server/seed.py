@@ -17,6 +17,7 @@ if __name__ == '__main__':
         Teacher.query.delete()
         Section.query.delete()
         Student.query.delete()
+        Prize.query.delete()
        
         teachers = []
         for n in range(5):
