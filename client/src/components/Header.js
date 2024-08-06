@@ -2,9 +2,6 @@ import React from "react";
 import "./component.css"
 
 function Header({onLogout}){
-    console.log(onLogout);
-
-
     function handleLogout() {
         console.log("handleLogout called");
 

@@ -4,10 +4,15 @@ import Header from '../components/Header';
 import SignUpForm from '../components/SignUpForm';
 import "./pages.css"
 import Login from'../components/Login';
+import { useNavigate } from 'react-router-dom';
+
 
 function Home (){
 
   const [user, setUser] = useState(null);
+  const [section, setSection]= useState("");
+  const [sectionInput,setSectionInput]=useState("")
+  const navigate = useNavigate();
   //Etrech Goal: Stay logged after login
   // useEffect(() => {
   //   fetch("/check_session").then((response) => {
@@ -23,6 +28,26 @@ function Home (){
 
   function handleLogout() {
     setUser(null);
+  }
+
+  function handleChange(e){
+    e.preventDefault();
+    setSectionInput(e.target.value)
+  }
+ 
+  function handleSectionMatch(e){
+    console.log("handleSectionMatch called");
+    e.preventDefault();
+    console.log(sectionInput);
+    fetch(`/sections/${sectionInput}`)
+    .then((res) => res.json())
+    .then((data) => {
+      setSection(data);
+      console.log(data);
+      navigate("/studentViewClass")
+  
+
+    })
   }
 
  if (user){
@@ -54,9 +79,13 @@ function Home (){
             <h2 className='section-banner'>I am a student:</h2> 
             </div>
            <div id="student-section">
-              <form>
+              <form onSubmit={handleSectionMatch}>
                 <label>Class code:</label>
-                <input type="text" className="form-control" placeholder=""></input>
+                <input type="text" 
+                className="form-control" 
+                value={sectionInput} 
+                onChange={e=>handleChange(e)}
+                placeholder=""></input>
                 <input className="action-button" type="submit" value = "Go!"/>
               </form>
             </div>

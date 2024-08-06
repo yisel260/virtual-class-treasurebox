@@ -6,6 +6,7 @@ import Home from "./pages/Home";
 import ErrorPage from "./pages/ErrorPage";
 import Classes from "./pages/Classes";
 import Prizes from "./pages/Prizes";
+import StudentViewClass from "./pages/StudenViewClass";
 
 
 
@@ -24,6 +25,11 @@ const router = createBrowserRouter([
   {
     path: "/prizes",
     element: <Prizes/>,
+    errorElement: <ErrorPage/>,
+  }, 
+  {
+    path: "/studentViewClass",
+    element: <StudentViewClass/>,
     errorElement: <ErrorPage/>,
   }, 
   
