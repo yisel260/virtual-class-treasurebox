@@ -6,6 +6,8 @@ import "./pages.css"
 import Login from'../components/Login';
 import { useNavigate } from 'react-router-dom';
 import { useFormik, validateYupSchema } from 'formik';
+import * as yup from "yup";
+
 
 
 function Home (){
@@ -38,11 +40,19 @@ const formik = useFormik(
     onSubmit: (values)=>{
       console.log(values.sectionCode);
       fetch(`/sections/${values.sectionCode}`)
-      .then((res) => res.json())
-      .then((data) => {
-        setSection(data);
-        console.log(data);
-        navigate("/studentViewClass")
+      .then((res) =>{
+        if (res.ok){
+          res.json()
+          .then((data) => {
+            setSection(data);
+            console.log(data);
+            navigate("/studentViewClass")
+        })
+        }
+        else {
+          console.log("class not found");
+          alert("Ooopsie that class code could not be found. ")
+        }
       })
     }
   }
