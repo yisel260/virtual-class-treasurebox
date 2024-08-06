@@ -68,3 +68,8 @@ h1 {
     text-align: center;}
 h2 {
      text-align: center;}
+
+.prize-picture{
+    max-width:300px;
+    max-height: 200px;
+}
