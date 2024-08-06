@@ -5,13 +5,13 @@ import SignUpForm from '../components/SignUpForm';
 import "./pages.css"
 import Login from'../components/Login';
 import { useNavigate } from 'react-router-dom';
+import { useFormik, validateYupSchema } from 'formik';
 
 
 function Home (){
 
   const [user, setUser] = useState(null);
   const [section, setSection]= useState("");
-  const [sectionInput,setSectionInput]=useState("")
   const navigate = useNavigate();
   //Etrech Goal: Stay logged after login
   // useEffect(() => {
@@ -24,32 +24,32 @@ function Home (){
 
   function handleLogin(user) {
     setUser(user);
+    navigate("/classes")
   }
 
   function handleLogout() {
     setUser(null);
   }
 
-  function handleChange(e){
-    e.preventDefault();
-    setSectionInput(e.target.value)
+const formik = useFormik(
+  {
+    initialValues:{
+      sectionCode:"",
+    },
+    onSubmit: (values)=>{
+      console.log("handleSectionMatch called");
+      console.log(values.sectionCode);
+      fetch(`/sections/${values.sectionCode}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setSection(data);
+        console.log(data);
+        navigate("/studentViewClass")
+      })
+    }
   }
+)
  
-  function handleSectionMatch(e){
-    console.log("handleSectionMatch called");
-    e.preventDefault();
-    console.log(sectionInput);
-    fetch(`/sections/${sectionInput}`)
-    .then((res) => res.json())
-    .then((data) => {
-      setSection(data);
-      console.log(data);
-      navigate("/studentViewClass")
-  
-
-    })
-  }
-
  if (user){
     return (
       <>
@@ -79,12 +79,14 @@ function Home (){
             <h2 className='section-banner'>I am a student:</h2> 
             </div>
            <div id="student-section">
-              <form onSubmit={handleSectionMatch}>
+              <form onSubmit={formik.handleSubmit}>
                 <label>Class code:</label>
                 <input type="text" 
                 className="form-control" 
-                value={sectionInput} 
-                onChange={e=>handleChange(e)}
+                id="senctionCode"
+                name="sectionCode"
+                value={formik.values.sectionCode} 
+                onChange={formik.handleChange}
                 placeholder=""></input>
                 <input className="action-button" type="submit" value = "Go!"/>
               </form>
