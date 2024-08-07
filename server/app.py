@@ -55,6 +55,7 @@ class Login(Resource):
 
     def post(self):
         user = Teacher.query.filter(Teacher.email == request.get_json("username")).first()
+        print(user.id)
         session['user_id'] = user.id
         return user.to_dict()
     
@@ -63,13 +64,13 @@ class Logout(Resource):
         session['user_id'] = None
         return {'message': '204: No Content'}, 204
     
-# class CheckSession(Resource):
-#     def get(self):
-#         user = Teacher.query.filter(Teacher.id == session.get('username')).first()
-#         if user:
-#             return user.to_dict()
-#         else:
-#             return {}, 401
+class CheckSession(Resource):
+    def get(self):
+        user = Teacher.query.filter(Teacher.id == session.get('username')).first()
+        if user:
+            return user.to_dict()
+        else:
+            return {}, 401
 
 
 class Sections(Resource):
@@ -223,7 +224,7 @@ api.add_resource(TeacherByID, '/teachers/<int:id>')
 api.add_resource(Teachers, '/teachers')
 api.add_resource(Login,'/login')
 api.add_resource(Logout,'/logout')
-# api.add_resource(CheckSession, '/check_session')
+api.add_resource(CheckSession, '/check_session')
 api.add_resource(Sections,'/sections')
 api.add_resource(SectionBySectionCode, '/sections/<string:section_code>')
 api.add_resource(SectionById, '/sections/<int:section_id>')

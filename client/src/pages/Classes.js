@@ -3,6 +3,7 @@ import NavBar from '../components/NavBar';
 import Header from '../components/Header';
 import SignUpForm from '../components/SignUpForm';
 import "./pages.css";
+import StudentCard from "../components/StudentCard"
 
 
 function Classes (){

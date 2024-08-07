@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import { useFormik, validateYupSchema } from 'formik';
 import * as yup from "yup";
 import StudentViewClass from './StudenViewClass';
-
+import StudentCard from "../components/StudentCard"
 
 
 function Home (){
@@ -16,14 +16,15 @@ function Home (){
   const [user, setUser] = useState(null);
   const [section, setSection]= useState("");
   const navigate = useNavigate();
-  //Etrech Goal: Stay logged after login
-  // useEffect(() => {
-  //   fetch("/check_session").then((response) => {
-  //     if (response.ok) {
-  //       response.json().then((user) => setUser(user));
-  //     }
-  //   });
-  // }, []);
+
+  useEffect(() => {
+    fetch("/check_session").then((response) => {
+      if (response.ok) {
+        console.log(response)
+        response.json().then((user) => setUser(user));
+      }
+    });
+  }, []);
 
   function handleLogin(user) {
     setUser(user);
@@ -73,7 +74,7 @@ const formik = useFormik(
             <button className= "class-button">Class 1</button>
             <button className= "class-button">Class 2</button>
             </div>
-            {/* <StudentCard/> */}
+            <StudentCard/>
 
         </main>
       </>
