@@ -10,18 +10,19 @@ function StudenShopping({studentUser}){
       fetch(`/sections/${studentUser.section_id}`)
       .then((res) =>res.json())
       .then((data) =>{
+        console.log (data)
+        console.log(data.teacher_id)
+        // setTeacherId((teacherId)=>setTeacherIDdata.teacher_id)
         setTeacherId(data.teacher_id)
-        console.log(teacherId)
         fetch(`/prizesbyteacher/${teacherId}`)
-        .then((res) =>res.json(
-        ))
+        .then((res) =>res.json())
         .then((data)=>{
            setPrizes(data)
         })
     })
     
         
-    }, [refreshPage]);
+    }, [teacherId]);
 
   
 
@@ -29,13 +30,22 @@ function StudenShopping({studentUser}){
     <>
     <p>Hello {studentUser.name}!</p>
     <p>Pick your prizes! </p>
+    <p>You have {studentUser.points} points to shop with!  </p>
     {prizes.map(((prize)=>{
         return(
             <div>
                 <PrizeCard prize={prize} key={prize.id}/>
             </div>
         )
-    }))}
+    }
+
+    ))}
+
+    <div>
+        <p>Your prizes</p>
+        <p>display student prizes here</p> 
+        
+    </div>
     
     </>
     )

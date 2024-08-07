@@ -1,7 +1,7 @@
 import React from "react";
 import "./component.css"
 
-function StudentCard(students){
+function StudentCard(student){
     return (
     <>
     <div id= "studentCard" >
