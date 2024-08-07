@@ -16,7 +16,8 @@ function Home (){
   const [user, setUser] = useState(null);
   const [section, setSection]= useState("");
   const navigate = useNavigate();
-
+  const [teacherSections, setTeacherSections] = useState([])
+  
   useEffect(() => {
     fetch("/check_session").then((response) => {
       if (response.ok) {

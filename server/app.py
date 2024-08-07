@@ -66,7 +66,7 @@ class Logout(Resource):
     
 class CheckSession(Resource):
     def get(self):
-        user = Teacher.query.filter(Teacher.id == session.get('username')).first()
+        user = Teacher.query.filter(Teacher.id == session.get('user_id')).first()
         if user:
             return user.to_dict()
         else:
