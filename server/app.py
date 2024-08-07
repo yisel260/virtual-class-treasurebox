@@ -105,6 +105,16 @@ class SectionBySectionCode(Resource):
         )
         return response
     
+class SectionById(Resource):
+    def get(self, section_id):
+        response_dict = Section.query.filter_by(id=section_id).first().to_dict()
+        response = make_response(
+            response_dict,
+            200,
+        )
+        return response
+    
+    
 class Students(Resource):
     def get(self):
         response_dict_list = [n.to_dict() for n in Student.query.all()]
@@ -168,6 +178,29 @@ class Prizes(Resource):
             200, )
         return response
     
+
+class PrizesByTeacher(Resource):
+
+    def get(self, teacher_id):
+        prizes = Prize.query.filter_by(teacher_id=teacher_id).all()
+        print(prizes)
+        response_dict_list = [n.to_dict() for n in prizes]
+        response = make_response(
+            response_dict_list,
+            200, )
+        return response
+    
+    
+# class PrizesByTeacher(Resource):
+
+#     def get(self):
+#         response_dict_list = [n.to_dict() for n in Prize.query.all()]
+#         response = make_response(
+#             response_dict_list,
+#             200, )
+#         return response
+    
+
     # def post(self):
     #     data = request.get_json()
     #     new_teacher = Prize(
@@ -193,10 +226,12 @@ api.add_resource(Logout,'/logout')
 # api.add_resource(CheckSession, '/check_session')
 api.add_resource(Sections,'/sections')
 api.add_resource(SectionBySectionCode, '/sections/<string:section_code>')
+api.add_resource(SectionById, '/sections/<int:section_id>')
 api.add_resource(Students, '/students')
 api.add_resource(StudentsBySection,"/studentsbysection/<int:section_id>")
 api.add_resource(StudentLogIn, '/studentlogin')
 api.add_resource(Prizes, '/prizes')
+api.add_resource(PrizesByTeacher, '/prizesbyteacher/<int:teacher_id>')
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)

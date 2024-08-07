@@ -4,15 +4,25 @@ import PrizeCard from '../components/PrizeCard';
 function StudenShopping({studentUser}){
     const [prizes, setPrizes]= useState([])
     const [refreshPage, setRefreshPage] = useState(false);
-  
+   const [teacherId, setTeacherId] = useState("")
   
     useEffect(() => {
-      fetch("/prizes")
-        .then((res) => res.json())
-        .then((data) => {
-          setPrizes(data);
-        });
+      fetch(`/sections/${studentUser.section_id}`)
+      .then((res) =>res.json())
+      .then((data) =>{
+        setTeacherId(data.teacher_id)
+        console.log(teacherId)
+        fetch(`/prizesbyteacher/${teacherId}`)
+        .then((res) =>res.json(
+        ))
+        .then((data)=>{
+           setPrizes(data)
+        })
+    })
+    
+        
     }, [refreshPage]);
+
   
 
     return(
