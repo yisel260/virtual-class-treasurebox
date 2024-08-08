@@ -1,6 +1,7 @@
 import React, {useEffect,useState} from "react" 
 import LoginStudentCard from "../components/LoginStudentCard"
 import StudentShopping from "./StudentShopping"
+
 function StudentViewClass({onStudentLogIn,section}){
 
     const [students,setStudents] = useState([])
@@ -21,9 +22,15 @@ function onStudentLogIn(studentUser){
     console.log(studentUser);
 }
 
+function onStudentLogOut(){
+    setStudentUser(null)
+    console.log(studentUser);
+}
+
+
 if (studentUser){
     return (
-        <StudentShopping studentUser={studentUser}/>
+        <StudentShopping onStudentLogOut={onStudentLogOut} studentUser={studentUser}/>
     )
 }
 else{

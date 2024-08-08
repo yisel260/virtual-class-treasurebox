@@ -1,8 +1,8 @@
 import React ,{useEffect,useState} from 'react';
 import PrizeCard from '../components/PrizeCard';
 
-function StudenShopping({studentUser}){
-    const [prizes, setPrizes]= useState([])
+function StudenShopping({onStudentLogOut,studentUser}){
+   const [prizes, setPrizes]= useState([])
    const [teacherId, setTeacherId] = useState("")
   
     useEffect(() => {
@@ -26,6 +26,7 @@ function StudenShopping({studentUser}){
     return(
     <>
     <p>Hello {studentUser.name}!</p>
+    <button onClick={onStudentLogOut}>Log Out</button>
     <p>Pick your prizes! </p>
     <p>You have {studentUser.points} points to shop with!  </p>
     {prizes.map(((prize)=>{
