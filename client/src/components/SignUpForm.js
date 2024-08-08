@@ -4,19 +4,19 @@ import { useFormik } from "formik";
 import * as yup from "yup";
 
 function SignUpForm({onLogin}){
-  const [teachers, setTeachers] = useState([{}]);
-  const [refreshPage, setRefreshPage] = useState(false);
+  // const [teachers, setTeachers] = useState([{}]);
+  // const [refreshPage, setRefreshPage] = useState(false);
   
   
-  useEffect(() => {
-    console.log("FETCH! ");
-    fetch("/teachers")
-      .then((res) => res.json())
-      .then((data) => {
-        setTeachers(data);
-        console.log(data);
-      });
-  }, [refreshPage]);
+  // useEffect(() => {
+  //   console.log("FETCH! ");
+  //   fetch("/teachers")
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       setTeachers(data);
+  //       console.log(data);
+  //     });
+  // }, [refreshPage]);
 
   const formSchema= yup.object().shape(
     {

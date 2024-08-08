@@ -19,7 +19,9 @@ function Prizes(){
         console.log(data);
       });
 
-  }, [refreshPage]);
+  }, []);
+    console.log ("rendering component"
+    )
     return(
         <>
           <header>
@@ -46,12 +48,10 @@ function Prizes(){
                     <th>Requested</th>
                     <th>Net Total</th>  
                 </tr>
-                {prizes === "undefined" ? (
-            <p>Loading</p>
-          ) : (
-            prizes.map((prize, i) => (
+                {prizes === "undefined" ? (<p>Loading</p>) : (
+                 prizes.map((prize) => (
               <>
-                <tr key={i}>
+                <tr key={prize.id}>
                   <td>{prize.name}</td>
                   <td>{prize.description}</td>
                   <td>{prize.available}</td>

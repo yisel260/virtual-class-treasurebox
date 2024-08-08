@@ -115,6 +115,20 @@ class SectionById(Resource):
         )
         return response
     
+class SectionsByTeacher(Resource):
+    def get(self, teacher_id):
+        
+        sections = Section.query.filter_by(teacher_id=teacher_id).all()
+
+        response_dict = [n.to_dict() for n in sections ]
+
+        response = make_response(
+            response_dict,
+            200,
+        )
+        return response
+    
+    
     
 class Students(Resource):
     def get(self):
@@ -233,6 +247,7 @@ api.add_resource(StudentsBySection,"/studentsbysection/<int:section_id>")
 api.add_resource(StudentLogIn, '/studentlogin')
 api.add_resource(Prizes, '/prizes')
 api.add_resource(PrizesByTeacher, '/prizesbyteacher/<int:teacher_id>')
+api.add_resource(SectionsByTeacher,"/sectionsbyteacher/<int:teacher_id>")
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)

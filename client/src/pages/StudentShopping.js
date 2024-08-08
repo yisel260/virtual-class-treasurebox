@@ -3,7 +3,6 @@ import PrizeCard from '../components/PrizeCard';
 
 function StudenShopping({studentUser}){
     const [prizes, setPrizes]= useState([])
-    const [refreshPage, setRefreshPage] = useState(false);
    const [teacherId, setTeacherId] = useState("")
   
     useEffect(() => {
@@ -20,8 +19,6 @@ function StudenShopping({studentUser}){
            setPrizes(data)
         })
     })
-    
-        
     }, [teacherId]);
 
   
@@ -33,8 +30,8 @@ function StudenShopping({studentUser}){
     <p>You have {studentUser.points} points to shop with!  </p>
     {prizes.map(((prize)=>{
         return(
-            <div>
-                <PrizeCard prize={prize} key={prize.id}/>
+            <div key={prize.id}>
+                <PrizeCard prize={prize} />
             </div>
         )
     }

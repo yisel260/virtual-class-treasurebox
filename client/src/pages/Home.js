@@ -9,14 +9,13 @@ import { useFormik, validateYupSchema } from 'formik';
 import * as yup from "yup";
 import StudentViewClass from './StudenViewClass';
 import StudentCard from "../components/StudentCard"
-
+import TeacherHome from "./TeacherHome"
 
 function Home (){
 
   const [user, setUser] = useState(null);
   const [section, setSection]= useState("");
   const navigate = useNavigate();
-  const [teacherSections, setTeacherSections] = useState([])
   
   useEffect(() => {
     fetch("/check_session").then((response) => {
@@ -66,18 +65,7 @@ const formik = useFormik(
  if (user){
     return (
       <>
-        <header>
-          <Header onLogout={handleLogout}/>
-          <NavBar  />
-        </header>
-        <main>
-            <div id="class-button-div">
-            <button className= "class-button">Class 1</button>
-            <button className= "class-button">Class 2</button>
-            </div>
-            <StudentCard/>
-
-        </main>
+      <TeacherHome user={user} handleLogout={handleLogout}/>
       </>
     );
   } 
