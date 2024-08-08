@@ -154,6 +154,34 @@ class Students(Resource):
         )
         return response
     
+class StudentsById(Resource):
+
+    def get(self,student_id):
+        response_dict = Student.query.filter_by(id=student_id).first().to_dict()
+        response = make_response(
+            response_dict,
+            200,
+        )
+        return response
+    
+    def patch(self, student_id):
+
+        student = Student.query.filter_by(id = student_id).first()
+        
+        student.points = request.get_json().get('points')
+
+        db.session.add(student)
+        db.session.commit()
+
+        student_dict = student.to_dict()
+
+        response = make_response(
+            student_dict,
+            200
+        )
+        return  response
+
+    
 class StudentsBySection(Resource):
     def get(self, section_id):
         studentsInSection = Student.query.filter(Student.section_id == section_id).all()
@@ -243,6 +271,7 @@ api.add_resource(Sections,'/sections')
 api.add_resource(SectionBySectionCode, '/sections/<string:section_code>')
 api.add_resource(SectionById, '/sections/<int:section_id>')
 api.add_resource(Students, '/students')
+api.add_resource(StudentsById, '/studentsById/<int:student_id>')
 api.add_resource(StudentsBySection,"/studentsbysection/<int:section_id>")
 api.add_resource(StudentLogIn, '/studentlogin')
 api.add_resource(Prizes, '/prizes')

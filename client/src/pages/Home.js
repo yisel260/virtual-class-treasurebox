@@ -72,7 +72,7 @@ const formik = useFormik(
   else if(section) {
     return(
       <>
-      < StudentViewClass section={section}/>
+      < StudentViewClass handleLogout = {handleLogout} section={section}/>
       </>
     )
 
