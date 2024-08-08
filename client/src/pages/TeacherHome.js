@@ -7,6 +7,7 @@ function TeacherHome({user,handleLogout}){
 
     const [teacherSections, setTeacherSections] = useState([])
     const [sectionSelected,setSectionSelected] = useState(null)
+    const[students,setStudents]= useState(null)
 
     // console.log(teacherSections[0])
     // console.log(teacherSections)
@@ -19,10 +20,22 @@ function TeacherHome({user,handleLogout}){
     
     }, []);
 
-   useEffect(() =>{
-    console.log("second useeffect called")
-    setSectionSelected(teacherSections[0].id)
-   },[teacherSections])
+    useEffect(() => {
+        console.log(teacherSections.length)
+        if (teacherSections.length === 0) {
+          console.log("Classes coming");
+        } else {
+          console.log("Second useEffect called");
+          console.log(teacherSections);
+          setSectionSelected(teacherSections[0].id);
+          fetch(`/studentsbysection/${sectionSelected}`)
+            .then(result => result.json())
+            .then(data => {
+              setStudents(data);
+            });
+        }
+      }, [teacherSections]);
+
 
     return (
         <>
