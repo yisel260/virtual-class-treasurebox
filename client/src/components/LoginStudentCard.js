@@ -30,7 +30,7 @@ function LoginStudentCard({onStudentLogIn, student}){
           }});
 return(
         <>
-                <div>
+                <div key={student.id}>
                     <p>{student.name}</p> 
                     <form onSubmit={formik.handleSubmit}>
                     <input type='hidden' id="name" name="name" value={formik.studentUserName}></input>

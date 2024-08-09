@@ -12,6 +12,7 @@ from config import app, db, api
 # Add your model imports
 from models import Teacher, Section, Student, Prize
 
+import json
 
 # Views go here!
 class Teachers(Resource):
@@ -180,6 +181,20 @@ class StudentsById(Resource):
             200
         )
         return  response
+
+
+    def delete(self, student_id):
+        student = Student.query.filter_by(id=student_id).first()
+        response_body = student.to_dict()
+
+        db.session.delete(student)
+        db.session.commit()
+        response = make_response(
+            response_body,
+            204
+        )
+
+        return response
 
     
 class StudentsBySection(Resource):

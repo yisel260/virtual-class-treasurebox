@@ -67,7 +67,7 @@ function TeacherHome({user,handleLogout}){
             {students == null? (<p>students loading</p>):(students.map(student =>{
                                     console.log(student)
 
-                return (<StudentCard student={student}  />
+                return (<StudentCard student={student} key={student.id} />
                 )
             }))}
           </main>
