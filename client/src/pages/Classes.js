@@ -15,7 +15,7 @@ function Classes() {
   const [students,setStudents]=useState([])
   const [sectionSelected,setSectionSelected]=useState("")
   const [sectionSelectedId,setSectionSelectedId]=useState("")
-  const [addSection,setAddClass]=useState(false)
+  const [addSection,setAddSection]=useState(false)
   const[addStudent, setAddStudent]=useState(false)
 
 // console.log(user)
@@ -91,6 +91,18 @@ function assignSectionId(){
 
 }
 
+function handleAddSection(){
+  setStudents([])
+  setAddStudent(false)
+  setAddSection(true)
+}
+
+function handleAddStudentClick(){
+  setAddSection(false)
+  setAddStudent(true)
+}
+
+
 
   return (
     <>
@@ -100,20 +112,20 @@ function assignSectionId(){
       <main>
       
         {user? (
-          
           <>
-                <AddSectionForm user={user}/>
-                <AddStudentForm sectionSelectedId = {sectionSelectedId}/>
-           <div>
-              <button type="button">Add a new class</button>
+          <div>
+              <button onClick={handleAddSection}  type="button">Add a new class</button>
             </div>
             <div>
-              <button type="button">add a student </button>
+              <button onClick={handleAddStudentClick} type="button">add a student </button>
             </div>
+
+          {addSection?<AddSectionForm user={user}/>  : null}
+          {addStudent ? <AddStudentForm sectionSelectedId={sectionSelectedId}/> : null}
 
           {sections?(
             <div>
-              <label htmlFor="cars">Choose a class:</label>
+              <label htmlFor="section">Choose a class:</label>
               <select value={sectionSelected} onChange={handleSectionChange} name="classesdrpdwn" id="classdrpdwn">
               {sections.map((section)=>{
                   return(
@@ -123,13 +135,13 @@ function assignSectionId(){
               </select>
             </div>):(<p>Classes coming </p>)}
           
-            <table>
+            {students.length>0?(
+              <table>
               <tbody>
                 <tr>
                   <th>Student Name</th>
                   <th>Password</th>
                   <th>Points</th>
-
                 </tr>
                 <tr>
               {students.length>0 ? (
@@ -141,16 +153,15 @@ function assignSectionId(){
                         <td>{student.points}</td>
                         <button onClick={handleDeleteStudent} value={student.id} id="delete-student-btn"> delete </button>
                       </tr>
-                      </>))) : (<p>Please choose a class to see students</p>)
-              }
-                </tr>
-              </tbody>
-          </table>
-          </>
-        ): (
-          <td>Classes Loading</td>
-        ) }
-        
+                      </>))) : null
+                        }
+                          </tr>
+                        </tbody>
+                    </table>):null}
+                    </>
+                  ):null }
+
+
       </main>
     </>
   );
