@@ -3,7 +3,7 @@ import { useFormik } from "formik";
 import * as yup from "yup";
 
 
-function AddSectionForm({user}){
+function AddSectionForm({user, setSectionSelected}){
 
 const formik = useFormik({
     initialValues: {
@@ -21,7 +21,8 @@ const formik = useFormik({
         })
         .then((res)=>res.json())
         .then((data)=>{
-            console.log(data)})
+            setSectionSelected(data.name)
+        })
         resetForm();
     }
 })

@@ -4,7 +4,7 @@ import * as yup from "yup";
 
 
 
-function AddStudentForm({sectionSelectedId}){
+function AddStudentForm({sectionSelected}){
 // const formSchema= yup.object().shape(
 //     {
 //       name: yup.string().required("must enter a name").max(20),
@@ -13,13 +13,12 @@ function AddStudentForm({sectionSelectedId}){
 //       section_id: yup.number().required("must enter a school name")
 //     })
 
-console.log(sectionSelectedId)
   const formik = useFormik({
       initialValues: {
         name: "",
         password: "",
         points:"",  
-        section_id:sectionSelectedId,
+        section_id:sectionSelected,
       },
     //   validationSchema: formSchema,
       onSubmit: (values,{resetForm}) => {

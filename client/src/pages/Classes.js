@@ -34,33 +34,14 @@ function Classes() {
       .then((response) =>response.json())
       .then(data =>{
         setSections(data)
-        console.log(data[0].name)
-        setSectionSelected(data[0].name)
       })):(<p>classes coming</p>)
   },[user])
 
-
-function assignSectionId(){
-    const sectionListed = sections.filter(section => section.name === sectionSelected)
-    const sectionId = sectionListed[0].id
-    setSectionSelectedId(sectionId)
-  }
-
-  
-  useEffect(() =>{
-    sectionSelected?(assignSectionId()):(console.log(sectionSelected))
-  },[sectionSelected])
-
+ 
  function handleSectionChange(e){
   setSectionSelected(e.target.value)
   console.log(e.target.value)
-  const section= sections.filter(section => section.name === e.target.value)
-  console.log(section[0].id)
-  fetch(`/sections/${section[0].id}`)
-  . then((res)=>res.json())
-  .then ((data) =>{
-    console.log(data) })
-    fetch(`/studentsbysection/${section[0].id}`)
+    fetch(`/studentsbysection/${e.target.value}`)
     .then((res)=>res.json())
     .then((data) =>{
       setStudents(data)
@@ -69,7 +50,6 @@ function assignSectionId(){
 
 
  function handleDeleteStudent(e){
-  // console.log(e.target.value)
   fetch(`/studentsById/${e.target.value}`,{
     method: 'delete',
   })
@@ -92,7 +72,6 @@ function assignSectionId(){
 }
 
 function handleAddSection(){
-  setStudents([])
   setAddStudent(false)
   setAddSection(true)
 }
@@ -120,8 +99,11 @@ function handleAddStudentClick(){
               <button onClick={handleAddStudentClick} type="button">add a student </button>
             </div>
 
-          {addSection?<AddSectionForm user={user}/>  : null}
-          {addStudent ? <AddStudentForm sectionSelectedId={sectionSelectedId}/> : null}
+          {addSection?<AddSectionForm user={user}
+          setSectionSelected={setSectionSelected}/>  : null}
+          {addStudent ? <AddStudentForm 
+          sectionSelected={sectionSelected}
+           /> : null}
 
           {sections?(
             <div>
@@ -129,7 +111,7 @@ function handleAddStudentClick(){
               <select value={sectionSelected} onChange={handleSectionChange} name="classesdrpdwn" id="classdrpdwn">
               {sections.map((section)=>{
                   return(
-                  <option  key= {section.name} name="section" id="section" >{section.name}</option>
+                  <option value={section.id} key= {section.name} name="section" id="section" >{section.name}</option>
                   )
               })}
               </select>
