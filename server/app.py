@@ -144,6 +144,7 @@ class Students(Resource):
         new_section = Student(
             name=data.get('name'),
             password=data.get('password'),
+            points=data.get('points'),
             section_id=data.get('section_id'),
         )
         db.session.add(new_section)

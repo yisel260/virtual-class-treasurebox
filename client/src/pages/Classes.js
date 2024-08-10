@@ -1,11 +1,11 @@
 import React,{useEffect,useState} from 'react';
 import NavBar from '../components/NavBar';
 import Header from '../components/Header';
+import AddStudentForm from '../components/AddStudentForm';
 import SignUpForm from '../components/SignUpForm';
 import "./pages.css";
 import StudentCard from "../components/StudentCard"
 import Home from "./Home"
-
 
 
 function Classes() {
@@ -37,7 +37,6 @@ function Classes() {
       })):(<p>classes coming</p>)
   },[user])
 
-console.log(sectionSelected)
 
 function assignSectionId(){
     const sectionListed = sections.filter(section => section.name === sectionSelected)
@@ -65,15 +64,6 @@ function assignSectionId(){
       setStudents(data)
     })
 }
-
-// function handleSectionChange(e){
-//   fetch (`/studentsbytsection/${sectionSelectedId}`)
-//   .then((res)=>res.json())
-//   .then((data) =>{
-//     console.log(data)
-//   })
-// }
-
 
 
  function handleDeleteStudent(e){
@@ -113,7 +103,7 @@ function assignSectionId(){
               <select value={sectionSelected} onChange={handleSectionChange} name="classesdrpdwn" id="classdrpdwn">
               {sections.map((section)=>{
                   return(
-                  <option  key= {section.id} name="section" id="section" >{section.name}</option>
+                  <option  key= {section.name} name="section" id="section" >{section.name}</option>
                   )
               })}
               </select>
@@ -143,12 +133,11 @@ function assignSectionId(){
               }
                 </tr>
               </tbody>
-            </table>
-
-            <button>Add student</button>
+          </table>      
+          <AddStudentForm sectionSelectedId={sectionSelectedId}/>
           </>
         ): (
-          <p>Classes Loading</p>
+          <td>Classes Loading</td>
         ) }
       </main>
     </>
