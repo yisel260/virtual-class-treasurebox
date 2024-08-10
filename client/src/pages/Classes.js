@@ -14,7 +14,6 @@ function Classes() {
   const [sections,setSections]=useState(null)
   const [students,setStudents]=useState([])
   const [sectionSelected,setSectionSelected]=useState("")
-  const [sectionSelectedId,setSectionSelectedId]=useState("")
   const [addSection,setAddSection]=useState(false)
   const[addStudent, setAddStudent]=useState(false)
 
@@ -37,15 +36,28 @@ function Classes() {
       })):(<p>classes coming</p>)
   },[user])
 
+  useEffect(() => {
+    if (sections) {
+      console.log(sections[0].id)
+      const sectionId= sections[0].id
+      getStudents(sectionId);
+      setSectionSelected(sectionId)
+    }
+  }, [sections]);
+  
  
+ function getStudents(sectionId){
+  fetch(`/studentsbysection/${sectionId}`)
+  .then((res)=>res.json())
+  .then((data) =>{
+    setStudents(data)
+  })
+ }
+
  function handleSectionChange(e){
   setSectionSelected(e.target.value)
   console.log(e.target.value)
-    fetch(`/studentsbysection/${e.target.value}`)
-    .then((res)=>res.json())
-    .then((data) =>{
-      setStudents(data)
-    })
+   getStudents(e.target.value)
 }
 
 
