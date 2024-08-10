@@ -6,7 +6,7 @@ import SignUpForm from '../components/SignUpForm';
 import "./pages.css";
 import StudentCard from "../components/StudentCard"
 import Home from "./Home"
-
+import AddSectionForm from '../components/AddSectionForm';
 
 function Classes() {
 
@@ -15,6 +15,8 @@ function Classes() {
   const [students,setStudents]=useState([])
   const [sectionSelected,setSectionSelected]=useState("")
   const [sectionSelectedId,setSectionSelectedId]=useState("")
+  const [addSection,setAddClass]=useState(false)
+  const[addStudent, setAddStudent]=useState(false)
 
 // console.log(user)
   useEffect(() => {
@@ -94,9 +96,21 @@ function assignSectionId(){
     <>
       <Header />
       <NavBar/>
+
       <main>
-        {user ? (
+      
+        {user? (
+          
           <>
+                <AddSectionForm user={user}/>
+                <AddStudentForm sectionSelectedId = {sectionSelectedId}/>
+           <div>
+              <button type="button">Add a new class</button>
+            </div>
+            <div>
+              <button type="button">add a student </button>
+            </div>
+
           {sections?(
             <div>
               <label htmlFor="cars">Choose a class:</label>
@@ -108,9 +122,7 @@ function assignSectionId(){
               })}
               </select>
             </div>):(<p>Classes coming </p>)}
-            <div>
-              <button type="button">Add a new class</button>
-            </div>
+          
             <table>
               <tbody>
                 <tr>
@@ -133,12 +145,12 @@ function assignSectionId(){
               }
                 </tr>
               </tbody>
-          </table>      
-          <AddStudentForm sectionSelectedId={sectionSelectedId}/>
+          </table>
           </>
         ): (
           <td>Classes Loading</td>
         ) }
+        
       </main>
     </>
   );

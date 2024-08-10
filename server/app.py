@@ -85,8 +85,8 @@ class Sections(Resource):
     def post(self):
         data = request.get_json()
         new_section = Section(
-            name=data.get('fname'),
-            section_code=data.get('lname'),
+            name=data.get('name'),
+            section_code=data.get('section_code'),
             teacher_id=data.get('teacher_id'),
         )
         db.session.add(new_section)
