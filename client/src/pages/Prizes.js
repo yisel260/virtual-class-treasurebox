@@ -48,7 +48,7 @@ function Prizes(){
                     <th>Requested</th>
                     <th>Net Total</th>  
                 </tr>
-                {prizes === "undefined" ? (<p>Loading</p>) : (
+                {prizes?(
                  prizes.map((prize) => (
               <>
                 <tr key={prize.id}>
@@ -62,7 +62,7 @@ function Prizes(){
                 </tr>
               </>
             ))
-          )}
+          ): (<p>Loading</p>) }
             </table>
             
         </div>

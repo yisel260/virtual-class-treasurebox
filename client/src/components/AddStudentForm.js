@@ -40,7 +40,7 @@ function AddStudentForm({sectionSelected,getStudents}){
 return (
     <>
     
-   
+   <br/><br/>
 
 <form onSubmit={formik.handleSubmit}>
 
@@ -69,6 +69,7 @@ return (
         />
 
         <input
+        type="hidden"
         id="section_id"
         name="section_id"
         onChange={formik.handleChange}

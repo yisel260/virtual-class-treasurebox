@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import Header from "../components/Header"
 import NavBar from "../components/NavBar";
 import StudentCard from "../components/StudentCard";
+import "./pages.css"
 
 function TeacherHome({user,handleLogout}){
 
@@ -49,21 +50,23 @@ function TeacherHome({user,handleLogout}){
         <>
           <header>
             <Header onLogout={handleLogout} />
+            <br/>
             <NavBar />
           </header>
+          <br/>
           <main>
             {teacherSections === undefined ? (
               <p>Loading</p> ) : (
               <>
                 {teacherSections.map((section) => (
-                  <div id="class-button-div" key={section.id}>
-                    <button className="class-button">{section.name}</button>
+                  <div className="class-button-div" key={section.id}>
+                    <button  className="choice-button">{section.name}</button>
                   </div>
                 ))}
-
-                <p>the selected class is : {sectionSelected}</p>
               </>
             )}
+            <br/><br/>
+
             {students == null? (<p>students loading</p>):(students.map(student =>{
                                     console.log(student)
 

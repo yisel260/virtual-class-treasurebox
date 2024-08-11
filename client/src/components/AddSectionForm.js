@@ -31,6 +31,7 @@ const formik = useFormik({
 })
 return(
     <>
+    <br/><br/>
     <form onSubmit={formik.handleSubmit}>
         <label htmlFor='name'>Name:</label>
         <input 
@@ -50,7 +51,7 @@ return(
 
         <label htmlFor='teacher_id'></label>
         <input 
-        type='text'
+        type='hidden'
         name='name'
         value={formik.values.teacher_id}
         onChange={formik.handleChange}

@@ -22,11 +22,11 @@ function StudentCard({student}){
 
     return (
     <>
-    <div id= "studentCard" >
-        <div id="studentName">
-            <p>{student.name}</p>
-            <p>Points: {student.points}</p>
-            <button value= {student.id} id="add-points-button" name="add-points-button" onClick={handleAddPoint}>+1 point </button>
+    <div  >
+        <div id="student-card">
+            <p id="student-name">{student.name}</p>
+            <p id ="student-points">Points: {student.points}</p>
+            <button value= {student.id} id="add-points-btn" name="add-points-btn" onClick={handleAddPoint}>+1 point </button>
         </div>
 
     </div>

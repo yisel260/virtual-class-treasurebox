@@ -71,27 +71,6 @@ function Classes() {
 }
 
 
- function handleDeleteStudent(e){
-  fetch(`/studentsById/${e.target.value}`,{
-    method: 'delete',
-  })
-  .then((res)=>{
-  if (res.ok) { 
-    console.log(sectionSelected)
-    const section= sections.filter(section => section.name == sectionSelected)
-    console.log(section[0].id)
-    fetch(`/sections/${section[0].id}`)
-    . then((res)=>res.json())
-    .then ((data) =>{
-      console.log(data) })
-      fetch(`/studentsbysection/${section[0].id}`)
-      .then((res)=>res.json())
-      .then((data) =>{
-        setStudents(data)
-      })
-  }})
-
-}
 
 function handleAddSection(){
   setAddStudent(false)
@@ -112,6 +91,7 @@ function handleStudentRosterClick(){
   setAddSection(false)
   setAddStudent(false)
   setStudentRoster(true)
+  setSectionDwn(true)
 }
 
 
@@ -122,37 +102,39 @@ function handleStudentRosterClick(){
     <>
       <Header />
       <NavBar/>
-
+      <br/>
       <main>
       
         {user? (
           <>
-          <div>
-              <button onClick={handleAddSection}  type="button">Add a new class</button>
+          <div id="choice-btn-container">
+              <button className="choice-button"onClick={handleAddSection}  type="button">Add a new class</button>
             </div>
             <div>
-              <button onClick={handleAddStudentClick} type="button">add a student </button>
+              <button className="choice-button" onClick={handleAddStudentClick} type="button">add a student </button>
             </div>
             <div>
-              <button onClick={handleStudentRosterClick} type="button">Student roster </button>
+              <button className="choice-button" onClick={handleStudentRosterClick} type="button">Student roster </button>
             </div>
-
+            <br/>
           {addSection?<AddSectionForm user={user} setSectionSelected={setSectionSelected} getSections={getSections}/>  : null}
           {addStudent ? <AddStudentForm 
               sectionSelected={sectionSelected}
               getStudents={getStudents}/> : null}
           {studentRoster?(
             <>
+            <br/>
              {sectionDwn? (<SectionSelector 
               sections={sections}
               sectionSelected={sectionSelected}
               handleSectionChange={handleSectionChange}/>):null}
               <StudentDataTable 
               handleSectionChange={handleSectionChange}
-              handleDeleteStudent={handleDeleteStudent} 
+              setStudents={setStudents} 
               sections = {sections} 
               sectionSelected={sectionSelected} 
               students={students}
+              getStudents={getStudents}
               />
               </>):null}
                 </>

@@ -64,6 +64,33 @@
    
 }
 
+
+.choice-button {
+    background-color:salmon; 
+    border: 1px solid salmon; 
+    color: white; 
+    padding: 10px 24px; 
+    cursor: pointer; 
+    float: left; 
+    border-radius:10px;
+  }
+  
+  .choice-button:after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+  
+  .choice-button:not(:last-child) {
+    border-right: none; 
+  }
+  
+  .choice-button:hover {
+    background-color: #a6c8f0;}
+
+#choice-btn-container{
+    width:100%
+}
 h1 {
     text-align: center;}
 h2 {

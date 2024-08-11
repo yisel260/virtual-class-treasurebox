@@ -3,6 +3,7 @@ import React,{useEffect,useState} from 'react';
 function SectionSelector({sections,sectionSelected,handleSectionChange}){
     return (
         <>
+        <br />
         {sections?(<>
     
          <label htmlFor="section">Choose a class:</label>

@@ -1,35 +1,54 @@
 import React,{useEffect,useState} from 'react';
 
-function StudentDataTable({students, sections,sectionSelected,handleSectionChange, handleDeleteStudent})
-   {
-    return (
-        <>
-        {sections?(
+function StudentDataTable({ students, getStudents, setStudents, sections, sectionSelected }) {
+  function handleDeleteStudent(e) {
+    fetch(`/studentsById/${e.target.value}`, {
+      method: 'delete',
+    })
+      .then((res) => {
+        if (res.ok) {
+          getStudents(sectionSelected);
+        }
+      });
+  }
+
+  return (
+    <>
+      {sections ? (
         <div>
-        
-          {students?(
-          <table>
-          <tbody>
-            <tr>
-              <th>Student Name</th>
-              <th>Password</th>
-              <th>Points</th>
-            </tr>
-            <tr>
-              {students.map((student) => (
-                <>
+          {students ? (
+            <>
+            <br/>
+            <table>
+              <tbody>
+                <tr>
+                  <th>Student Name</th>
+                  <th>Password</th>
+                  <th>Points</th>
+                </tr>
+                {students.map((student) => (
                   <tr key={student.id}>
                     <td>{student.name}</td>
                     <td>{student.password}</td>
                     <td>{student.points}</td>
-                    <button onClick={handleDeleteStudent} value={student.id} id="delete-student-btn"> delete </button>
+                    <td>
+                      <button onClick={handleDeleteStudent} value={student.id} id="delete-student-btn">
+                        delete
+                      </button>
+                    </td>
                   </tr>
-                  </>))}
-                      </tr>
-                    </tbody>
-                </table>):(console.log("no students added yet"))}
-        </div>):(<p>Classes coming </p>)}
-        </>)
+                ))}
+              </tbody>
+            </table>
+            </>) : (
+            console.log('no students added yet')
+          )}
+        </div>
+      ) : (
+        <p>Classes coming</p>
+      )}
+    </>
+  );
 }
 
-export default StudentDataTable
+export default StudentDataTable;

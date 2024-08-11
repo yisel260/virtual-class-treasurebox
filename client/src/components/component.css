@@ -36,20 +36,43 @@
 .navbar{
     color:white;
     width:100%;
-    overflow: auto;
+    /* overflow: auto; */
 }
 .nav-link{
     background-color: #66acc7;
     text-align: center; 
-    padding:10px;
+    padding: 10px 24px; 
     margin:10px;
     text-decoration:none;
     color:black;
     font-size: 30px;
+    border-radius:10px;
+
 
 }
+
+.nav-link:hover {
+    background-color: #a6c8f0;}
 
 .prize-picture{
     max-width:300px;
     max-height: 200px;
+}
+
+#student-card{
+    background-color: #96df8c;
+    border-radius: 12px;
+    text-align: center;
+    display: inline-table;
+    margin:10px;
+}
+
+#student-name{
+    background-color: #96df8c;
+}
+
+#add-points-btn{
+    background-color: salmon;
+    border-radius: 10px;
+    border-color:salmon;
 }
