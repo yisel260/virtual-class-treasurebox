@@ -4,7 +4,7 @@ import * as yup from "yup";
 
 
 
-function AddStudentForm({sectionSelected}){
+function AddStudentForm({sectionSelected,getStudents}){
 // const formSchema= yup.object().shape(
 //     {
 //       name: yup.string().required("must enter a name").max(20),
@@ -30,12 +30,11 @@ function AddStudentForm({sectionSelected}){
           },
           body: JSON.stringify(values, null, 2),
         })
-        .then((res) => {
-          if (res.status === 201) {
-            console.log("student added successfully")
-          }
+        .then((res) => res.json())
+        .then((data) => {
+          getStudents(data.section_id)
         })
-        resetForm();
+        resetForm()
       }
       })
 return (

@@ -6,14 +6,7 @@ function StudentDataTable({students, sections,sectionSelected,handleSectionChang
         <>
         {sections?(
         <div>
-          <label htmlFor="section">Choose a class:</label>
-          <select id="section-selector" value={sectionSelected} onChange={handleSectionChange} name="classesdrpdwn">
-          {sections.map((section)=>{
-              return(
-              <option value={section.id} key= {section.name} name="section" id="section" >{section.name}</option>
-              )
-          })}
-          </select>
+        
           {students?(
           <table>
           <tbody>

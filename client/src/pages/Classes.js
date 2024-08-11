@@ -5,6 +5,7 @@ import AddStudentForm from '../components/AddStudentForm';
 import "./pages.css";
 import AddSectionForm from '../components/AddSectionForm';
 import StudentDataTable from '../components/StudentDataTable';
+import SectionSelector from '../components/SectionSelector';
 
 function Classes() {
 
@@ -15,7 +16,7 @@ function Classes() {
   const [addSection,setAddSection]=useState(false)
   const[addStudent, setAddStudent]=useState(false)
   const[studentRoster, setStudentRoster]=useState(true)
-
+  const[sectionDwn, setSectionDwn]=useState(false)
 // console.log(user)
   useEffect(() => {
     fetch("/check_session")
@@ -103,6 +104,7 @@ function handleAddStudentClick(){
   setAddSection(false)
   setAddStudent(true)
   setStudentRoster(true)
+  setSectionDwn(false)
 
 }
 
@@ -136,14 +138,23 @@ function handleStudentRosterClick(){
             </div>
 
           {addSection?<AddSectionForm user={user} setSectionSelected={setSectionSelected} getSections={getSections}/>  : null}
-          {addStudent ? <AddStudentForm sectionSelected={sectionSelected}/> : null}
-          {studentRoster?<StudentDataTable 
+          {addStudent ? <AddStudentForm 
+              sectionSelected={sectionSelected}
+              getStudents={getStudents}/> : null}
+          {studentRoster?(
+            <>
+             {sectionDwn? (<SectionSelector 
+              sections={sections}
+              sectionSelected={sectionSelected}
+              handleSectionChange={handleSectionChange}/>):null}
+              <StudentDataTable 
               handleSectionChange={handleSectionChange}
               handleDeleteStudent={handleDeleteStudent} 
               sections = {sections} 
               sectionSelected={sectionSelected} 
               students={students}
-              />:null}
+              />
+              </>):null}
                 </>
                   ):null}
 
