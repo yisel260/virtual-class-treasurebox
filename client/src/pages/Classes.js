@@ -2,11 +2,9 @@ import React,{useEffect,useState} from 'react';
 import NavBar from '../components/NavBar';
 import Header from '../components/Header';
 import AddStudentForm from '../components/AddStudentForm';
-import SignUpForm from '../components/SignUpForm';
 import "./pages.css";
-import StudentCard from "../components/StudentCard"
-import Home from "./Home"
 import AddSectionForm from '../components/AddSectionForm';
+import StudentDataTable from '../components/StudentDataTable';
 
 function Classes() {
 
@@ -104,7 +102,7 @@ function handleAddSection(){
 function handleAddStudentClick(){
   setAddSection(false)
   setAddStudent(true)
-  setStudentRoster(false)
+  setStudentRoster(true)
 
 }
 
@@ -137,45 +135,15 @@ function handleStudentRosterClick(){
               <button onClick={handleStudentRosterClick} type="button">Student roster </button>
             </div>
 
-          {addSection?<AddSectionForm user={user}
-          setSectionSelected={setSectionSelected}
-          getSections={getSections}/>  : null}
-          {addStudent ? <AddStudentForm 
-          sectionSelected={sectionSelected}
-           /> : null}
-
-          {sections?(
-            <div>
-              <label htmlFor="section">Choose a class:</label>
-              <select id="section-selector" value={sectionSelected} onChange={handleSectionChange} name="classesdrpdwn">
-              {sections.map((section)=>{
-                  return(
-                  <option value={section.id} key= {section.name} name="section" id="section" >{section.name}</option>
-                  )
-              })}
-              </select>
-              {students.length>0?(
-              <table>
-              <tbody>
-                <tr>
-                  <th>Student Name</th>
-                  <th>Password</th>
-                  <th>Points</th>
-                </tr>
-                <tr>
-                  {students.map((student) => (
-                    <>
-                      <tr key={student.id}>
-                        <td>{student.name}</td>
-                        <td>{student.password}</td>
-                        <td>{student.points}</td>
-                        <button onClick={handleDeleteStudent} value={student.id} id="delete-student-btn"> delete </button>
-                      </tr>
-                      </>))}
-                          </tr>
-                        </tbody>
-                    </table>):(console.log("no students added yet"))}
-            </div>):(<p>Classes coming </p>)}
+          {addSection?<AddSectionForm user={user} setSectionSelected={setSectionSelected} getSections={getSections}/>  : null}
+          {addStudent ? <AddStudentForm sectionSelected={sectionSelected}/> : null}
+          {studentRoster?<StudentDataTable 
+              handleSectionChange={handleSectionChange}
+              handleDeleteStudent={handleDeleteStudent} 
+              sections = {sections} 
+              sectionSelected={sectionSelected} 
+              students={students}
+              />:null}
                 </>
                   ):null}
 
