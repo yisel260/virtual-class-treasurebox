@@ -16,6 +16,7 @@ function Classes() {
   const [sectionSelected,setSectionSelected]=useState("")
   const [addSection,setAddSection]=useState(false)
   const[addStudent, setAddStudent]=useState(false)
+  const[studentRoster, setStudentRoster]=useState(true)
 
 // console.log(user)
   useEffect(() => {
@@ -28,22 +29,32 @@ function Classes() {
   }, []);
 
   useEffect(() => {
-    user?(
-      fetch(`/sectionsbyteacher/${user.id}`)
+    user?(getSections(user.id)):(<p>classes coming</p>)
+  },[user])
+
+
+  function getSections(userId) {
+    fetch(`/sectionsbyteacher/${userId}`)
       .then((response) =>response.json())
       .then(data =>{
         setSections(data)
-      })):(<p>classes coming</p>)
-  },[user])
+      })
+
+  }
 
   useEffect(() => {
-    if (sections) {
-      console.log(sections[0].id)
-      const sectionId= sections[0].id
-      getStudents(sectionId);
-      setSectionSelected(sectionId)
+    if (sections){
+      if (sectionSelected) {
+        console.log('section selected already')
+
+      }
+      else {
+        const sectionId= sections[0].id
+        getStudents(sectionId);
+        setSectionSelected(sectionId)
+      }
     }
-  }, [sections]);
+  },[sections] );
   
  
  function getStudents(sectionId){
@@ -86,12 +97,24 @@ function Classes() {
 function handleAddSection(){
   setAddStudent(false)
   setAddSection(true)
+  setStudentRoster(false)
+
 }
 
 function handleAddStudentClick(){
   setAddSection(false)
   setAddStudent(true)
+  setStudentRoster(false)
+
 }
+
+function handleStudentRosterClick(){
+  setAddSection(false)
+  setAddStudent(false)
+  setStudentRoster(true)
+}
+
+
 
 
 
@@ -110,9 +133,13 @@ function handleAddStudentClick(){
             <div>
               <button onClick={handleAddStudentClick} type="button">add a student </button>
             </div>
+            <div>
+              <button onClick={handleStudentRosterClick} type="button">Student roster </button>
+            </div>
 
           {addSection?<AddSectionForm user={user}
-          setSectionSelected={setSectionSelected}/>  : null}
+          setSectionSelected={setSectionSelected}
+          getSections={getSections}/>  : null}
           {addStudent ? <AddStudentForm 
           sectionSelected={sectionSelected}
            /> : null}
@@ -120,16 +147,14 @@ function handleAddStudentClick(){
           {sections?(
             <div>
               <label htmlFor="section">Choose a class:</label>
-              <select value={sectionSelected} onChange={handleSectionChange} name="classesdrpdwn" id="classdrpdwn">
+              <select id="section-selector" value={sectionSelected} onChange={handleSectionChange} name="classesdrpdwn">
               {sections.map((section)=>{
                   return(
                   <option value={section.id} key= {section.name} name="section" id="section" >{section.name}</option>
                   )
               })}
               </select>
-            </div>):(<p>Classes coming </p>)}
-          
-            {students.length>0?(
+              {students.length>0?(
               <table>
               <tbody>
                 <tr>
@@ -138,8 +163,7 @@ function handleAddStudentClick(){
                   <th>Points</th>
                 </tr>
                 <tr>
-              {students.length>0 ? (
-                students.map((student) => (
+                  {students.map((student) => (
                     <>
                       <tr key={student.id}>
                         <td>{student.name}</td>
@@ -147,13 +171,13 @@ function handleAddStudentClick(){
                         <td>{student.points}</td>
                         <button onClick={handleDeleteStudent} value={student.id} id="delete-student-btn"> delete </button>
                       </tr>
-                      </>))) : null
-                        }
+                      </>))}
                           </tr>
                         </tbody>
-                    </table>):null}
-                    </>
-                  ):null }
+                    </table>):(console.log("no students added yet"))}
+            </div>):(<p>Classes coming </p>)}
+                </>
+                  ):null}
 
 
       </main>
