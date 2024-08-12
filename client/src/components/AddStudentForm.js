@@ -32,6 +32,7 @@ function AddStudentForm({sectionSelected,getStudents}){
         })
         .then((res) => res.json())
         .then((data) => {
+          console.log(data)
           getStudents(data.section_id)
         })
         resetForm()

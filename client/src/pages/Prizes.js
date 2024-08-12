@@ -40,6 +40,8 @@ function Prizes(){
                     <th>Available </th>
                     <th>Requested</th>
                     <th>Net Total</th>  
+                    <th></th>
+                    <th></th>  
                 </tr>
                 {prizes?(
                  prizes.map((prize) => (
@@ -50,9 +52,11 @@ function Prizes(){
                   <td>{prize.inventory}</td>
                   <td>{prize.number_requested}</td>
                   <td>{prize.inventory - prize.number_requested}</td>
+                  <td><button>delete</button></td>
+                  <td><button>Update</button></td>
+            </tr>
+      
 
-
-                </tr>
               </>
             ))
           ): (<p>Loading</p>) }

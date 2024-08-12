@@ -1,5 +1,5 @@
 import React,{useState} from "react";
-import App from "./components/App";
+import App from "./App";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./pages/Home";

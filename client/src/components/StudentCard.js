@@ -5,7 +5,6 @@ function StudentCard({student}){
     const[studentPoints, setStudentPoints]=useState(student.points)
 
     function handleAddPoint(event){
-        console.log(student.id)
         fetch(`/studentsById/${student.id}` 
         ,{
             method: 'PATCH',

@@ -159,7 +159,7 @@ class Students(Resource):
 class StudentsById(Resource):
 
     def get(self,student_id):
-        response_dict = Student.query.filter_by(id=student_id).first().to_dict()
+        response_dict = Student.query.filter_by(id=student_id).first().to_dict( only={"name","password","points","section_id"})
         response = make_response(
             response_dict,
             200,

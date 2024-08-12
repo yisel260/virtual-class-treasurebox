@@ -1,26 +1,24 @@
 import React,{useState, useEffect} from 'react';
-import NavBar from '../components/NavBar';
 import Header from '../components/Header';
 import SignUpForm from '../components/SignUpForm';
 import "./pages.css"
 import Login from'../components/Login';
-import { useNavigate } from 'react-router-dom';
 import { useFormik, validateYupSchema } from 'formik';
 import * as yup from "yup";
 import StudentViewClass from './StudenViewClass';
-import StudentCard from "../components/StudentCard"
 import TeacherHome from "./TeacherHome"
+import { useOutletContext } from 'react-router-dom';
 
 function Home (){
+  const context = useOutletContext()
+  console.log(context)
 
   const [user, setUser] = useState(null);
   const [section, setSection]= useState("");
-  const navigate = useNavigate();
   
   useEffect(() => {
     fetch("/check_session").then((response) => {
       if (response.ok) {
-        console.log(response)
         response.json().then((user) => setUser(user));
       }
     });
@@ -40,17 +38,13 @@ const formik = useFormik(
       sectionCode:"",
     },
     onSubmit: (values)=>{
-      console.log(values.sectionCode);
       fetch(`/sections/${values.sectionCode}`)
       .then((res) =>{
         if (res.ok){
           res.json()
           .then((data) => {
             setSection(data);
-            console.log(data);
             setSection(data.id)
-            console.log(section);
-            //navigate("/studentViewClass")
         })
         }
         else {
@@ -85,7 +79,6 @@ const formik = useFormik(
         </header>
         <main>
           <h1>Welcome to Treasure Box! </h1>
-         {/* <div className="parent-section"> */}
          <div>
             <h2 className='section-banner'>I am a student:</h2> 
             </div>
@@ -116,7 +109,6 @@ const formik = useFormik(
               <div id="sign-up-form"className="section">
                   <SignUpForm onLogin={handleLogin}/>
               </div>
-            {/* </div> */}
 
       
           </div>

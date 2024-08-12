@@ -10,8 +10,6 @@ function TeacherHome({user,handleLogout}){
     const [sectionSelected,setSectionSelected] = useState(null)
     const[students,setStudents]= useState([])
 
-    // console.log(teacherSections[0])
-    // console.log(teacherSections)
     useEffect(() => {
         fetch(`/sectionsbyteacher/${user.id}`)
         .then((res) =>res.json())
@@ -22,26 +20,19 @@ function TeacherHome({user,handleLogout}){
     }, []);
 
     useEffect(() => {
-        console.log(teacherSections.length)
         if (teacherSections.length === 0) {
-          console.log("Classes coming");
         } else {
-          console.log("Second useEffect called");
-          console.log(teacherSections);
           setSectionSelected(teacherSections[0].id);
         }
       }, [teacherSections]);
 
     useEffect(()=>{
         if (sectionSelected==null){
-            console.log("No section selected");
         }
         else{
-        console.log("Third UseEffect called")
         fetch(`/studentsbysection/${sectionSelected}`)
         .then(result => result.json())
         .then(data => {
-            console.log(data)
           setStudents(data);
         })}},[sectionSelected]
     )
@@ -68,8 +59,6 @@ function TeacherHome({user,handleLogout}){
             <br/><br/>
 
             {students == null? (<p>students loading</p>):(students.map(student =>{
-                                    console.log(student)
-
                 return (<StudentCard student={student} key={student.id} />
                 )
             }))}
