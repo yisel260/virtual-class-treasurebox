@@ -16,7 +16,7 @@ function Classes() {
   const [addSection,setAddSection]=useState(false)
   const[addStudent, setAddStudent]=useState(false)
   const[studentRoster, setStudentRoster]=useState(true)
-  const[sectionDwn, setSectionDwn]=useState(false)
+  const[sectionDwn, setSectionDwn]=useState(true)
 // console.log(user)
   useEffect(() => {
     fetch("/check_session")

@@ -22,7 +22,7 @@ function StudentCard({student}){
 
     return (
     <>
-    <div  >
+        <div id="student-card-container">
         <div id="student-card">
             <p id="student-name">{student.name}</p>
             <p id ="student-points">Points: {student.points}</p>

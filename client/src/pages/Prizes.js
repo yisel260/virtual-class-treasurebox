@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import NavBar from '../components/NavBar';
 import Header from '../components/Header';
 import "./pages.css";
-
+import AddPrizeForm from "../components/AddPrizeForm";
 function Prizes(){
 
     const [prizes, setPrizes] = useState([{}]);
@@ -27,22 +27,15 @@ function Prizes(){
           <header>
           <Header/>
           <NavBar />
+          <br/>
         </header>
-        <form id="addPrizeForm">
-            <label htmlFor = "prize-name">Prize </label>
-            <input type="text"></input>
-            <label htmlFor ="description">Description</label>
-            <input type="text"></input>
-            <label htmlFor = "points">Point value</label>
-            <input type="text"></input>
-            <label htmlFor="inventory">Number Available</label>
-            <input type="text"></input>
-            <input type="submit" value = "Add Prize"/>
-            </form>
+        <br/>
+        <AddPrizeForm/>
+        <br/>
         <div>
             <table >
                 <tr>
-                    <th>Prize</th>
+                    {/* <th>Prize</th> */}
                     <th>Description</th>
                     <th>Available </th>
                     <th>Requested</th>
@@ -52,11 +45,11 @@ function Prizes(){
                  prizes.map((prize) => (
               <>
                 <tr key={prize.id}>
-                  <td>{prize.name}</td>
+                  {/* <td>{prize.name}</td> */}
                   <td>{prize.description}</td>
-                  <td>{prize.available}</td>
-                  <td>{prize.requested}</td>
-                  <td>{prize.available - prize.requested}</td>
+                  <td>{prize.inventory}</td>
+                  <td>{prize.number_requested}</td>
+                  <td>{prize.inventory - prize.number_requested}</td>
 
 
                 </tr>

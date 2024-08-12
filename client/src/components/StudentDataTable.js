@@ -25,6 +25,7 @@ function StudentDataTable({ students, getStudents, setStudents, sections, sectio
                   <th>Student Name</th>
                   <th>Password</th>
                   <th>Points</th>
+                  <th></th>
                 </tr>
                 {students.map((student) => (
                   <tr key={student.id}>

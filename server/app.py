@@ -237,6 +237,55 @@ class Prizes(Resource):
             200, )
         return response
     
+    def post(self):
+        data = request.get_json()
+        new_prize = Prize(
+            foto=data.get('foto'),
+            description=data.get('description'),
+            point_value=data.get('point_value'),
+            inventory=data.get('inventory'),
+            number_requested=data.get('number_requested'),
+            teacher_id=data.get('section_id'),
+        )
+        db.session.add(new_prize)
+        db.session.commit()
+        response_dict = jsonify(new_prize.to_dict())
+        response = make_response(
+             response_dict,
+            201,
+        )
+        return response
+    
+    # def patch(self, student_id):
+
+    #     student = Student.query.filter_by(id = student_id).first()
+        
+    #     student.points = request.get_json().get('points')
+
+    #     db.session.add(student)
+    #     db.session.commit()
+
+    #     student_dict = student.to_dict()
+
+    #     response = make_response(
+    #         student_dict,
+    #         200
+    #     )
+    #     return  response
+
+
+    # def delete(self, student_id):
+    #     student = Student.query.filter_by(id=student_id).first()
+    #     response_body = student.to_dict()
+
+    #     db.session.delete(student)
+    #     db.session.commit()
+    #     response = make_response(
+    #         response_body,
+    #         204
+    #     )
+
+    #     return response
 
 class PrizesByTeacher(Resource):
 

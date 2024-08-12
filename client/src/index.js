@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState} from "react";
 import App from "./components/App";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
@@ -9,8 +9,9 @@ import Prizes from "./pages/Prizes";
 import StudentViewClass from "./pages/StudenViewClass";
 
 
+const router = createBrowserRouter(
 
-const router = createBrowserRouter([
+  [
   {
     path: "/",
     element: <Home />,

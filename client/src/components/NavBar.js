@@ -2,6 +2,8 @@ import { NavLink } from "react-router-dom";
 
 function NavBar() {
   return (
+    <>
+    <br/>
     <nav className="navbar">
       <NavLink
         to="/"
@@ -22,6 +24,7 @@ function NavBar() {
         Manage Prizes 
       </NavLink>
     </nav>
+    </>
   );
 };
 
