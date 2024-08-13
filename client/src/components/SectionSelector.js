@@ -2,7 +2,7 @@ import React,{useEffect,useState} from 'react';
 import { useOutletContext } from 'react-router-dom';
 
 
-function SectionSelector({sections,sectionSelected,handleSectionChange}){
+function SectionSelector({handleSectionChange}){
     const context = useOutletContext()
     return (
         <>
@@ -10,7 +10,7 @@ function SectionSelector({sections,sectionSelected,handleSectionChange}){
         {context.sections?(<>
     
          <label htmlFor="section">Choose a class:</label>
-         <select id="section-selector" value={sectionSelected} onChange={handleSectionChange} name="classesdrpdwn">
+         <select id="section-selector" value={context.sectionSelected} onChange={handleSectionChange} name="classesdrpdwn">
                {context.sections.map((section)=>{
                                  return(
                               <option value={section.id} key= {section.name} name="section" id="section" >{section.name}</option>)})}

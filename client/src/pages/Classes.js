@@ -55,11 +55,11 @@ function Classes() {
 //   })
 //  }
 
-//  function handleSectionChange(e){
-//   setSectionSelected(e.target.value)
-//   console.log(e.target.value)
-//    getStudents(e.target.value)
-// }
+ function handleSectionChange(e){
+  context.setSectionSelected(e.target.value)
+  console.log(e.target.value)
+   context.getStudents(e.target.value)
+}
 
 
 
@@ -110,7 +110,7 @@ function handleStudentRosterClick(){
           {studentRoster?(
             <>
             <br/>
-             {sectionDwn? (<SectionSelector />):null}
+             {sectionDwn? (<SectionSelector handleSectionChange={handleSectionChange}/>):null}
               <StudentDataTable  /></>):null}
             </>
               ):null}

@@ -52,7 +52,7 @@ function StudentDataTable() {
           )}
         </div>
       ) : (
-        <p>Classes coming</p>
+        <p>Students Loading Shortly</p>
       )}
     </>
   );

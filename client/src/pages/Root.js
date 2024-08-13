@@ -44,7 +44,9 @@ function Root (){
         }
       },[sections] );
       
-     
+    //  useEffect(() => {
+
+    //  })
      function getStudents(sectionId){
       fetch(`/studentsbysection/${sectionId}`)
       .then((res)=>res.json())
@@ -62,7 +64,7 @@ function Root (){
     
     return (
     <>
-    <Outlet context={{user, setUser,sections, setSections,students,setStudents,sectionSelected,setSectionSelected}}/>
+    <Outlet context={{user, setUser,sections, setSections,students,setStudents,sectionSelected,setSectionSelected,getStudents}}/>
     </>)
 }
  
