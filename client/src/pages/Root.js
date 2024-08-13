@@ -61,13 +61,7 @@ function Root (){
     
     
     return (
-        <>
-    <div>
-    
-        <Link to="/teacherhome">Home</Link>
-        <Link to="/classes">Mange Classes</Link>
-        <Link to="/prizes">Mangage Prizes</Link>
-    </div>
+    <>
     <Outlet context={{user, setUser,sections, setSections,students,setStudents,sectionSelected,setSectionSelected}}/>
     </>)
 }

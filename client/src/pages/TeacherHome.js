@@ -8,39 +8,6 @@ import "./pages.css"
 function TeacherHome({handleLogout}){
 
   const context = useOutletContext()
-
-
-    // const [teacherSections, setTeacherSections] = useState([])
-    // const [sectionSelected,setSectionSelected] = useState(null)
-    // const[students,setStudents]= useState([])
-
-    // useEffect(() => {
-    //     fetch(`/sectionsbyteacher/${user.id}`)
-    //     .then((res) =>res.json())
-    //     .then(data=>{
-    //        setTeacherSections(data);
-    //   })
-    
-    // }, []);
-
-    // useEffect(() => {
-    //     if (teacherSections.length === 0) {
-    //     } else {
-    //       setSectionSelected(teacherSections[0].id);
-    //     }
-    //   }, [teacherSections]);
-
-    // useEffect(()=>{
-    //     if (sectionSelected==null){
-    //     }
-    //     else{
-    //     fetch(`/studentsbysection/${sectionSelected}`)
-    //     .then(result => result.json())
-    //     .then(data => {
-    //       setStudents(data);
-    //     })}},[sectionSelected]
-    // )
-
     return (
         <>
           <header>
@@ -48,13 +15,6 @@ function TeacherHome({handleLogout}){
             <br/>
             <NavBar />
           </header>
-
-          <div>
-        <Link to="/teacherhome">Home</Link>
-        <Link to="/classes">Mange Classes</Link>
-        <Link to="/prizes">Mangage Prizes</Link>
-
-      </div>
           <br/>
           <main>
             {context.sections? (

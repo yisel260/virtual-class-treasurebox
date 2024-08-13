@@ -6,69 +6,60 @@ import "./pages.css";
 import AddSectionForm from '../components/AddSectionForm';
 import StudentDataTable from '../components/StudentDataTable';
 import SectionSelector from '../components/SectionSelector';
+import { useOutletContext } from 'react-router-dom';
 
 function Classes() {
 
-  const [user,setUser]=useState(null)
-  const [sections,setSections]=useState(null)
-  const [students,setStudents]=useState([])
-  const [sectionSelected,setSectionSelected]=useState("")
+  const context= useOutletContext()
+
   const [addSection,setAddSection]=useState(false)
   const[addStudent, setAddStudent]=useState(false)
   const[studentRoster, setStudentRoster]=useState(true)
   const[sectionDwn, setSectionDwn]=useState(true)
 // console.log(user)
-  useEffect(() => {
-    fetch("/check_session")
-    .then((response) => {
-      if (response.ok) {
-        response.json().then((user) => setUser(user));
-      }
-    })
-  }, []);
-
-  useEffect(() => {
-    user?(getSections(user.id)):(<p>classes coming</p>)
-  },[user])
+ 
+//   useEffect(() => {
+//     user?(getSections(user.id)):(<p>classes coming</p>)
+//   },[user])
 
 
-  function getSections(userId) {
-    fetch(`/sectionsbyteacher/${userId}`)
-      .then((response) =>response.json())
-      .then(data =>{
-        setSections(data)
-      })
+//   function getSections(userId) {
+//     fetch(`/sectionsbyteacher/${userId}`)
+//       .then((response) =>response.json())
+//       .then(data =>{
+//         setSections(data)
+//       })
 
-  }
+//   }
 
-  useEffect(() => {
-    if (sections){
-      if (sectionSelected) {
-        console.log('section selected already')
+//   useEffect(() => {
+//     if (sections){
+//       if (sectionSelected) {
+//         console.log('section selected already')
 
-      }
-      else {
-        const sectionId= sections[0].id
-        getStudents(sectionId);
-        setSectionSelected(sectionId)
-      }
-    }
-  },[sections] );
+//       }
+//       else {
+//         const sectionId= sections[0].id
+//         getStudents(sectionId);
+//         setSectionSelected(sectionId)
+//       }
+//     }
+//   },[sections] );
   
  
- function getStudents(sectionId){
-  fetch(`/studentsbysection/${sectionId}`)
-  .then((res)=>res.json())
-  .then((data) =>{
-    setStudents(data)
-  })
- }
+//  function getStudents(sectionId){
+//   fetch(`/studentsbysection/${sectionId}`)
+//   .then((res)=>res.json())
+//   .then((data) =>{
+//     setStudents(data)
+//   })
+//  }
 
- function handleSectionChange(e){
-  setSectionSelected(e.target.value)
-  console.log(e.target.value)
-   getStudents(e.target.value)
-}
+//  function handleSectionChange(e){
+//   setSectionSelected(e.target.value)
+//   console.log(e.target.value)
+//    getStudents(e.target.value)
+// }
 
 
 
@@ -95,9 +86,6 @@ function handleStudentRosterClick(){
 }
 
 
-
-
-
   return (
     <>
       <Header />
@@ -105,7 +93,7 @@ function handleStudentRosterClick(){
       <br/>
       <main>
       
-        {user? (
+        {context.user? (
           <>
           <div id="choice-btn-container">
               <button className="choice-button"onClick={handleAddSection}  type="button">Add a new class</button>
@@ -117,28 +105,15 @@ function handleStudentRosterClick(){
               <button className="choice-button" onClick={handleStudentRosterClick} type="button">Student roster </button>
             </div>
             <br/>
-          {addSection?<AddSectionForm user={user} setSectionSelected={setSectionSelected} getSections={getSections}/>  : null}
-          {addStudent ? <AddStudentForm 
-              sectionSelected={sectionSelected}
-              getStudents={getStudents}/> : null}
+          {addSection?<AddSectionForm/>  : null}
+          {addStudent ? <AddStudentForm /> : null}
           {studentRoster?(
             <>
             <br/>
-             {sectionDwn? (<SectionSelector 
-              sections={sections}
-              sectionSelected={sectionSelected}
-              handleSectionChange={handleSectionChange}/>):null}
-              <StudentDataTable 
-              handleSectionChange={handleSectionChange}
-              setStudents={setStudents} 
-              sections = {sections} 
-              sectionSelected={sectionSelected} 
-              students={students}
-              getStudents={getStudents}
-              />
-              </>):null}
-                </>
-                  ):null}
+             {sectionDwn? (<SectionSelector />):null}
+              <StudentDataTable  /></>):null}
+            </>
+              ):null}
 
 
       </main>

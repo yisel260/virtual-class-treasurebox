@@ -45,6 +45,7 @@ function Home (){
 // )
  
  if (context.user){
+  console.log(context.user)
     return (
       <>
       <TeacherHome  handleLogout={handleLogout}/>
@@ -60,57 +61,17 @@ function Home (){
   // }
   
   else{
+
+    console.log(context.user)
+
     return(
+      
     <>
     <LogInPage/>
     </>)
   }
   
-  // else{ return (
-  //   <>
-  //       <header>
-  //         <Header onLogout={handleLogout}/>
-  //       </header>
-  //       <main>
-  //         <h1>Welcome to Treasure Box! </h1>
-  //        <div>
-  //           <h2 className='section-banner'>I am a student:</h2> 
-  //           </div>
-  //          <div id="student-section">
-  //             <form onSubmit={formik.handleSubmit}>
-  //               <label>Class code:</label>
-  //               <input type="text" 
-  //               className="form-control" 
-  //               id="senctionCode"
-  //               name="sectionCode"
-  //               value={formik.values.sectionCode} 
-  //               onChange={formik.handleChange}
-  //               placeholder=""></input>
-  //               <input className="action-button" type="submit" value = "Go!"/>
-  //             </form>
-  //           </div>
-  //           <div>
-  //           <h2 className='section-banner'>I am a teacher:</h2> 
-  //           </div>
-           
-  //          <div id="teacher-section">
-  //             <div id="log-in-form" className="section">
-  //                 <Login onLogin={handleLogin}/>
-  //             </div>
-  //             <div id= "or">
-  //             <h3>Or</h3>
-  //             </div>
-  //             <div id="sign-up-form"className="section">
-  //                 <SignUpForm onLogin={handleLogin}/>
-  //             </div>
-
-      
-  //         </div>
-
-  //       </main>
-  //     </>
-
-  // )}
+  
 }
 
 export default Home;

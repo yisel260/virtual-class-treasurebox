@@ -5,21 +5,19 @@ import "./pages.css"
 import Login from'../components/Login';
 import { useFormik, validateYupSchema } from 'formik';
 import * as yup from "yup";
-import StudentViewClass from './StudenViewClass';
-import TeacherHome from "./TeacherHome"
 import { useOutletContext } from 'react-router-dom';
 
 
 function LoginInPage(){
-    const [section, setSection]= useState("");
-    const [user, setUser] = useState(null);
+    const context = useOutletContext()
+    console.log(context)
 
     function handleLogin(user) {
-        setUser(user);
+       context.setUser(user);
       }
     
       function handleLogout() {
-        setUser(null);
+        context.setUser(null);
       }
     
 
@@ -34,8 +32,7 @@ function LoginInPage(){
               if (res.ok){
                 res.json()
                 .then((data) => {
-                  setSection(data);
-                  setSection(data.id)
+                  context.setSection(data.id)
               })
               }
               else {
@@ -46,6 +43,7 @@ function LoginInPage(){
           }
         }
       )
+
     return (
         <>
             <header>

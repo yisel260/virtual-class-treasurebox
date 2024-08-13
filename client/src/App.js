@@ -9,23 +9,12 @@ import Classes from "./pages/Classes";
 import Prizes from "./pages/Prizes";
 import { RouterProvider } from "react-router-dom";
 import router from "./Router";
-function  App() {
 
- const [testVariable,setTestVariable]=useState("This information is coming from app")
- const [user,setUser]=useState("")
- 
- useEffect(() => {
-  fetch("/check_session").then((response) => {
-    if (response.ok) {
-      response.json().then((user) => setUser(user));
-    }
-  });
-    }, []);
+function  App() {
 
   return (
     <>
    <RouterProvider router={router}/>
-
     </>)
 };
 
