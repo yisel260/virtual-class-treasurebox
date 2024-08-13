@@ -245,7 +245,7 @@ class Prizes(Resource):
             point_value=data.get('point_value'),
             inventory=data.get('inventory'),
             number_requested=data.get('number_requested'),
-            teacher_id=data.get('section_id'),
+            teacher_id=data.get('teacher_id'),
         )
         db.session.add(new_prize)
         db.session.commit()
@@ -268,6 +268,51 @@ class PrizesByTeacher(Resource):
             response_dict_list,
             200, )
         return response
+
+    
+class PrizesById(Resource):
+
+    def get(self,prize_id):
+        response_dict = Prize.query.filter_by(id=prize_id).first().to_dict()
+        response = make_response(
+            response_dict,
+            200,
+        )
+        return response
+    
+    def patch(self, prize_id):
+
+        prize = Prize.query.filter_by(id = prize_id).first()
+        
+        # student.points = request.get_json().get('points')
+
+        db.session.add(prize)
+        db.session.commit()
+
+        student_dict = prize.to_dict()
+
+        response = make_response(
+            student_dict,
+            200
+        )
+        return  response
+
+
+    def delete(self, prize_id):
+        prize = Prize.query.filter_by(id=prize_id).first()
+        print(prize)
+        response_body = prize.to_dict()
+
+        db.session.delete(prize)
+        db.session.commit()
+        response = make_response(
+            response_body,
+            204
+        )
+
+        return response
+
+    
     
     # def patch(self, student_id):
 
@@ -345,6 +390,7 @@ api.add_resource(StudentsBySection,"/studentsbysection/<int:section_id>")
 api.add_resource(StudentLogIn, '/studentlogin')
 api.add_resource(Prizes, '/prizes')
 api.add_resource(PrizesByTeacher, '/prizesbyteacher/<int:teacher_id>')
+api.add_resource(PrizesById,"/prizesById/<int:prize_id>")
 api.add_resource(SectionsByTeacher,"/sectionsbyteacher/<int:teacher_id>")
 
 if __name__ == '__main__':
