@@ -1,15 +1,18 @@
 import React from 'react';
 import { useFormik } from "formik";
 import * as yup from "yup";
+import { useOutletContext } from 'react-router-dom';
 
 
-function AddSectionForm({user, getSections, setSectionSelected}){
+function AddSectionForm(){
+
+    const context = useOutletContext()
 
 const formik = useFormik({
     initialValues: {
         name:"",
         section_code:"", 
-        teacher_id:`${user.id}`
+        teacher_id:`${context.user.id}`
     },
     onSubmit:(values,{resetForm})=>{
         fetch ("/sections",{
@@ -21,9 +24,8 @@ const formik = useFormik({
         })
         .then((res)=>res.json())
         .then((data)=>{
-            setSectionSelected(data.id)
-            console.log(data.teacher_id)
-            getSections(data.teacher_id)
+            context.setSectionSelected(data.id)
+            context.getSections(data.teacher_id)
             
         })
         resetForm();

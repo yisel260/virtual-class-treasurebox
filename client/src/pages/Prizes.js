@@ -3,29 +3,16 @@ import NavBar from '../components/NavBar';
 import Header from '../components/Header';
 import "./pages.css";
 import AddPrizeForm from "../components/AddPrizeForm";
+import { useOutletContext } from "react-router-dom";
+
 function Prizes(){
 
-    const [prizes, setPrizes] = useState([{}]);
-    const [refreshPage, setRefreshPage] = useState(false);
-  // Pass the useFormik() hook initial form values and a submit function that will
-  // be called when the form is submitted
-
-  useEffect(() => {
-    console.log("FETCH! ");
-    fetch("/prizes")
-      .then((res) => res.json())
-      .then((data) => {
-        setPrizes(data);
-        console.log(data);
-      });
-
-  }, []);
-    console.log ("rendering component"
-    )
+ const context = useOutletContext()
     return(
         <>
           <header>
           <Header/>
+          <br/>
           <NavBar />
           <br/>
         </header>
@@ -43,8 +30,8 @@ function Prizes(){
                     <th></th>
                     <th></th>  
                 </tr>
-                {prizes?(
-                 prizes.map((prize) => (
+                {context.prizes?(
+                 context.prizes.map((prize) => (
               <>
                 <tr key={prize.id}>
                   {/* <td>{prize.name}</td> */}

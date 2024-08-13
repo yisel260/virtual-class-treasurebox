@@ -1,8 +1,11 @@
 import React from 'react';
 import { useFormik } from "formik";
 import * as yup from "yup";
+import { useOutletContext } from 'react-router-dom';
 
-function AddPrizeForm(user){
+function AddPrizeForm(){
+
+    const context =useOutletContext()
 
     const formik = useFormik({
         initialValues: {
@@ -11,7 +14,7 @@ function AddPrizeForm(user){
             point_value:"", 
             inventory:"",
             number_requested:"0",
-            teacher_id:user.id,
+            teacher_id:context.user.id,
         },
         onSubmit:(values,{resetForm})=>{
             fetch ("/prizes",{
@@ -23,7 +26,7 @@ function AddPrizeForm(user){
             })
             .then((res)=>res.json())
             .then((data)=>{
-                console.log(data);                
+                console.log(data)
             })
             resetForm();
         }

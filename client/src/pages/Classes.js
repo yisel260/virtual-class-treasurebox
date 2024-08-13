@@ -55,13 +55,6 @@ function Classes() {
 //   })
 //  }
 
- function handleSectionChange(e){
-  context.setSectionSelected(e.target.value)
-  console.log(e.target.value)
-   context.getStudents(e.target.value)
-}
-
-
 
 function handleAddSection(){
   setAddStudent(false)
@@ -110,7 +103,7 @@ function handleStudentRosterClick(){
           {studentRoster?(
             <>
             <br/>
-             {sectionDwn? (<SectionSelector handleSectionChange={handleSectionChange}/>):null}
+             {sectionDwn? (<SectionSelector />):null}
               <StudentDataTable  /></>):null}
             </>
               ):null}

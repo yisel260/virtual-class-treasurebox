@@ -7,7 +7,8 @@ function Root (){
     const [sections, setSections]=useState("")
     const [students,setStudents]=useState("")
     const [sectionSelected,setSectionSelected]=useState("")
-    
+    const [prizes, setPrizes] = useState([{}]);
+
 
     useEffect(() => {
      fetch("/check_session").then((response) => {
@@ -17,10 +18,15 @@ function Root (){
      });
        }, []);
 
-       useEffect(() => {
-        user?(getSections(user.id)):(<p>classes coming</p>)
+    useEffect(() => {
+        user?(getData(user.id)):(<p>classes coming</p>)
       },[user])
-    
+
+    function getData(userId) {
+        getSections(userId)
+        getPrizes(userId)
+
+    }
     
     function getSections(userId) {
         fetch(`/sectionsbyteacher/${userId}`)
@@ -43,10 +49,13 @@ function Root (){
           }
         }
       },[sections] );
-      
-    //  useEffect(() => {
+    
+    function handleSectionChange(e){
+        setSectionSelected(e.target.value)
+        console.log(e.target.value)
+        getStudents(e.target.value)
+      }
 
-    //  })
      function getStudents(sectionId){
       fetch(`/studentsbysection/${sectionId}`)
       .then((res)=>res.json())
@@ -55,16 +64,21 @@ function Root (){
       })
      }
     
-     function handleSectionChange(e){
-      setSectionSelected(e.target.value)
-      console.log(e.target.value)
-       getStudents(e.target.value)
-    }
+ 
+
+  function getPrizes(userId) {
+    fetch(`/prizesbyteacher/${userId}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setPrizes(data);
+      });
+
+  };
     
     
     return (
     <>
-    <Outlet context={{user, setUser,sections, setSections,students,setStudents,sectionSelected,setSectionSelected,getStudents}}/>
+    <Outlet context={{user, setUser,sections, setSections,students,setStudents,sectionSelected,setSectionSelected,prizes, setPrizes,getStudents,getSections, handleSectionChange}}/>
     </>)
 }
  

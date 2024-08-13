@@ -256,6 +256,19 @@ class Prizes(Resource):
         )
         return response
     
+
+    
+class PrizesByTeacher(Resource):
+
+    def get(self, teacher_id):
+        prizes = Prize.query.filter_by(teacher_id=teacher_id).all()
+        print(prizes)
+        response_dict_list = [n.to_dict() for n in prizes]
+        response = make_response(
+            response_dict_list,
+            200, )
+        return response
+    
     # def patch(self, student_id):
 
     #     student = Student.query.filter_by(id = student_id).first()
@@ -287,16 +300,7 @@ class Prizes(Resource):
 
     #     return response
 
-class PrizesByTeacher(Resource):
 
-    def get(self, teacher_id):
-        prizes = Prize.query.filter_by(teacher_id=teacher_id).all()
-        print(prizes)
-        response_dict_list = [n.to_dict() for n in prizes]
-        response = make_response(
-            response_dict_list,
-            200, )
-        return response
     
     
 # class PrizesByTeacher(Resource):
