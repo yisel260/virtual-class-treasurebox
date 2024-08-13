@@ -72,6 +72,7 @@ class Student(db.Model, SerializerMixin):
     section_id= db.Column(db.Integer, db.ForeignKey("sections.id"))
     section = db.relationship("Section",back_populates ="students")
     serialize_rules = ('-section.students',)
+    orders = db.relationship('Order', back_populates='student', cascade='all, delete-orphan')
     
 
     def __repr__(self):
@@ -88,17 +89,34 @@ class Prize(db.Model,SerializerMixin):
     number_requested=db.Column(db.Integer, nullable=True)
     teacher_id=db.Column(db.Integer, db.ForeignKey("teachers.id"))
     teacher=db.relationship("Teacher", back_populates="prizes")
+    orders = db.relationship('Order', back_populates='prize', cascade='all, delete-orphan')
+
     serialize_rules = ('-teacher.prizes',)
+    def _repr_(self):
+         return f"{self.description} , {self.point_value}"
 
 
-student_prizes = db.Table(
-    'students_prizes',
-    metadata,
-    db.Column('student_id', db.Integer, db.ForeignKey(
-        'students.id'), primary_key=True),
-    db.Column('prize_id', db.Integer, db.ForeignKey(
-        'prizes.id'), primary_key=True)
-)
+
+class Order(db.Model,SerializerMixin):
+
+    __tablename__="orders"
+
+    id = db.Column(db.Integer, primary_key=True)
+    status = db.Column(db.String)
+    student_id = db.Column(db.Integer, db.ForeignKey('students.id'))
+    prize_id = db.Column(db.Integer, db.ForeignKey('prizes.id'))
+    student = db.relationship('Student', back_populates='orders')
+    prize= db.relationship('Prize', back_populates='orders')
+    def __repr__(self):
+        return f'<Order {self.id}, {self.student.name}, {self.prize.name}>'
+# student_prizes = db.Table(
+#     'prize_orders',
+#     metadata,
+#     db.Column('student_id', db.Integer, db.ForeignKey(
+#         'students.id'), primary_key=True),
+#     db.Column('prize_id', db.Integer, db.ForeignKey(
+#         'prizes.id'), primary_key=True)
+# )
 
 
  
