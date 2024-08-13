@@ -1,32 +1,32 @@
 import React, { useEffect, useState } from "react";
-import { BrowserRouter, Route, Routes,Link } from "react-router-dom";
+import { BrowserRouter, Route, Routes,Link, useNavigate } from "react-router-dom";
 import Home from "./pages/Home";
 import { Outlet, useOutletContext } from "react-router-dom";
-
+import LoginInPage from "./pages/LogInPage";
+import TeacherHome from "./pages/TeacherHome";
+import StudentViewClass from "./pages/StudenViewClass";
+import Classes from "./pages/Classes";
+import Prizes from "./pages/Prizes";
+import { RouterProvider } from "react-router-dom";
+import router from "./Router";
 function  App() {
 
  const [testVariable,setTestVariable]=useState("This information is coming from app")
+ const [user,setUser]=useState("")
+ 
+ useEffect(() => {
+  fetch("/check_session").then((response) => {
+    if (response.ok) {
+      response.json().then((user) => setUser(user));
+    }
+  });
+    }, []);
 
   return (
     <>
-     
-    <BrowserRouter>
-    <div>
+   <RouterProvider router={router}/>
 
-     <div>
-        <Link to="/">Home</Link>
-        <Link to="/classes">Mange Classes</Link>
-        <Link to="/prizes">Mangage Prizes</Link>
-
-      </div>
-    <Routes>
-      <Route path = "/" element={<Home />} ></Route>
-    </Routes>
-    </div>
-    </BrowserRouter>
-    <Outlet context={{testVariable, setTestVariable}}/> 
-
-    </>
-    );
+    </>)
 };
+
 export default App;
