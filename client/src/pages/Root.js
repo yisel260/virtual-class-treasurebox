@@ -8,6 +8,7 @@ function Root (){
     const [students,setStudents]=useState("")
     const [sectionSelected,setSectionSelected]=useState("")
     const [prizes, setPrizes] = useState([{}]);
+    const [section,setSection] = useState()
 
 
     useEffect(() => {
@@ -27,6 +28,8 @@ function Root (){
         getPrizes(userId)
 
     }
+
+
     
     function getSections(userId) {
         fetch(`/sectionsbyteacher/${userId}`)
@@ -78,7 +81,15 @@ function Root (){
     
     return (
     <>
-    <Outlet context={{user, setUser,sections, setSections,students,setStudents,sectionSelected,setSectionSelected,prizes, setPrizes,getStudents,getSections, handleSectionChange}}/>
+    <Outlet context={{user, setUser,
+        sections, setSections,
+        students,setStudents,
+        sectionSelected,setSectionSelected,
+        prizes, setPrizes,
+        section,setSection,
+        getStudents,
+        getSections, 
+        handleSectionChange}}/>
     </>)
 }
  

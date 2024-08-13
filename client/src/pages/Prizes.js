@@ -12,7 +12,6 @@ function Prizes(){
         <>
           <header>
           <Header/>
-          <br/>
           <NavBar />
           <br/>
         </header>

@@ -16,49 +16,25 @@ function Home (){
    context.setUser(user);
   }
 
-  function handleLogout() {
-    context.setUser(null);
-  }
+ 
 
-// const formik = useFormik(
-//   {
-//     initialValues:{
-//       sectionCode:"",
-//     },
-//     onSubmit: (values)=>{
-//       fetch(`/sections/${values.sectionCode}`)
-//       .then((res) =>{
-//         if (res.ok){
-//           res.json()
-//           .then((data) => {
-//             setSection(data);
-//             setSection(data.id)
-//         })
-//         }
-//         else {
-//           console.log("class not found");
-//           alert("Ooopsie that class code could not be found. ")
-//         }
-//       })
-//     }
-//   }
-// )
+
  
  if (context.user){
   console.log(context.user)
     return (
       <>
-      <TeacherHome  handleLogout={handleLogout}/>
+      <TeacherHome />
       </>
     );
   } 
-  // else if(section) {
-  //   return(
-  //     <>
-  //     < StudentViewClass handleLogout = {handleLogout}/>
-  //     </>
-  //   )
-  // }
+  else if(context.section) {
+    return(
+      <>
+      < StudentViewClass/>
+      </>
+    )
+  }
   
   else{
 

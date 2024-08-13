@@ -34,27 +34,29 @@ function AddPrizeForm(){
 
     return (
         <>
-        <form onSubmit={formik.handleSubmit} id="addPrizeForm">
+        <form  onSubmit={formik.handleSubmit} id="add-prize-form">
 
-            <label htmlFor = "prize-foto">Foto</label>
+            <label className="form-label" htmlFor = "prize-foto">Foto</label>
             <input type="text"
             id='foto'
             onChange={formik.handleChange}
             value={formik.values.foto}></input>
 
-            <label htmlFor ="description">Description</label>
+            <label className="form-label" htmlFor ="description">Description</label>
             <input type="text"
              id='description'
              onChange={formik.handleChange}
              value={formik.values.description}></input>
-
-            <label htmlFor = "points">Point value</label>
+            <br/>
+            <br/>
+            <label className="form-label" htmlFor = "points">Point value</label>
             <input type="text"
              id='point_value'
              onChange={formik.handleChange}
              value={formik.values.point_value}></input>
+        
 
-            <label htmlFor="inventory">Number Available</label>
+            <label className="form-label" htmlFor="inventory">Number Available</label>
             <input type="text"
              id='inventory'
              onChange={formik.handleChange}
@@ -66,12 +68,13 @@ function AddPrizeForm(){
              value={formik.values.number_requested}></input>
 
             <input type="hidden"
-            id='teacher_id'
+             id='teacher_id'
              onChange={formik.handleChange}
              value={formik.values.teacher_id}></input>
-             
+             <br/>
+             <br/>
 
-            <input type="submit" value = "Add Prize"/>
+            <input className='action-button' type="submit" value = "Add Prize"/>
             </form>
         </>
     

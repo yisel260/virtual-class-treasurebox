@@ -2,9 +2,10 @@ import React from "react";
 import { useFormik } from "formik";
 import * as yup from "yup";
 
+import { useOutlet, useOutletContext } from "react-router-dom";
 
-
-function AddStudentForm({sectionSelected,getStudents}){
+function AddStudentForm({}){
+  const context = useOutletContext()
 // const formSchema= yup.object().shape(
 //     {
 //       name: yup.string().required("must enter a name").max(20),
@@ -18,7 +19,7 @@ function AddStudentForm({sectionSelected,getStudents}){
         name: "",
         password: "",
         points:"",  
-        section_id:sectionSelected,
+        section_id:context.sectionSelected,
       },
     //   validationSchema: formSchema,
       onSubmit: (values,{resetForm}) => {
@@ -33,7 +34,7 @@ function AddStudentForm({sectionSelected,getStudents}){
         .then((res) => res.json())
         .then((data) => {
           console.log(data)
-          getStudents(data.section_id)
+          context.getStudents(data.section_id)
         })
         resetForm()
       }

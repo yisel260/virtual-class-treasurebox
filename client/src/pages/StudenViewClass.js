@@ -1,15 +1,18 @@
 import React, {useEffect,useState} from "react" 
 import LoginStudentCard from "../components/LoginStudentCard"
 import StudentShopping from "./StudentShopping"
+import { useOutletContext } from "react-router-dom"
 
 function StudentViewClass({onStudentLogIn,section}){
+
+    const context = useOutletContext()
 
     const [students,setStudents] = useState([])
     const [studentUser, setStudentUser] = useState(null)
 
     useEffect(() => {
         console.log("FETCH! ");
-        fetch(`/studentsbysection/${section}`)
+        fetch(`/studentsbysection/${context.section}`)
           .then((res) => res.json())
           .then((data) => {
             setStudents(data);

@@ -13,7 +13,6 @@ function TeacherHome({handleLogout}){
         <>
           <header>
             <Header onLogout={handleLogout} />
-            <br/>
             <NavBar />
           </header>
           <br/>
