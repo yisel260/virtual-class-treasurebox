@@ -27,6 +27,7 @@ function LoginInPage(){
             sectionCode:"",
           },
           onSubmit: (values)=>{
+            console.log(values.sectionCode)
             fetch(`/sections/${values.sectionCode}`)
             .then((res) =>{
               if (res.ok){

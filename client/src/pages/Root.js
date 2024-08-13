@@ -77,8 +77,6 @@ function Root (){
       });
 
   };
-    
-    
     return (
     <>
     <Outlet context={{user, setUser,

@@ -7,7 +7,7 @@ return(
 <>
 <img className="prize-picture" src={prize.foto} alt="My Image" />
 <p>{prize.description}</p>
-<p>{prize.id}</p>
+<p>Points {prize.point_value}</p>
 </>)
 }
 

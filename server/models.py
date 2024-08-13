@@ -2,7 +2,7 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy_serializer import SerializerMixin
 from sqlalchemy.ext.associationproxy import association_proxy
 from sqlalchemy.orm import validates
-from config import db
+from config import db, metadata
 
 class Teacher(db.Model, SerializerMixin): 
     __tablename__ = "teachers"
@@ -91,14 +91,14 @@ class Prize(db.Model,SerializerMixin):
     serialize_rules = ('-teacher.prizes',)
 
 
-# student_prizes = db.Table(
-#     'students_prizes',
-#     metadata,
-#     db.Column('employee_id', db.Integer, db.ForeignKey(
-#         'employees.id'), primary_key=True),
-#     db.Column('meeting_id', db.Integer, db.ForeignKey(
-#         'meetings.id'), primary_key=True)
-# )
+student_prizes = db.Table(
+    'students_prizes',
+    metadata,
+    db.Column('student_id', db.Integer, db.ForeignKey(
+        'students.id'), primary_key=True),
+    db.Column('prize_id', db.Integer, db.ForeignKey(
+        'prizes.id'), primary_key=True)
+)
 
 
  

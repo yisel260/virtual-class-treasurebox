@@ -1,5 +1,7 @@
 import React ,{useEffect,useState} from 'react';
 import PrizeCard from '../components/PrizeCard';
+import { useOutletContext } from 'react-router-dom';
+import "./pages.css"
 
 function StudenShopping({onStudentLogOut,studentUser}){
    const [prizes, setPrizes]= useState([])
@@ -10,8 +12,6 @@ function StudenShopping({onStudentLogOut,studentUser}){
       .then((res) =>res.json())
       .then((data) =>{
         console.log (data)
-        console.log(data.teacher_id)
-        // setTeacherId((teacherId)=>setTeacherIDdata.teacher_id)
         setTeacherId(data.teacher_id)
         fetch(`/prizesbyteacher/${teacherId}`)
         .then((res) =>res.json())
@@ -25,23 +25,28 @@ function StudenShopping({onStudentLogOut,studentUser}){
 
     return(
     <>
-    <p>Hello {studentUser.name}!</p>
-    <button onClick={onStudentLogOut}>Log Out</button>
+    <div id="welcome-banner">
+    <h3 id="student-name-banner">Hello {studentUser.name}!</h3>
+    <button className="action-button" onClick={onStudentLogOut}>Log Out</button>
+    </div>
+    <div className='info-display'>
     <p>Pick your prizes! </p>
     <p>You have {studentUser.points} points to shop with!  </p>
+    
+    </div>
+    <div id='prize-container'>
     {prizes.map(((prize)=>{
         return(
-            <div key={prize.id}>
+            <div id='prize-card' key={prize.id}>
                 <PrizeCard prize={prize} />
             </div>
         )
     }
-
     ))}
+    </div>
+    <h2>Your prizes</h2>
 
-    <div>
-        <p>Your prizes</p>
-        <p>display student prizes here</p> 
+    <div id='student-prize-container'>
         
     </div>
     
