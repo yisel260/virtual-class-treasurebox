@@ -1,22 +1,28 @@
 import React,{useEffect,useState} from 'react';
+import { useOutletContext } from 'react-router-dom';
 
-function StudentDataTable({ students, getStudents, setStudents, sections, sectionSelected }) {
+function StudentDataTable() {
+
+
+  const context = useOutletContext()
+
+
   function handleDeleteStudent(e) {
     fetch(`/studentsById/${e.target.value}`, {
       method: 'delete',
     })
       .then((res) => {
         if (res.ok) {
-          getStudents(sectionSelected);
+          context.getStudents(context.sectionSelected);
         }
       });
   }
 
   return (
     <>
-      {sections ? (
+      {context.sections ? (
         <div>
-          {students ? (
+          {context.students ? (
             <>
             <br/>
             <table>
@@ -27,7 +33,7 @@ function StudentDataTable({ students, getStudents, setStudents, sections, sectio
                   <th>Points</th>
                   <th></th>
                 </tr>
-                {students.map((student) => (
+                {context.students.map((student) => (
                   <tr key={student.id}>
                     <td>{student.name}</td>
                     <td>{student.password}</td>

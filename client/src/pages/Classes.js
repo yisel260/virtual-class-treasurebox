@@ -115,7 +115,6 @@ function handleStudentRosterClick(){
             </>
               ):null}
 
-
       </main>
     </>
   );
