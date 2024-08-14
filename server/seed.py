@@ -49,7 +49,7 @@ if __name__ == '__main__':
             student=Student(
             name = fake.first_name(),
             password = fake.word(),
-            points = "0",
+            points = "50",
             section_id=rc(sections).id)
             students.append(student)
             db.session.add(student)

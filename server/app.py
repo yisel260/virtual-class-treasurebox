@@ -281,21 +281,24 @@ class PrizesById(Resource):
         return response
     
     def patch(self, prize_id):
+        data = request.get_json()
 
-        prize = Prize.query.filter_by(id = prize_id).first()
-        
-        # student.points = request.get_json().get('points')
+        prize = Prize.query.filter_by(id=prize_id).first()
+
+        prize.foto = data.get('foto')
+        prize.description = data.get('description')
+        prize.point_value = data.get('point_value')
+        prize.inventory = data.get('inventory')
+        prize.number_requested = data.get('number_requested')
+        prize.teacher_id = data.get('teacher_id')
 
         db.session.add(prize)
         db.session.commit()
 
         student_dict = prize.to_dict()
 
-        response = make_response(
-            student_dict,
-            200
-        )
-        return  response
+        response = make_response(student_dict, 200)
+        return response
 
 
     def delete(self, prize_id):

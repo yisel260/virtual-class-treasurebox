@@ -87,6 +87,7 @@ function Root (){
         section,setSection,
         getStudents,
         getSections, 
+        getPrizes,
         handleSectionChange}}/>
     </>)
 }

@@ -1,11 +1,14 @@
 import React from "react";
 import { useFormik } from "formik";
 import * as yup from "yup";
+import "./component.css";
+
 
 import { useOutlet, useOutletContext } from "react-router-dom";
 
 function AddStudentForm({}){
   const context = useOutletContext()
+  console.log(context.sectionSelected)
 // const formSchema= yup.object().shape(
 //     {
 //       name: yup.string().required("must enter a name").max(20),

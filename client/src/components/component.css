@@ -96,13 +96,7 @@ th{
     background-color: #96df8c;
 }
 
-#add-prize-form {
-    background-color: salmon;
-    width: 100%;
-    text-align: center;
-    padding-top: 10px;
-    border-radius: 12px;
-}
+
 
 .form-label{
     padding: 15px;
@@ -112,4 +106,21 @@ th{
 
 input{
     font-size: 20px;
+}
+
+
+#update-prize-form {
+    background-color: #a6c8f0;
+    width: 100%;
+    text-align: center;
+    padding-top: 10px;
+    border-radius: 12px;
+}
+
+#add-prize-form {
+    background-color: salmon;
+    width: 100%;
+    text-align: center;
+    padding-top: 10px;
+    border-radius: 12px;
 }

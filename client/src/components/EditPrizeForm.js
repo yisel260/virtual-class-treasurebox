@@ -5,23 +5,24 @@ import { useOutletContext } from 'react-router-dom';
 import "./component.css";
 
 
-function AddPrizeForm(){
+function EditPrizeForm({prizeToUpdate,updatePrize,setUpdatePrize}){
+    console.log(prizeToUpdate.foto)
 
     const context =useOutletContext()
 
     const formik = useFormik({
         initialValues: {
-            foto:"",
-            description:"",
-            point_value:"", 
-            inventory:"",
-            number_requested:"0",
+            foto:`${prizeToUpdate.foto}`,
+            description:`${prizeToUpdate.description}`,
+            point_value:`${prizeToUpdate.point_value}`, 
+            inventory:`${prizeToUpdate.inventory}`,
+            number_requested:`${prizeToUpdate.number_requested}`,
             teacher_id:`${context.user.id}`,
         },
         onSubmit:(values,{resetForm})=>{
             console.log(context.user.id)
-            fetch ("/prizes",{
-                method: "POST",
+            fetch (`/prizesById/${prizeToUpdate.id}`,{
+                method: "PATCH",
                 headers: {
                     "Content-Type": "application/json",
                 },
@@ -30,6 +31,7 @@ function AddPrizeForm(){
             .then((res)=>res.json())
             .then((data)=>{
                 context.getPrizes(context.user.id)
+                setUpdatePrize(!updatePrize)
             })
             resetForm();
         }
@@ -37,7 +39,7 @@ function AddPrizeForm(){
 
     return (
         <>
-        <form  onSubmit={formik.handleSubmit} id="add-prize-form">
+        <form  onSubmit={formik.handleSubmit} id="update-prize-form">
 
             <label className="form-label" htmlFor = "prize-foto">Foto</label>
             <input type="text"
@@ -77,10 +79,10 @@ function AddPrizeForm(){
              <br/>
              <br/>
 
-            <input className='action-button' type="submit" value = "Add Prize"/>
+            <input className='action-button' type="submit" value = "Update Prize"/>
             </form>
         </>
     
 )}
 
-export default AddPrizeForm
+export default  EditPrizeForm 
