@@ -1,10 +1,19 @@
 import React ,{useEffect,useState} from 'react';
 import "./component.css"
 
-function PrizeCard({prize,handleAddToCart}){
-   
+function PrizeCard({prize, handleAddToCart, handleRemoveFromCart, inCart, setInCart}){
+    
+
     function handlePrizeClick(){
+    if (inCart==false) {
         handleAddToCart(prize)
+        setInCart(!inCart)
+    }
+    else {
+        handleRemoveFromCart(prize)
+        setInCart(!inCart)
+    }
+        
     }
    
 return(

@@ -7,7 +7,7 @@ function StudenShopping({onStudentLogOut,studentUser}){
    const [prizes, setPrizes]= useState([])
    const [teacherId, setTeacherId] = useState("")
    const [prizesInCart, setPrizesInCart] = useState([])
-
+   const [inCart, setInCart] = useState()
   
     useEffect(() => {
       fetch(`/sections/${studentUser.section_id}`)
@@ -52,6 +52,32 @@ function StudenShopping({onStudentLogOut,studentUser}){
       }
 
 
+    function handleRemoveFromCart(prize) {
+        console.log(prize.target
+
+        )
+       
+            const cartItems = prizesInCart.filter((item)=>{
+                return (item.id !== prize.id)
+            });
+            console.log(cartItems);
+            setPrizesInCart(cartItems);
+
+            fetch(`/studentsById/${studentUser.id}` 
+                ,{
+                    method: 'PATCH',
+                    headers: { 'Content-type':'application/json'
+                    
+                },
+                body: JSON.stringify({
+                    points:`${studentUser.points+=prize.point_value}`
+                })
+            })
+                .then(res=>res.json())
+                // .then(data=>setStudentPoints(data.points))
+      }
+
+
     return(
     <>
         <div id="welcome-banner">
@@ -66,7 +92,7 @@ function StudenShopping({onStudentLogOut,studentUser}){
             {prizes.map(((prize)=>{
                 return(
                     <div id='prize-card' key={prize.id}>
-                        <PrizeCard handleAddToCart={handleAddToCart} prize={prize} />
+                        <PrizeCard handleRemoveFromCart={handleRemoveFromCart} handleAddToCart={handleAddToCart} prize={prize}  setInCart={setInCart} inCart={false}/>
                     </div>
                 )
             }
@@ -77,7 +103,7 @@ function StudenShopping({onStudentLogOut,studentUser}){
         <div id='student-prize-container'>
             {prizesInCart.length>0?( prizesInCart.map((prize)=>{
                    return (
-                    <img className="prize-picture" src={prize.foto} alt={prize.description}/>
+                    <PrizeCard handleAddToCart={handleAddToCart} handleRemoveFromCart={handleRemoveFromCart} prize={prize} setInCart={setInCart}  inCart = {true} />
                    )
 
                 })):(<p>Your cart is empty!</p>)}
