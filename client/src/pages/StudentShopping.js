@@ -101,13 +101,13 @@ function StudenShopping({onStudentLogOut,studentUser}){
         <h2>Your prizes</h2>
 
         <div id='student-prize-container'>
-            {prizesInCart.length>0?( prizesInCart.map((prize)=>{
+            {prizesInCart.length>0?(<> {prizesInCart.map((prize)=>{
                    return (
                     <PrizeCard handleAddToCart={handleAddToCart} handleRemoveFromCart={handleRemoveFromCart} prize={prize} setInCart={setInCart}  inCart = {true} />
                    )
 
-                })):(<p>Your cart is empty!</p>)}
-                
+                })}
+                <button>Get Prizes!</button> </>):(<p>Your cart is empty!</p>)}
         </div>
     
     </>
