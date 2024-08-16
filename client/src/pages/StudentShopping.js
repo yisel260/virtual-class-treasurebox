@@ -8,6 +8,7 @@ function StudenShopping({onStudentLogOut,studentUser}){
    const [teacherId, setTeacherId] = useState("")
    const [prizesInCart, setPrizesInCart] = useState([])
    const [inCart, setInCart] = useState()
+   const [studentPoints,setStudentPoints] = useState(studentUser.points)
   
     useEffect(() => {
       fetch(`/sections/${studentUser.section_id}`)
@@ -28,18 +29,20 @@ function StudenShopping({onStudentLogOut,studentUser}){
             const cartItems = [...prizesInCart, prize];
             console.log(cartItems);
             setPrizesInCart(cartItems);
+            let points = studentPoints - prize.point_value;
+            setStudentPoints(points);
 
-            fetch(`/studentsById/${studentUser.id}` 
-                ,{
-                    method: 'PATCH',
-                    headers: { 'Content-type':'application/json'
+            // fetch(`/studentsById/${studentUser.id}` 
+            //     ,{
+            //         method: 'PATCH',
+            //         headers: { 'Content-type':'application/json'
                     
-                },
-                body: JSON.stringify({
-                    points:`${studentUser.points-=prize.point_value}`
-                })
-            })
-                .then(res=>res.json())
+            //     },
+            //     body: JSON.stringify({
+            //         points:`${studentUser.points-=prize.point_value}`
+            //     })
+            // })
+            //     .then(res=>res.json())
                 // .then(data=>setStudentPoints(data.points))
             
         
@@ -62,18 +65,20 @@ function StudenShopping({onStudentLogOut,studentUser}){
             });
             console.log(cartItems);
             setPrizesInCart(cartItems);
+            setStudentPoints(studentPoints + prize.point_value);
 
-            fetch(`/studentsById/${studentUser.id}` 
-                ,{
-                    method: 'PATCH',
-                    headers: { 'Content-type':'application/json'
+
+            // fetch(`/studentsById/${studentUser.id}` 
+            //     ,{
+            //         method: 'PATCH',
+            //         headers: { 'Content-type':'application/json'
                     
-                },
-                body: JSON.stringify({
-                    points:`${studentUser.points+=prize.point_value}`
-                })
-            })
-                .then(res=>res.json())
+            //     },
+            //     body: JSON.stringify({
+            //         points:`${studentUser.points+=prize.point_value}`
+            //     })
+            // })
+            //     .then(res=>res.json())
                 // .then(data=>setStudentPoints(data.points))
       }
 
@@ -86,7 +91,7 @@ function StudenShopping({onStudentLogOut,studentUser}){
         </div>
         <div className='info-display'>
             <p>Pick your prizes! </p>
-            <p>You have {studentUser.points} points to shop with!  </p>
+            <p>You have {studentPoints} points to shop with!  </p>
         </div>
         <div id='prize-container'>
             {prizes.map(((prize)=>{
