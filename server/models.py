@@ -105,7 +105,7 @@ class Order(db.Model,SerializerMixin):
     serialize_rules = ('-prize.orders', "-student.orders",)
 
     def __repr__(self):
-        return f'<Order {self.id}, {self.student.name}, {self.prize.name}>'
+        return f'<Order {self.id}, {self.student.name}, {self.prize.description}>'
     
 
 

@@ -296,9 +296,9 @@ class PrizesById(Resource):
         db.session.add(prize)
         db.session.commit()
 
-        student_dict = prize.to_dict()
+        prize_dict = prize.to_dict()
 
-        response = make_response(student_dict, 200)
+        response = make_response(prize_dict, 200)
         return response
 
 
@@ -343,6 +343,44 @@ class Orders(Resource):
         )
         return response
     
+class OrderByID(Resource):
+
+    def get(self,order_id):
+        response_dict = Order.query.filter_by(id=order_id).first().to_dict()
+        response = make_response(
+            response_dict,
+            200,
+        )
+        return response
+    
+    def patch(self, order_id):
+        data = request.get_json()
+
+        order = Order.query.filter_by(id=order_id).first()
+
+        order.status = data.get('status')
+
+        db.session.add(order)
+        db.session.commit()
+
+        order_dict = order.to_dict()
+
+        response = make_response(order_dict, 200)
+        return response
+
+
+    def delete(self, order_id):
+        order = Order.query.filter_by(id=order_id).first()
+        response_body = order.to_dict()
+
+        db.session.delete(order)
+        db.session.commit()
+        response = make_response(
+            response_body,
+            204
+        )
+
+        return response
     
     
 api.add_resource(TeacherByID, '/teachers/<int:id>')
@@ -362,6 +400,7 @@ api.add_resource(PrizesByTeacher, '/prizesbyteacher/<int:teacher_id>')
 api.add_resource(PrizesById,"/prizesById/<int:prize_id>")
 api.add_resource(SectionsByTeacher,"/sectionsbyteacher/<int:teacher_id>")
 api.add_resource(Orders, "/orders")
+api.add_resource(OrderByID, "/orderById/<int:order_id>")
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)
