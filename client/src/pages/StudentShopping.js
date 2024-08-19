@@ -25,25 +25,24 @@ function StudenShopping({onStudentLogOut,studentUser}){
     }, [teacherId]);
 
     function handleAddToCart(prize) {
-        if (prize.point_value<studentUser.points){
+        if (prize.point_value<=studentPoints){
             const cartItems = [...prizesInCart, prize];
             console.log(cartItems);
             setPrizesInCart(cartItems);
             let points = studentPoints - prize.point_value;
             setStudentPoints(points);
-
-            // fetch(`/studentsById/${studentUser.id}` 
-            //     ,{
-            //         method: 'PATCH',
-            //         headers: { 'Content-type':'application/json'
+            fetch(`/studentsById/${studentUser.id}` 
+                ,{
+                    method: 'PATCH',
+                    headers: { 'Content-type':'application/json'
                     
-            //     },
-            //     body: JSON.stringify({
-            //         points:`${studentUser.points-=prize.point_value}`
-            //     })
-            // })
-            //     .then(res=>res.json())
-                // .then(data=>setStudentPoints(data.points))
+                },
+                body: JSON.stringify({
+                    points:`${studentUser.points-=prize.point_value}`
+                })
+            })
+                .then(res=>res.json())
+                .then(data=>setStudentPoints(data.points))
             
         
 
@@ -56,10 +55,11 @@ function StudenShopping({onStudentLogOut,studentUser}){
 
 
     function handleRemoveFromCart(prize) {
-        console.log(prize)
-       
+            console.log(prize)
+
             const cartItems = prizesInCart.filter((item)=>{
-                return (item.id !== prize.id)
+                console.log(item)
+                return (item!== prize)
             });
             console.log(cartItems);
             setPrizesInCart(cartItems);

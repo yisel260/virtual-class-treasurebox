@@ -14,7 +14,7 @@ class Teacher(db.Model, SerializerMixin):
     school=db.Column(db.String)
     sections=db.relationship('Section', back_populates="teacher", cascade='all, delete-orphan')
     prizes=db.relationship('Prize', back_populates="teacher", cascade='all, delete-orphan')
-    serialize_rules = ('-prizes.teacher','-sections.teacher',)
+    serialize_rules = ('-prizes','-sections.teacher',)
 
     def __repr__(self):
         return f"{self.fname}{self.lname} from {self.school}"
@@ -88,7 +88,7 @@ class Prize(db.Model,SerializerMixin):
     teacher=db.relationship("Teacher", back_populates="prizes")
     orders = db.relationship('Order', back_populates='prize', cascade='all, delete-orphan')
 
-    serialize_rules = ('-teacher.prizes','-orders.prize',)
+    serialize_rules = ('-teacher','-orders.prize',)
     def _repr_(self):
          return f"{self.description} , {self.point_value}"
 

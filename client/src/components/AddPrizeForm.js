@@ -5,7 +5,7 @@ import { useOutletContext } from 'react-router-dom';
 import "./component.css";
 
 
-function AddPrizeForm(){
+function AddPrizeForm({setAddPrize}){
 
     const context =useOutletContext()
 
@@ -32,6 +32,7 @@ function AddPrizeForm(){
                 context.getPrizes(context.user.id)
             })
             resetForm();
+            setAddPrize()
         }
     })
 
