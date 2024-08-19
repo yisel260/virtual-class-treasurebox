@@ -5,12 +5,14 @@ import "./pages.css";
 import AddPrizeForm from "../components/AddPrizeForm";
 import EditPrizeForm from "../components/EditPrizeForm";
 import { useOutletContext } from "react-router-dom";
+import StudentOrder from "../components/studentOrder";
 
 function Prizes(){
  const[updatePrize,setUpdatePrize] = useState(false)
  const[AddPrize,setAddPrize]=useState(false)
  const context = useOutletContext()
  const [prizeToUpdate,setPrizeToUpdate]=useState(null)
+ const [showOrders,setShowOrders]=useState(false)
 
  function handleDeletePrize(e) {
     const prizeId = e.target.value;
@@ -26,7 +28,8 @@ function Prizes(){
 }
 
 function handleAddPrizeClick(){
-    console.log ("show student orders")
+    setAddPrize(!AddPrize)
+
 }
 
 function handleUpdatePrize(e){
@@ -38,7 +41,12 @@ function handleUpdatePrize(e){
 }
 
 function handlePrizeByStudentClick(){
-  setAddPrize(!AddPrize)
+  setShowOrders(!showOrders)
+  console.log(context.students)
+  context.students.forEach((student) => {
+    console.log(student.orders);
+  });
+
 }
 
     return(
@@ -56,10 +64,7 @@ function handlePrizeByStudentClick(){
         {AddPrize?(<AddPrizeForm setAddPrize={setAddPrize} />):null}
         {updatePrize?(<EditPrizeForm updatePrize ={updatePrize} setUpdatePrize ={setUpdatePrize} prizeToUpdate={prizeToUpdate}/>):null}
         <br/>
-        {/* <EditPrizeForm/> */}
-        <div>
-          <br/>
-          <table>
+        <table>
               <thead>
                 <tr>
                   <th>Description</th>
@@ -85,8 +90,13 @@ function handlePrizeByStudentClick(){
                 ) : (<p>Loading</p>)}
               </tbody>
             </table>
-            
-        </div>
+           {showOrders?(<div>{context.students.map((student)=>{
+            return (
+            <div>
+            <StudentOrder student={student} key={student.id}/>
+           </div>
+           )})
+            }</div>):null}
         </>
     )
 }
