@@ -1,8 +1,8 @@
-"""add orders model plus relationships
+"""add oders model
 
-Revision ID: 03bc80f24172
+Revision ID: b84f54bb49ed
 Revises: 3155fee9a5e9
-Create Date: 2024-08-13 14:00:10.548487
+Create Date: 2024-08-15 23:00:27.519429
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '03bc80f24172'
+revision = 'b84f54bb49ed'
 down_revision = '3155fee9a5e9'
 branch_labels = None
 depends_on = None

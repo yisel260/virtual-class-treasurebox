@@ -7,9 +7,6 @@ from config import db, metadata
 class Teacher(db.Model, SerializerMixin): 
     __tablename__ = "teachers"
 
-    serialize_rules = ('-prizes.teacher','-sections.teacher',)
-
-
     id =db.Column(db.Integer, primary_key=True)
     fname=db.Column(db.String)
     lname=db.Column(db.String)
@@ -71,7 +68,7 @@ class Student(db.Model, SerializerMixin):
     points = db.Column(db.Integer)
     section_id= db.Column(db.Integer, db.ForeignKey("sections.id"))
     section = db.relationship("Section",back_populates ="students")
-    serialize_rules = ('-section.students',)
+    serialize_rules = ('-section.students','-orders.student',)
     orders = db.relationship('Order', back_populates='student', cascade='all, delete-orphan')
     
 
@@ -91,11 +88,9 @@ class Prize(db.Model,SerializerMixin):
     teacher=db.relationship("Teacher", back_populates="prizes")
     orders = db.relationship('Order', back_populates='prize', cascade='all, delete-orphan')
 
-    serialize_rules = ('-teacher.prizes',)
+    serialize_rules = ('-teacher.prizes','-orders.prize',)
     def _repr_(self):
          return f"{self.description} , {self.point_value}"
-
-
 
 class Order(db.Model,SerializerMixin):
 
@@ -107,8 +102,20 @@ class Order(db.Model,SerializerMixin):
     prize_id = db.Column(db.Integer, db.ForeignKey('prizes.id'))
     student = db.relationship('Student', back_populates='orders')
     prize= db.relationship('Prize', back_populates='orders')
+    serialize_rules = ('-prize.orders', "-student.orders",)
+
     def __repr__(self):
         return f'<Order {self.id}, {self.student.name}, {self.prize.name}>'
+    
+
+
+
+
+
+
+
+
+
 # student_prizes = db.Table(
 #     'prize_orders',
 #     metadata,

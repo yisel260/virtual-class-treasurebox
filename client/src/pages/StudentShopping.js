@@ -56,9 +56,7 @@ function StudenShopping({onStudentLogOut,studentUser}){
 
 
     function handleRemoveFromCart(prize) {
-        console.log(prize.target
-
-        )
+        console.log(prize)
        
             const cartItems = prizesInCart.filter((item)=>{
                 return (item.id !== prize.id)
@@ -82,7 +80,34 @@ function StudenShopping({onStudentLogOut,studentUser}){
                 // .then(data=>setStudentPoints(data.points))
       }
 
+    function sendOrder(){
+        prizesInCart.forEach((prize)=>{
 
+            
+           const order = {
+                status:"requested",
+                student_id:studentUser.id,
+                prize_id:prize.id
+            }
+
+            fetch(`/orders`,{
+                method: 'POST', 
+                headers: {
+                    'Content-Type': 'application/json'
+                }, 
+                body: JSON.stringify(order)
+            })
+            .then(res=>res.json())
+            .then((data)=>{
+                console.log(data);
+            })
+        })
+
+        setPrizesInCart([])
+
+    }
+
+  ;
     return(
     <>
         <div id="welcome-banner">
@@ -108,11 +133,11 @@ function StudenShopping({onStudentLogOut,studentUser}){
         <div id='student-prize-container'>
             {prizesInCart.length>0?(<> {prizesInCart.map((prize)=>{
                    return (
-                    <PrizeCard handleAddToCart={handleAddToCart} handleRemoveFromCart={handleRemoveFromCart} prize={prize} setInCart={setInCart}  inCart = {true} />
+                    <PrizeCard key={prize.id} handleAddToCart={handleAddToCart} handleRemoveFromCart={handleRemoveFromCart} prize={prize} setInCart={setInCart}  inCart = {true} />
                    )
 
                 })}
-                <button>Get Prizes!</button> </>):(<p>Your cart is empty!</p>)}
+                <button onClick={sendOrder}>Get Prizes!</button> </>):(<p>Your cart is empty!</p>)}
         </div>
     
     </>

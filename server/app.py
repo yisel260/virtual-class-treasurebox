@@ -10,7 +10,8 @@ from flask import jsonify
 # Local imports
 from config import app, db, api
 # Add your model imports
-from models import Teacher, Section, Student, Prize
+from models import Teacher, Section, Student, Prize, Order
+
 
 import json
 
@@ -315,68 +316,33 @@ class PrizesById(Resource):
 
         return response
 
-    
-    
-    # def patch(self, student_id):
-
-    #     student = Student.query.filter_by(id = student_id).first()
-        
-    #     student.points = request.get_json().get('points')
-
-    #     db.session.add(student)
-    #     db.session.commit()
-
-    #     student_dict = student.to_dict()
-
-    #     response = make_response(
-    #         student_dict,
-    #         200
-    #     )
-    #     return  response
 
 
-    # def delete(self, student_id):
-    #     student = Student.query.filter_by(id=student_id).first()
-    #     response_body = student.to_dict()
+class Orders(Resource):
 
-    #     db.session.delete(student)
-    #     db.session.commit()
-    #     response = make_response(
-    #         response_body,
-    #         204
-    #     )
-
-    #     return response
-
-
-    
-    
-# class PrizesByTeacher(Resource):
-
-#     def get(self):
-#         response_dict_list = [n.to_dict() for n in Prize.query.all()]
-#         response = make_response(
-#             response_dict_list,
-#             200, )
-#         return response
-    
-
-    # def post(self):
-    #     data = request.get_json()
-    #     new_teacher = Prize(
-    #         fname=data.get('fname'),
-    #         lname=data.get('lname'),
-    #         email=data.get('email'),
-    #         school=data.get('school'),
-    #     )
-    #     db.session.add(new_teacher)
-    #     db.session.commit()
-    #     response_dict = jsonify(new_teacher.to_dict())
-    #     response = make_response(
-    #          response_dict,
-    #         201,
-    #     )
+    def get(self):
+        response_dict_list = [n.to_dict() for n in Order.query.all()]
+        response = make_response(
+            response_dict_list,
+            200, )
         return response
+    
+    def post(self):
+        data = request.get_json()
+        new_order = Order(
+            status=data.get('status'),
+            student_id=data.get('student_id'),
+            prize_id=data.get('prize_id'),
+        )
+        db.session.add(new_order)
+        db.session.commit()
+        response_dict = jsonify(new_order.to_dict())
+        response = make_response(
+             response_dict,
+            201,
+        )
+        return response
+    
     
     
 api.add_resource(TeacherByID, '/teachers/<int:id>')
@@ -395,6 +361,7 @@ api.add_resource(Prizes, '/prizes')
 api.add_resource(PrizesByTeacher, '/prizesbyteacher/<int:teacher_id>')
 api.add_resource(PrizesById,"/prizesById/<int:prize_id>")
 api.add_resource(SectionsByTeacher,"/sectionsbyteacher/<int:teacher_id>")
+api.add_resource(Orders, "/orders")
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)
