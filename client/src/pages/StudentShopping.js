@@ -65,31 +65,15 @@ function StudenShopping({onStudentLogOut,studentUser}){
             setPrizesInCart(cartItems);
             setStudentPoints(studentPoints + prize.point_value);
 
-
-            // fetch(`/studentsById/${studentUser.id}` 
-            //     ,{
-            //         method: 'PATCH',
-            //         headers: { 'Content-type':'application/json'
-                    
-            //     },
-            //     body: JSON.stringify({
-            //         points:`${studentUser.points+=prize.point_value}`
-            //     })
-            // })
-            //     .then(res=>res.json())
-                // .then(data=>setStudentPoints(data.points))
       }
 
     function sendOrder(){
         prizesInCart.forEach((prize)=>{
-
-            
            const order = {
                 status:"requested",
                 student_id:studentUser.id,
                 prize_id:prize.id
             }
-
             fetch(`/orders`,{
                 method: 'POST', 
                 headers: {
@@ -101,13 +85,31 @@ function StudenShopping({onStudentLogOut,studentUser}){
             .then((data)=>{
                 console.log(data);
             })
-        })
 
+            fetch(`/prizesById/${prize.id}`,{
+                method: 'PATCH',
+                headers: { 'Content-type':'application/json'
+                
+                },
+                body: JSON.stringify({
+                        foto : `${prize.foto}`,
+                        description : `${prize.description}`,	
+                        point_value :`${prize.point_value}`,
+                        inventory : `${prize.inventory}`,
+                        number_requested:`${prize.number_requested+=1}`,
+                        teacher_id : `${prize.teacher_id}`
+
+                    })
+            })
+            .then(res=>res.json())
+            .then(data=>console.log(data))
+
+        })
         setPrizesInCart([])
 
     }
 
-  ;
+  
     return(
     <>
         <div id="welcome-banner">

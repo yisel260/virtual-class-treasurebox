@@ -2,7 +2,8 @@ import React , {useState, useEffect} from 'react';
 import { useOutletContext } from 'react-router-dom';
 
 function StudentOrder({student}){
-
+    
+ const context = useOutletContext()
     function handleChangeStatus(e, order){
         console.log(e)
         let newStatus = e.target.value
@@ -15,7 +16,25 @@ function StudentOrder({student}){
             })
         })
         .then(res => res.json())
-        .then(data => console.log(data))
+        .then((data) => {
+            fetch(`/prizesById/${data.prize_id}`,{
+                method:'PATCH',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({
+                    foto : `${order.prize.foto}`,
+                    description : `${order.prize.description}`,	
+                    point_value :`${order.prize.point_value}`,
+                    inventory : `${order.prize.inventory-=1}`,
+                    number_requested:`${order.prize.number_requested-=1}`,
+                    teacher_id : `${order.prize.teacher_id}`
+                })
+            }).then(response => response.json())
+            .then((prize) => {
+              context.getPrizes(prize.teacher_id);
+            }
+            )
+
+        })
     }
     
     return (
