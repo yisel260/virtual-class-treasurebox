@@ -138,3 +138,14 @@ display:inline-table}
     border-radius: 5px;
     width:100%
 }
+
+#student-order-container{
+    border-radius: 12px;
+    text-align: center;
+    display: flex;
+    column-gap:10px; 
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+}
+

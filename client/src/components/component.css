@@ -96,6 +96,9 @@ th{
     background-color: #96df8c;
 }
 
+td{
+    padding:5px
+}
 
 
 .form-label{
@@ -124,3 +127,25 @@ input{
     padding-top: 10px;
     border-radius: 12px;
 }
+
+.student-order-block{
+
+    border-radius: 12px;
+    text-align: center;
+    border-color: #111010;
+    border-width: 20px;
+    display:inline-block;
+}
+
+#student-order-name{
+    background-color:#6ec0e0;
+    padding:5px;
+    border-radius: 10px;
+     width: auto; 
+     text-align: center;
+} 
+
+/* .order-information{
+    background-color: salmon;
+    display:table;
+} */

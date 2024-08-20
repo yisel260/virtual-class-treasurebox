@@ -38,22 +38,33 @@ function StudentOrder({student}){
     }
     
     return (
-        <div className='student-order'>
-            <p>{student.name}</p>
-            {student.orders.map((order) => {
-                return (
-                    <>
-                        <p>{order.prize.description}
-                        <select onChange={(e) => handleChangeStatus(e, order)}  id="student-order-status" name="student-order-status">
-                            <option value={order.status} name="order-status-option">{order.status}</option>
-                            <option value={order.status === "requested" ? "fulfilled" : "requested"} name="order-status-option">
-                                {order.status === "requested" ? "fulfilled" : "requested"}</option>
-                            {order.status === "fulfilled" ? (<button type="button">delete order</button>) : null}
-                        </select> 
-                        </p>
-                    </>
+        <div className='student-order-block' >
+            <p id='student-order-name'>{student.name}</p>
+            {student.orders.length>0?(
+            <table>
+                <tbody>
+                    <tr>
+                        <th>Prize Description</th>
+                        <th>Order Status</th>
+                    </tr>
+                        {student.orders.map((order) => {
+                                    return (
+                                <tr>
+                                    <td> {order.prize.description}</td>
+                                    <td> 
+                                        <select  onChange={(e) => handleChangeStatus(e, order)}  id="student-order-status" name="student-order-status">
+                                            <option value={order.status} name="order-status-option">{order.status}</option>
+                                            <option value={order.status === "requested" ? "fulfilled" : "requested"} name="order-status-option">
+                                                {order.status === "requested" ? "fulfilled" : "requested"}</option>
+                                            {order.status === "fulfilled" ? (<button type="button">delete order</button>) : null}
+                                        </select> 
+                                    </td>
+                                </tr>
                )
            })}
+            </tbody>
+            </table>
+            ):<p>No  orders</p>}
         </div>
     )
 }

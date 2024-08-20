@@ -6,6 +6,7 @@ import AddPrizeForm from "../components/AddPrizeForm";
 import EditPrizeForm from "../components/EditPrizeForm";
 import { useOutletContext } from "react-router-dom";
 import StudentOrder from "../components/studentOrder";
+import PrizesDataTable from "../components/PrizesDataTable";
 
 function Prizes(){
  const[updatePrize,setUpdatePrize] = useState(false)
@@ -13,6 +14,7 @@ function Prizes(){
  const context = useOutletContext()
  const [prizeToUpdate,setPrizeToUpdate]=useState(null)
  const [showOrders,setShowOrders]=useState(false)
+ const [showPrizeTable,setShowPrizeTable]=useState(true)
 
  function handleDeletePrize(e) {
     const prizeId = e.target.value;
@@ -29,6 +31,7 @@ function Prizes(){
 
 function handleAddPrizeClick(){
     setAddPrize(!AddPrize)
+    setShowOrders(false)
 
 }
 
@@ -38,14 +41,13 @@ function handleUpdatePrize(e){
     })
     setPrizeToUpdate(selectedPrize[0])
     setUpdatePrize(!updatePrize)
+    setShowOrders(false)
 }
 
 function handlePrizeByStudentClick(){
   setShowOrders(!showOrders)
-  console.log(context.students)
-  context.students.forEach((student) => {
-    console.log(student.orders);
-  });
+  setAddPrize(false)
+  setUpdatePrize(false)
 
 }
 
@@ -53,50 +55,23 @@ function handlePrizeByStudentClick(){
         <>
           <header>
           <Header/>
-          <NavBar />
-        <br/>
-        </header>
-        <br/>
-        <button onClick={handleAddPrizeClick} className="choice-button">Add Prize</button>
-        <button onClick={handlePrizeByStudentClick} className="choice-button">Student Prize Orders </button>
-
-        <br/>
-        {AddPrize?(<AddPrizeForm setAddPrize={setAddPrize} />):null}
-        {updatePrize?(<EditPrizeForm updatePrize ={updatePrize} setUpdatePrize ={setUpdatePrize} prizeToUpdate={prizeToUpdate}/>):null}
-        <br/>
-        <table>
-              <thead>
-                <tr>
-                  <th>Description</th>
-                  <th>Available</th>
-                  <th>Requested</th>
-                  <th>Net Total</th>
-                  <th></th>
-                  <th></th>
-                </tr>
-              </thead>
-              <tbody>
-                {context.prizes ? (
-                  context.prizes.map((prize) => (
-                    <tr key={prize.id}>
-                      <td>{prize.description}</td>
-                      <td>{prize.inventory}</td>
-                      <td>{prize.number_requested}</td>
-                      <td>{prize.inventory - prize.number_requested}</td>
-                      <td><button value={prize.id} onClick={handleDeletePrize}>delete</button></td>
-                      <td><button value={prize.id} onClick={handleUpdatePrize}>Update</button></td>
-                      </tr>
-                  ))
-                ) : (<p>Loading</p>)}
-              </tbody>
-            </table>
-           {showOrders?(<div>{context.students.map((student)=>{
-            return (
-            <div>
-            <StudentOrder student={student} key={student.id}/>
-           </div>
-           )})
-            }</div>):null}
+            <NavBar />
+          <br/>
+          </header>
+          <br/>
+          <button onClick={handleAddPrizeClick} className="choice-button">Add Prize</button>
+          <button onClick={handlePrizeByStudentClick} className="choice-button">Student Prize Orders </button>
+          <br/>
+          {AddPrize?(<AddPrizeForm setAddPrize={setAddPrize} />):null}
+          {updatePrize?(<EditPrizeForm updatePrize ={updatePrize} setUpdatePrize ={setUpdatePrize} prizeToUpdate={prizeToUpdate}/>):null}
+          <br/>
+          {showOrders?(<div id="student-order-container">{context.students.map((student)=>{
+              return (
+              <StudentOrder student={student} key={student.id}/>
+            )})
+              }</div>):null}
+          <br/>
+          {showPrizeTable?(<PrizesDataTable handleDeletePrize={handleDeletePrize}  handleUpdatePrize={handleUpdatePrize} />):null}
         </>
     )
 }
