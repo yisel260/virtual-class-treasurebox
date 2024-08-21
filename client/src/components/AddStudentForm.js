@@ -2,29 +2,27 @@ import React from "react";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import "./component.css";
-
-
-import { useOutlet, useOutletContext } from "react-router-dom";
+import {useOutletContext } from "react-router-dom";
 
 function AddStudentForm({}){
   const context = useOutletContext()
   console.log(context.sectionSelected)
-// const formSchema= yup.object().shape(
-//     {
-//       name: yup.string().required("must enter a name").max(20),
-//       password: yup.string().required("must enter a pasword").max(20),
-//       points: yup.number().required("Must a point value in number form"),
-//       section_id: yup.number().required("must enter a school name")
-//     })
+const formSchema= yup.object().shape(
+    {
+      name: yup.string().required("must enter a name").max(20),
+      password: yup.string().required("must enter a pasword").max(20),
+      points: yup.number().required("Must a point value in number form"),
+      section_id: yup.number().required()
+    })
 
   const formik = useFormik({
       initialValues: {
         name: "",
         password: "",
-        points:"",  
+        points:"0",  
         section_id:context.sectionSelected,
       },
-    //   validationSchema: formSchema,
+      validationSchema: formSchema,
       onSubmit: (values,{resetForm}) => {
         console.log("onSubmit called")
         fetch("/students", {
