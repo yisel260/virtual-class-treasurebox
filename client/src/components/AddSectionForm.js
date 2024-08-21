@@ -7,6 +7,11 @@ import { useOutletContext } from 'react-router-dom';
 function AddSectionForm({setStudentRoster,setAddSection,setAddStudent}){
 
     const context = useOutletContext()
+    const formSchema= yup.object().shape(
+    {
+      name: yup.string().required("must enter a clasname").max(20),
+      section_code: yup.string().required("must enter a classcode, think of something unique but easy to remember for students").max(20),
+    })
 
 const formik = useFormik({
     initialValues: {
@@ -14,34 +19,43 @@ const formik = useFormik({
         section_code:"", 
         teacher_id:`${context.user.id}`
     },
+    validationSchema: formSchema,
     onSubmit:(values,{resetForm})=>{
-        fetch ("/sections",{
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(values,null,2),
-        })
-        .then((res)=>res.json())
-        .then((data)=>{
-            context.setSectionSelected(data.id)
-            context.getSections(data.teacher_id)
-            context.getStudents(data.id)
+        fetch(`/sections/${values.section_code}`)
+        .then(res=>{
+            if (res.ok){
+                alert("A class with this class code already exist. Please try again, think of something unique but easy to remember for your students")
+            }
+            else {
+                fetch ("/sections",{
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(values,null,2),
+                })
+                .then((res)=>res.json())
+                .then((data)=>{
+                    context.setSectionSelected(data.id)
+                    context.getSections(data.teacher_id)
+                    context.getStudents(data.id)
 
+                })
+                resetForm();
+                setStudentRoster(true)
+                setAddSection(false)
+                setAddStudent(true)
+            }
         })
-        resetForm();
-        setStudentRoster(true)
-        setAddSection(false)
-        setAddStudent(true)
-    }
-})
+     }
+    })
 return(
     
 
 
     <div className="form-container">
     <br/>
-    <h3>Add student</h3>
+    <h3>Add a class </h3>
 
     < form id= "add-section-form" onSubmit={formik.handleSubmit}>
         <label htmlFor='name'>Class Name:</label>
