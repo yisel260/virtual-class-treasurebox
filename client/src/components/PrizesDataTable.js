@@ -25,8 +25,10 @@ function PrizesDataTable({handleDeletePrize,  handleUpdatePrize}){
                 <td>{prize.inventory}</td>
                 <td>{prize.number_requested}</td>
                 <td>{prize.inventory - prize.number_requested}</td>
-                <td><button value={prize.id} onClick={handleDeletePrize}>delete</button></td>
-                <td><button value={prize.id} onClick={handleUpdatePrize}>Update</button></td>
+                <td>
+                  <button value={prize.id} onClick={handleDeletePrize}>delete</button>
+                  <button value={prize.id} onClick={handleUpdatePrize}>Update</button>
+                  </td>
                 </tr>
             ))
           ) : (<p>Loading</p>)}

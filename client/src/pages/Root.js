@@ -26,6 +26,7 @@ function Root (){
     function getData(userId) {
         getSections(userId)
         getPrizes(userId)
+        getStudents(userId)
 
     }
     
@@ -86,7 +87,8 @@ function Root (){
         getStudents,
         getSections, 
         getPrizes,
-        handleSectionChange}}/>
+        handleSectionChange,
+        getData}}/>
     </>)
 }
  

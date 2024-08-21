@@ -2,21 +2,10 @@ import "./component.css"
 import React, { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import * as yup from "yup";
-
+import { useOutletContext } from "react-router-dom";
 function SignUpForm({onLogin}){
-  // const [teachers, setTeachers] = useState([{}]);
-  // const [refreshPage, setRefreshPage] = useState(false);
-  
-  
-  // useEffect(() => {
-  //   console.log("FETCH! ");
-  //   fetch("/teachers")
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       setTeachers(data);
-  //       console.log(data);
-  //     });
-  // }, [refreshPage]);
+
+  const context = useOutletContext()
 
   const formSchema= yup.object().shape(
     {
@@ -43,7 +32,6 @@ function SignUpForm({onLogin}){
           body: JSON.stringify(values, null, 2),
         }).then(
           (res) => {
-            console.log(res)
           if (res.status === 201) {
             fetch("/login", {
               method: "POST",
@@ -53,10 +41,16 @@ function SignUpForm({onLogin}){
               body: JSON.stringify(values.email),
             }).then((r) => {
               if (r.ok) {
-                console.log("Response status:", r.status);
-                r.json().then((user) => onLogin(user));
+                r.json().then((user) => {
+                  console.log(user)
+                  onLogin(user)
+                  context.getData(user.id)
+                }
+              );
               }
-              else console.log("response not ok")
+              else {
+                alert("Something went wrong please double check your infomation and try again")
+              }
             });
                       
              }
@@ -75,7 +69,9 @@ function SignUpForm({onLogin}){
             name="fname"
             onChange={formik.handleChange}
             value={formik.values.fname}
-          /><br/><br/>
+          /> 
+          <p style={{ color: "red" }}> {formik.errors.fname}</p>
+
 
           <label htmlFor="lname">Last Name: </label>
           <input
@@ -83,7 +79,8 @@ function SignUpForm({onLogin}){
             name="lname"
             onChange={formik.handleChange}
             value={formik.values.lname}
-          /><br/><br/>
+          />
+          <p style={{ color: "red" }}> {formik.errors.lname}</p>
 
           <label htmlFor="school">School: </label>
           <input
@@ -91,7 +88,8 @@ function SignUpForm({onLogin}){
             name="school"
             onChange={formik.handleChange}
             value={formik.values.school}
-          /><br/><br/>
+          />
+          <p style={{ color: "red" }}> {formik.errors.school}</p>
 
           <label htmlFor="email">E-mail: </label>
           <input
@@ -100,7 +98,9 @@ function SignUpForm({onLogin}){
             onChange={formik.handleChange}
             value={formik.values.email}
             
-          /><br/><br/>
+          />
+          <p style={{ color: "red" }}> {formik.errors.email}</p>
+
           <button className="action-button" type="submit">Submit</button>
 
         

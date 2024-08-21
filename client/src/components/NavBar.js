@@ -6,8 +6,6 @@ function NavBar() {
   const navigate = useNavigate();
 
   function handleLogout() {
-    console.log("handleLogout called");
-
     fetch("/logout", {
       method: "DELETE",
     }).then(() => {

@@ -12,7 +12,7 @@ function TeacherHome({handleLogout}){
     return (
         <>
           <header>
-            <Header onLogout={handleLogout} />
+            <Header />
             <NavBar />
           </header>
           <br/>

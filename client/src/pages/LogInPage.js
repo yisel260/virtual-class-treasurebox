@@ -15,11 +15,6 @@ function LoginInPage(){
     function handleLogin(user) {
        context.setUser(user);
       }
-    
-      function handleLogout() {
-        context.setUser(null);
-      }
-    
 
     const formik = useFormik(
         {
