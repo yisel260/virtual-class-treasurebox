@@ -2,10 +2,12 @@ import React, {useEffect,useState} from "react"
 import LoginStudentCard from "../components/LoginStudentCard"
 import StudentShopping from "./StudentShopping"
 import { useOutletContext } from "react-router-dom"
+import Header from "../components/Header"
 
 function StudentViewClass({onStudentLogIn,section}){
 
     const context = useOutletContext()
+
 
     const [students,setStudents] = useState([])
     const [studentUser, setStudentUser] = useState(null)
@@ -16,20 +18,19 @@ function StudentViewClass({onStudentLogIn,section}){
           .then((res) => res.json())
           .then((data) => {
             setStudents(data);
-            console.log(data);
           });
       }, []);
 
 function onStudentLogIn(studentUser){
     setStudentUser(studentUser)
-    console.log(studentUser);
 }
 
 function onStudentLogOut(){
     setStudentUser(null)
-    console.log(studentUser);
 }
 
+function redirectHome(){
+  context.setSection(null)}
 
 if (studentUser){
     return (
@@ -39,8 +40,10 @@ if (studentUser){
 else{
     return(
         <>
-        <p>You have made it to the page where the students log in</p>
-        <p>{section}</p>
+        <Header/>
+        <h2>Welcome!</h2>
+        <button onClick={redirectHome} id="different-class-btn" className="action-button" >Choose a different class</button>
+        <br/>
         {students.map(student=>{
             return(
              <LoginStudentCard onStudentLogIn={onStudentLogIn} student={student} key={student.id}/>)}

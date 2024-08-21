@@ -7,14 +7,14 @@ function StudenShopping({onStudentLogOut,studentUser}){
    const [prizes, setPrizes]= useState([])
    const [teacherId, setTeacherId] = useState("")
    const [prizesInCart, setPrizesInCart] = useState([])
-   const [inCart, setInCart] = useState()
+   const [inCart, setInCart] = useState("")
    const [studentPoints,setStudentPoints] = useState(studentUser.points)
+   const [myOrders, setMyOrders] = useState(studentUser.orders)
   
     useEffect(() => {
       fetch(`/sections/${studentUser.section_id}`)
       .then((res) =>res.json())
       .then((data) =>{
-        console.log (data)
         setTeacherId(data.teacher_id)
         fetch(`/prizesbyteacher/${teacherId}`)
         .then((res) =>res.json())
@@ -27,7 +27,6 @@ function StudenShopping({onStudentLogOut,studentUser}){
     function handleAddToCart(prize) {
         if (prize.point_value<=studentPoints){
             const cartItems = [...prizesInCart, prize];
-            console.log(cartItems);
             setPrizesInCart(cartItems);
             let points = studentPoints - prize.point_value;
             setStudentPoints(points);
@@ -55,13 +54,9 @@ function StudenShopping({onStudentLogOut,studentUser}){
 
 
     function handleRemoveFromCart(prize) {
-            console.log(prize)
-
             const cartItems = prizesInCart.filter((item)=>{
-                console.log(item)
                 return (item!== prize)
             });
-            console.log(cartItems);
             setPrizesInCart(cartItems);
             setStudentPoints(studentPoints + prize.point_value);
 
@@ -82,9 +77,9 @@ function StudenShopping({onStudentLogOut,studentUser}){
                 body: JSON.stringify(order)
             })
             .then(res=>res.json())
-            .then((data)=>{
-                console.log(data);
-            })
+            .then((newOrder)=>{
+                let newOrderList= [...myOrders,newOrder]
+                setMyOrders(newOrderList)})
 
             fetch(`/prizesById/${prize.id}`,{
                 method: 'PATCH',
@@ -102,8 +97,6 @@ function StudenShopping({onStudentLogOut,studentUser}){
                     })
             })
             .then(res=>res.json())
-            .then(data=>console.log(data))
-
         })
         setPrizesInCart([])
 
@@ -130,9 +123,9 @@ function StudenShopping({onStudentLogOut,studentUser}){
             }
             ))}
         </div>
-        <h2>Your prizes</h2>
+        <h2>Your Shopping Cart</h2>
 
-        <div id='student-prize-container'>
+        <div className="cart" id='student-prize-container'>
             {prizesInCart.length>0?(<> {prizesInCart.map((prize)=>{
                    return (
                     <PrizeCard key={prize.id} handleAddToCart={handleAddToCart} handleRemoveFromCart={handleRemoveFromCart} prize={prize} setInCart={setInCart}  inCart = {true} />
@@ -140,6 +133,21 @@ function StudenShopping({onStudentLogOut,studentUser}){
 
                 })}
                 <button onClick={sendOrder}>Get Prizes!</button> </>):(<p>Your cart is empty!</p>)}
+        </div>
+
+        <h2>Your prizes are comming! </h2>
+
+        <div id='student-order-container'>
+            {myOrders.length>0?(<> {myOrders.map((order)=>{
+                   return (
+                    <div className='cart'>
+                        <img className='prize-table-image' src={order.prize.foto}/>
+                        {}
+                    </div>
+                   )
+
+                })}
+               </>):(<p>No prizes ordered</p>)}
         </div>
     
     </>

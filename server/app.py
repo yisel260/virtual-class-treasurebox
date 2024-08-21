@@ -15,7 +15,6 @@ from models import Teacher, Section, Student, Prize, Order
 
 import json
 
-# Views go here!
 class Teachers(Resource):
 
     def get(self):
@@ -214,7 +213,7 @@ class StudentLogIn(Resource):
     def post(self):
         student = request.get_json()
         studentUserName = student.get('studentUserName')
-        print(type(studentUserName))
+        print(studentUserName)
 
         studentUser = Student.query.filter(Student.name == studentUserName).first()
 
@@ -222,6 +221,8 @@ class StudentLogIn(Resource):
         if password == studentUser.password:
             response = make_response(studentUser.to_dict(), 200)
             return response 
+        else:
+            return {}, 401
     
 
 class Prizes(Resource):
