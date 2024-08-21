@@ -78,12 +78,10 @@ function StudentOrder({student,showOrders}){
     }
 
     function getStudentOrders(studentId) {
-        console.log("I am being called")
         fetch(`/ordersByStudent/${studentId}`)
         .then(res=>res.json())
         .then((orders)=>{
             setOrders(orders)
-            console.log(orders)
         })
     }
     
@@ -94,10 +92,10 @@ function StudentOrder({student,showOrders}){
             {orders?(
             <table>
                 <tbody>
-                    <tr>
+                   {orders.length>0? (<tr>
                         <th>Prize Description</th>
                         <th>Order Status</th>
-                    </tr>
+                    </tr>):<p>No  orders</p>}
                         {orders.map((order) => {
                                     return (
                                 <tr>
@@ -111,7 +109,7 @@ function StudentOrder({student,showOrders}){
                                     </td>
                                 </tr>
                )
-           })}
+            })}
             </tbody>
             </table>
             ):<p>No  orders</p>}

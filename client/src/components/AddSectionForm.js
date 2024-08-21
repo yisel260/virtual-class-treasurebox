@@ -9,8 +9,9 @@ function AddSectionForm({setStudentRoster,setAddSection,setAddStudent}){
     const context = useOutletContext()
     const formSchema= yup.object().shape(
     {
-      name: yup.string().required("must enter a clasname").max(20),
-      section_code: yup.string().required("must enter a classcode, think of something unique but easy to remember for students").max(20),
+      name: yup.string().required("You must enter a clasname").max(20),
+      section_code: yup.string().required(
+        "You must enter a classcode, think of something unique but easy to remember for students").max(20),
     })
 
 const formik = useFormik({
@@ -65,6 +66,7 @@ return(
         value={formik.values.name}
         onChange={formik.handleChange}
          />
+        <p style={{ color: "red" }}> {formik.errors.name}</p>
 
         <label htmlFor='section_code'>Class Code:</label>
         <input 
@@ -73,6 +75,7 @@ return(
         value={formik.values.section_code}
         onChange={formik.handleChange}
          /> 
+        <p style={{ color: "BLue" }}> {formik.errors.section_code}</p>
 
         <label htmlFor='teacher_id'></label>
         <input 

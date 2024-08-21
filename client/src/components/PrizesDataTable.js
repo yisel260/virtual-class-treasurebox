@@ -20,6 +20,7 @@ function PrizesDataTable({handleDeletePrize,  handleUpdatePrize}){
           {context.prizes ? (
             context.prizes.map((prize) => (
               <tr key={prize.id}>
+                <td><img className="prize-table-image"src={prize.foto} alt={prize.description}/></td>
                 <td>{prize.description}</td>
                 <td>{prize.inventory}</td>
                 <td>{prize.number_requested}</td>

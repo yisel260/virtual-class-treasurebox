@@ -15,7 +15,7 @@ function Prizes(){
  const [prizeToUpdate,setPrizeToUpdate]=useState(null)
  const [showOrders,setShowOrders]=useState(false)
  const [showPrizeTable,setShowPrizeTable]=useState(true)
-
+ const [myPrizes,setMyPrizes]=useState(true)
  function handleDeletePrize(e) {
     const prizeId = e.target.value;
 
@@ -51,6 +51,14 @@ function handlePrizeByStudentClick(){
 
 }
 
+function handleSeePrizesClick(){
+  setMyPrizes(!myPrizes)
+  setShowOrders(false)
+  setAddPrize(false)
+  setUpdatePrize(false)
+
+}
+
     return(
         <>
           <header>
@@ -59,8 +67,11 @@ function handlePrizeByStudentClick(){
           <br/>
           </header>
           <br/>
+          <button onClick={handleSeePrizesClick} className="choice-button">My Prizes </button>
           <button onClick={handleAddPrizeClick} className="choice-button">Add Prize</button>
           <button onClick={handlePrizeByStudentClick} className="choice-button">Student Prize Orders </button>
+         
+
           <br/>
           {AddPrize?(<AddPrizeForm setAddPrize={setAddPrize} />):null}
           {updatePrize?(<EditPrizeForm updatePrize ={updatePrize} setUpdatePrize ={setUpdatePrize} prizeToUpdate={prizeToUpdate}/>):null}
