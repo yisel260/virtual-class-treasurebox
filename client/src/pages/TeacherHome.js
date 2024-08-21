@@ -19,10 +19,13 @@ function TeacherHome({handleLogout}){
           <main>
            <SectionSelector/>
             <br/><br/>
+          <div id="student-card-container">
+
             {context.students?(context.students.map(student =>{
                 return (<StudentCard student={student} key={student.id} />
                 )
             })):(<p>Students coming</p>)}
+          </div>
           </main>
         </>
       );

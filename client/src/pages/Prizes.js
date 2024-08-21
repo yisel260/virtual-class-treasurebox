@@ -67,7 +67,7 @@ function handlePrizeByStudentClick(){
           <br/>
           {showOrders?(<div id="student-order-container">{context.students.map((student)=>{
               return (
-              <StudentOrder student={student} key={student.id}/>
+              <StudentOrder showOrders={showOrders} setShowOrders={setShowOrders} student={student} key={student.id}/>
             )})
               }</div>):null}
           <br/>

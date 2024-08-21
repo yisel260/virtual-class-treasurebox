@@ -46,8 +46,10 @@ return (
     <>
     
    <br/><br/>
+    <div className="form-container">
+    <h3>Add student</h3>
 
-<form onSubmit={formik.handleSubmit}>
+    <form id= "add-student-form" onSubmit={formik.handleSubmit}>
 
         <label htmlFor="name"> Name: </label>
         <input
@@ -83,6 +85,7 @@ return (
         />
         <button className="action-button" type="submit">Submit</button>
         </form>
+        </div>
         </>
 )
 }

@@ -382,6 +382,15 @@ class OrderByID(Resource):
 
         return response
     
+class OrdersByStudent(Resource):
+    def get(self, student_id):
+        orders = Order.query.filter_by(student_id=student_id).all()
+        response_dict_list = [n.to_dict() for n in orders]
+        response = make_response(
+            response_dict_list,
+            200, )
+        return response
+    
     
 api.add_resource(TeacherByID, '/teachers/<int:id>')
 api.add_resource(Teachers, '/teachers')
@@ -401,6 +410,8 @@ api.add_resource(PrizesById,"/prizesById/<int:prize_id>")
 api.add_resource(SectionsByTeacher,"/sectionsbyteacher/<int:teacher_id>")
 api.add_resource(Orders, "/orders")
 api.add_resource(OrderByID, "/orderById/<int:order_id>")
+api.add_resource(OrdersByStudent, "/ordersByStudent/<int:student_id>")
+
 
 if __name__ == '__main__':
     app.run(port=5555, debug=True)

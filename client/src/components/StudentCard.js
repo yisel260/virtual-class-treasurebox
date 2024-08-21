@@ -20,16 +20,12 @@ function StudentCard({student}){
     }
 
     return (
-    <>
-        <div id="student-card-container">
         <div id="student-card">
             <p id="student-name">{student.name}</p>
             <p id ="student-points">Points: {student.points}</p>
             <button value= {student.id} id="add-points-btn" name="add-points-btn" onClick={handleAddPoint}>+1 point </button>
+            <br />
         </div>
-
-    </div>
-    </>
 )}
 
 export default StudentCard;

@@ -28,8 +28,6 @@ function Root (){
         getPrizes(userId)
 
     }
-
-
     
     function getSections(userId) {
         fetch(`/sectionsbyteacher/${userId}`)

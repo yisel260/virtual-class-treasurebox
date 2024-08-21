@@ -4,7 +4,7 @@ import * as yup from "yup";
 import { useOutletContext } from 'react-router-dom';
 
 
-function AddSectionForm(){
+function AddSectionForm({setStudentRoster,setAddSection,setAddStudent}){
 
     const context = useOutletContext()
 
@@ -26,16 +26,25 @@ const formik = useFormik({
         .then((data)=>{
             context.setSectionSelected(data.id)
             context.getSections(data.teacher_id)
-            
+            context.getStudents(data.id)
+
         })
         resetForm();
+        setStudentRoster(true)
+        setAddSection(false)
+        setAddStudent(true)
     }
 })
 return(
-    <>
-    <br/><br/>
-    <form onSubmit={formik.handleSubmit}>
-        <label htmlFor='name'>Name:</label>
+    
+
+
+    <div className="form-container">
+    <br/>
+    <h3>Add student</h3>
+
+    < form id= "add-section-form" onSubmit={formik.handleSubmit}>
+        <label htmlFor='name'>Class Name:</label>
         <input 
         type='text'
         name='name'
@@ -60,7 +69,8 @@ return(
          />
         <button className="action-button" type="submit">Submit</button>
     </form>
-    </>
+    </div>
+
 )
 }
 

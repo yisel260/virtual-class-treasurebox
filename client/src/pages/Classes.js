@@ -16,56 +16,19 @@ function Classes() {
   const[addStudent, setAddStudent]=useState(false)
   const[studentRoster, setStudentRoster]=useState(true)
   const[sectionDwn, setSectionDwn]=useState(true)
-// console.log(user)
- 
-//   useEffect(() => {
-//     user?(getSections(user.id)):(<p>classes coming</p>)
-//   },[user])
 
-
-//   function getSections(userId) {
-//     fetch(`/sectionsbyteacher/${userId}`)
-//       .then((response) =>response.json())
-//       .then(data =>{
-//         setSections(data)
-//       })
-
-//   }
-
-//   useEffect(() => {
-//     if (sections){
-//       if (sectionSelected) {
-//         console.log('section selected already')
-
-//       }
-//       else {
-//         const sectionId= sections[0].id
-//         getStudents(sectionId);
-//         setSectionSelected(sectionId)
-//       }
-//     }
-//   },[sections] );
-  
- 
-//  function getStudents(sectionId){
-//   fetch(`/studentsbysection/${sectionId}`)
-//   .then((res)=>res.json())
-//   .then((data) =>{
-//     setStudents(data)
-//   })
-//  }
 
 
 function handleAddSection(){
   setAddStudent(false)
-  setAddSection(true)
+  setAddSection(!addSection)
   setStudentRoster(false)
 
 }
 
 function handleAddStudentClick(){
   setAddSection(false)
-  setAddStudent(true)
+  setAddStudent(!addStudent)
   setStudentRoster(true)
   setSectionDwn(false)
 
@@ -98,7 +61,10 @@ function handleStudentRosterClick(){
               <button className="choice-button" onClick={handleStudentRosterClick} type="button">Student roster </button>
             </div>
             <br/>
-          {addSection?<AddSectionForm/>  : null}
+          {addSection?<AddSectionForm 
+            setAddSection ={setAddSection}
+            setStudentRoster={setStudentRoster}
+            setAddStudent={setAddStudent}/>  : null}
           {addStudent ? <AddStudentForm /> : null}
           {studentRoster?(
             <>
