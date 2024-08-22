@@ -79,3 +79,69 @@ On this page teachers see thier student roster, add a class , and add or delete 
 
 This page allows the teacher to see her prizes listed. He or she can then add , update or delete prizes as needed. Under "show student orders", the teacher can see what orders need to be fulfilled and keep track of them as she or he does that.  
 
+
+
+## File descriptions: 
+
+### Client side 
+
+App.js
+Index.js 
+Router.js 
+
+#### Pages Folder 
+
+#### Components Folder 
+
+AddPriceForm.js
+
+AddSectionFrom.js
+
+AddStudentForm.js
+
+component.css
+
+EditPrizeForm.js 
+
+Header.js 
+
+Login.js 
+
+LoginStudentCard.js 
+
+NavBar.js
+
+PrizeCard.js
+
+PrizesDataTable.js
+
+StudentOrder.js
+
+#### Pages Folder 
+
+Classes.js
+ErrorPage.js
+Home.js 
+LoginPage.js 
+pages.css 
+Prizes.js 
+Root.js 
+StudentShopping.js 
+StudentViewClass.js 
+TeacherHome.js 
+
+
+
+### Server 
+
+app.py 
+
+models.py 
+
+seed.py 
+
+
+
+
+
+

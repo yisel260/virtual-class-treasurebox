@@ -1,20 +1,20 @@
-import React,{useState, useEffect} from 'react';
+import React from 'react';
 import Header from '../components/Header';
 import SignUpForm from '../components/SignUpForm';
 import "./pages.css"
 import Login from'../components/Login';
-import { useFormik, validateYupSchema } from 'formik';
-import * as yup from "yup";
+import { useFormik } from 'formik';
 import { useOutletContext } from 'react-router-dom';
 
 
 function LoginInPage(){
+
     const context = useOutletContext()
-    console.log(context)
 
     function handleLogin(user) {
        context.setUser(user);
       }
+
 
     const formik = useFormik(
         {
@@ -32,7 +32,6 @@ function LoginInPage(){
               })
               }
               else {
-                console.log("class not found");
                 alert("Ooopsie that class code could not be found. ")
               }
             })
@@ -40,16 +39,17 @@ function LoginInPage(){
         }
       )
 
+
     return (
         <>
-            <header>
+          <header>
               <Header />
-            </header>
-            <main>
-              <h1>Welcome to Treasure Box! </h1>
-             <div>
+          </header>
+          <main>
+            <h1>Welcome to Treasure Box! </h1>
+            <div>
                 <h2 className='section-banner'>I am a student:</h2> 
-                </div>
+            </div>
                <div id="student-section">
                   <form onSubmit={formik.handleSubmit}>
                     <label>Class code:</label>
@@ -62,12 +62,11 @@ function LoginInPage(){
                     placeholder=""></input>
                     <input className="action-button" type="submit" value = "Go!"/>
                   </form>
-                </div>
-                <div>
-                <h2 className='section-banner'>I am a teacher:</h2> 
-                </div>
-               
-               <div id="teacher-section">
+            </div>
+            <div>
+            <h2 className='section-banner'>I am a teacher:</h2> 
+            </div>
+            <div id="teacher-section">
                   <div id="log-in-form" className="section">
                       <Login onLogin={handleLogin}/>
                   </div>
@@ -77,10 +76,7 @@ function LoginInPage(){
                   <div id="sign-up-form"className="section">
                       <SignUpForm onLogin={handleLogin}/>
                   </div>
-    
-          
               </div>
-    
             </main>
           </>
     

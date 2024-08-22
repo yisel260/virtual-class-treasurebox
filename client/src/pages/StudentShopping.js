@@ -1,6 +1,5 @@
 import React ,{useEffect,useState} from 'react';
 import PrizeCard from '../components/PrizeCard';
-import { useOutletContext } from 'react-router-dom';
 import "./pages.css"
 
 function StudenShopping({onStudentLogOut,studentUser}){
