@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React from "react";
 import Header from "../components/Header"
 import NavBar from "../components/NavBar";
 import StudentCard from "../components/StudentCard";
@@ -9,6 +9,7 @@ import SectionSelector from "../components/SectionSelector";
 function TeacherHome(){
 
   const context = useOutletContext()
+
     return (
         <>
           <header>
