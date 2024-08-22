@@ -15,11 +15,11 @@ Teachers can :
  - create a new account
  - add classes (sections) 
  - add students to each class 
- - add prizes they are offering students 
- - see which students have orders which prizes 
- - addd,delete, updtadate, and create przes, students and orders 
- - keep track of thier prizes through and inventory display 
- - Track which student have recieved thier prizes 
+ - add prizes
+ - see which students have ordered which prizes 
+ - addd,delete, updtadate, and create prizes
+ - keep track of thier prizes' inventory and request 
+ - Track which students have recieved thier prizes 
 
  Students can : 
 
@@ -35,7 +35,7 @@ Treasure box has 5 models, Teacher, Section, Student, Prize and Orders.
 - Section has many students 
 - Each Student belongs to  a single section
 - A Teacher has many Prizes 
-- A Prize can have many Student through Order
+- A Prize can have many Students through Order
 - A  Student can have many Prizes  through Order 
 
 
@@ -46,4 +46,16 @@ Server: run pipenv install as usual
      This project has a proxy server set up on port 5555.  Export port to 5555 ( export FLASK_RUN_PORT=5555)
 
 
+
+The application loads a *root* component first that checks if there is a  user already logged in. If there is then TeacherHome page will be rendered, diplaying the students in the any sections and students the teacher has previously created, as well as the Navigation Bar which allows teacher to access different routes. This Root elemet is also where most of my states live as they need be accessible though the application once a user has logged in. 
+
+If the application does not find a user  it will redirect to a login page.  
+
+### Student Features 
+
+From Login page students can enter thier class code (provided by thier teacher). If the class code matches a class listed the students names are displayed to they can then login in to their personal account. 
+
+#### Student Shopping page 
+ 
+Students here can see all the prizes added by thier teacher.  Cliking them will add them to their cart. Once students click "get prizes"  and order is created for each prize assigning the students those prizes. Then are then added to thier purchased prizes.  
 
