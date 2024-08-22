@@ -3,7 +3,6 @@ import Root from "./pages/Root";
 import Home from "./pages/Home";
 import Classes from "./pages/Classes"
 import Prizes from "./pages/Prizes"
-import  TeacherHome from "./pages/TeacherHome";
 import LoginInPage from "./pages/LogInPage";
 
 

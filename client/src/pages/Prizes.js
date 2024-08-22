@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, {useState } from "react";
 import NavBar from '../components/NavBar';
 import Header from '../components/Header';
 import "./pages.css";
@@ -9,6 +9,7 @@ import StudentOrder from "../components/studentOrder";
 import PrizesDataTable from "../components/PrizesDataTable";
 
 function Prizes(){
+
  const[updatePrize,setUpdatePrize] = useState(false)
  const[AddPrize,setAddPrize]=useState(false)
  const context = useOutletContext()
@@ -16,6 +17,8 @@ function Prizes(){
  const [showOrders,setShowOrders]=useState(false)
  const [showPrizeTable,setShowPrizeTable]=useState(true)
  const [myPrizes,setMyPrizes]=useState(true)
+
+
  function handleDeletePrize(e) {
     const prizeId = e.target.value;
 

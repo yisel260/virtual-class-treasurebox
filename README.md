@@ -53,9 +53,29 @@ If the application does not find a user  it will redirect to a login page.
 
 ### Student Features 
 
+The student side of the application does not have its own routing set up as they are directed to each page thorugh entering the correct password  or code. 
+
 From Login page students can enter thier class code (provided by thier teacher). If the class code matches a class listed the students names are displayed to they can then login in to their personal account. 
 
 #### Student Shopping page 
  
 Students here can see all the prizes added by thier teacher.  Cliking them will add them to their cart. Once students click "get prizes"  and order is created for each prize assigning the students those prizes. Then are then added to thier purchased prizes.  
+
+
+### Teacher Features 
+
+The teacher side has various routes set up. 
+
+#### Teacher Home 
+
+Once logged in a teachers home page will display the students from thier first listed class. Teachers can select a different class in the dropdown menu. 
+This page displays the students in cards and allows the teaher to award points to each student at the touch of a button. 
+
+####  Classes 
+
+On this page teachers see thier student roster, add a class , and add or delete students.  Various components are at play here as differnt types of data is displayed. There are also button that toggle on or off , to help organize what information is displayed. 
+
+#### Prizes 
+
+This page allows the teacher to see her prizes listed. He or she can then add , update or delete prizes as needed. Under "show student orders", the teacher can see what orders need to be fulfilled and keep track of them as she or he does that.  
 
