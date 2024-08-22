@@ -8,6 +8,7 @@ function PrizesDataTable({handleDeletePrize,  handleUpdatePrize}){
         <table>
         <thead>
           <tr>
+            <th>Foto</th>
             <th>Description</th>
             <th>Available</th>
             <th>Requested</th>

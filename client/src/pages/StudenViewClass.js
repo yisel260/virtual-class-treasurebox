@@ -1,12 +1,13 @@
 import React, {useEffect,useState} from "react" 
 import LoginStudentCard from "../components/LoginStudentCard"
 import StudentShopping from "./StudentShopping"
-import { useOutletContext } from "react-router-dom"
+import { useNavigate, useOutletContext } from "react-router-dom"
 import Header from "../components/Header"
 
 function StudentViewClass({onStudentLogIn,section}){
 
     const context = useOutletContext()
+    const navigate = useNavigate();
 
 
     const [students,setStudents] = useState([])
@@ -30,7 +31,11 @@ function onStudentLogOut(){
 }
 
 function redirectHome(){
-  context.setSection(null)}
+    context.setSection(null)
+    context.setUser(null)
+    navigate('/')
+}
+    
 
 if (studentUser){
     return (

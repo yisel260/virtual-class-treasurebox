@@ -26,8 +26,6 @@ function Root (){
     function getData(userId) {
         getSections(userId)
         getPrizes(userId)
-        getStudents(userId)
-
     }
     
     function getSections(userId) {

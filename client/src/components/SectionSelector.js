@@ -8,7 +8,6 @@ function SectionSelector(){
         <>
         <br />
         {context.sections?(<>
-    
          <label htmlFor="section">Choose a class:</label>
          <select id="section-selector" value={context.sectionSelected} onChange={context.handleSectionChange} name="classesdrpdwn">
                {context.sections.map((section)=>{

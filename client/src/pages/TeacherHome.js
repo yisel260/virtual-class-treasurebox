@@ -2,11 +2,11 @@ import React, {useEffect, useState} from "react";
 import Header from "../components/Header"
 import NavBar from "../components/NavBar";
 import StudentCard from "../components/StudentCard";
-import {Link,useOutletContext} from "react-router-dom"
+import {useOutletContext} from "react-router-dom"
 import "./pages.css"
 import SectionSelector from "../components/SectionSelector";
 
-function TeacherHome({handleLogout}){
+function TeacherHome(){
 
   const context = useOutletContext()
     return (

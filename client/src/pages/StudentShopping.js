@@ -142,7 +142,6 @@ function StudenShopping({onStudentLogOut,studentUser}){
                    return (
                     <div className='cart'>
                         <img className='prize-table-image' src={order.prize.foto}/>
-                        {}
                     </div>
                    )
 
