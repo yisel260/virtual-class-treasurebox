@@ -85,60 +85,98 @@ This page allows the teacher to see her prizes listed. He or she can then add , 
 
 ### Client side 
 
-App.js
-Index.js 
-Router.js 
+- App.js  and Index.js 
+
+  Sets up rendering of main content and routes 
+
+- Router.js 
+  
+  Configures routing for the application
 
 #### Pages Folder 
 
 #### Components Folder 
 
-AddPriceForm.js
+- AddPrizeForm.js,  AddSectionFrom.js, AddStudentForm.js, Signup form 
 
-AddSectionFrom.js
+  All of these components display a form for some sort of user input. 
+  The forms are set up with Formik for handlidng and validation. 
+  Once the user input is gathered the fuction sends a post requests to add the new data to the database and sets any state variables their new values if necesary. 
 
-AddStudentForm.js
+- component.css
+ 
+ Contains css for files in the components folder. 
 
-component.css
+- EditPrizeForm.js 
 
-EditPrizeForm.js 
+  This component first fetches the Prize it is associated with and the sets the data to the inital values in form sot he user can then edit it and update the Prize. 
 
-Header.js 
+- Header.js 
 
-Login.js 
+ Simply returns the static banner at the top of most of the pages. 
 
-LoginStudentCard.js 
+- Login.js 
+  
+  Displays the login form an uses a formik to submit the form and log a teacher in using thier username (email)
 
-NavBar.js
+- LoginStudentCard.js 
+  
+  Displays a student's name and a form to input their password into. Use formik to collect the data and send a request to verify it in the server. If the response is successful the student user is set through onStudentLogin Function. 
 
-PrizeCard.js
+- NavBar.js
 
-PrizesDataTable.js
+  This hold the navigation links for the different routes on the teacher side of the application. This component also hold the logout button. 
 
-StudentOrder.js
+- PrizeCard.js
+  
+  Renders a display of a prize with its picture and information. Upon click on any prize calls fuctionst to add or remove from the student's shopping cart. 
+
+- PrizesDataTable.js
+
+  Renders a table with relevant information for the teacher such as the number of studens that requested the prize and the number left in  inventory. 
+
+- StudentOrder.js
+
+  Upon rendering this component retrieves the orders for the student passed to it. It then displays the orders in a data table that includes the name  of the student, the prizes they have ordered and the status of the order.  This component also has functions to handle changing the status of the order throgh a PATCH request, and delete the order upon click of a button. 
+
 
 #### Pages Folder 
 
-Classes.js
-ErrorPage.js
-Home.js 
-LoginPage.js 
-pages.css 
-Prizes.js 
-Root.js 
-StudentShopping.js 
-StudentViewClass.js 
-TeacherHome.js 
+- Classes.js 
+  The classes component constains all the feeatures related to handling classes such as adding a new class, adding students to the class, consulting the roster, adding and deleting students, etc. It has logic handling to turns certain diplays on or off upon click of a button. 
+
+- ErrorPage.js
+
+- Home.js 
+  The home component renders a different component of a home page depending on who the user is. If the ther is no user it renders the login in page component. If the user is set as a student it renders the studentViewClass component which is show the students login in cards. 
+  If the user is a teacher it renders the teacher home page. 
+
+- LoginPage.js 
+
+  This component render the login in page . There is a section for students to login a section for teachers to log in an a section for teacher to sign up if they have not already.  The fetch request to check student with section code lives in this component. Both teacher types of log ins are handled in diferent components, either LogIn or SingUp. 
+
+- pages.css 
+
+  Contains css for all the components in the pages folder. 
+
+- Prizes.js 
+
+  This component displays the Manage Prize features. The page initally displays a table with information about the the prizes the teacher has already added. Button clicks displa froms to add a prize, and update a prize. Funtions to handle these request live with in each of the forms. Teachers can also delete a prize with the click of a button. 
+
+
+
+- Root.js 
+- StudentShopping.js 
+- StudentViewClass.js 
+- TeacherHome.js 
 
 
 
 ### Server 
 
-app.py 
-
-models.py 
-
-seed.py 
+- app.py 
+- models.py 
+- seed.py 
 
 
 

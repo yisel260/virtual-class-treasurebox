@@ -5,7 +5,6 @@ import Classes from "./pages/Classes"
 import Prizes from "./pages/Prizes"
 import LoginInPage from "./pages/LogInPage";
 
-
 const router = createBrowserRouter(
     [
         {

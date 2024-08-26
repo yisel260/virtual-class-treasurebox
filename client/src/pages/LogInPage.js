@@ -15,7 +15,6 @@ function LoginInPage(){
        context.setUser(user);
       }
 
-
     const formik = useFormik(
         {
           initialValues:{
@@ -38,7 +37,6 @@ function LoginInPage(){
           }
         }
       )
-
 
     return (
         <>
